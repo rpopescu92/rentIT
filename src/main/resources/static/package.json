@@ -1,0 +1,8 @@
+{
+  "name": "RentIT",
+  "version":"0.1.0",
+  "description": "Rent Properties Application",
+  "devDependencies": {
+    "gulp": "3.9.1"
+  }
+}
