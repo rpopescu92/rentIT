@@ -1,8 +1,16 @@
 {
   "name": "RentIT",
-  "version":"0.1.0",
+  "version": "0.1.0",
   "description": "Rent Properties Application",
   "devDependencies": {
-    "gulp": "3.9.1"
+    "gulp": "3.9.1",
+    "gulp-angular-filesort": "^1.1.1",
+    "gulp-debug": "^3.0.0",
+    "gulp-inject": "^4.1.0",
+    "gulp-main-bower-files": "^1.6.0"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "wiredep": "^4.0.0"
   }
 }

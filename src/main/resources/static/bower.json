@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "appPath": "src/main",
   "dependencies": {
-      "angular": "1.5.5",
-      "angular-material": "latest"
+    "angular": "1.5.5",
+    "angular-material": "latest",
+    "jquery": "^3.1.1"
   }
 }
