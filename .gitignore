@@ -25,3 +25,8 @@ nbdist/
 /rentIT.iml
 /src/main/resources/static/lib/bower_components/
 /.mvn/
+/target/
+/mvnw.cmd
+/mvnw
+/src/main/resources/static/node_modules/
+/node_modules/
