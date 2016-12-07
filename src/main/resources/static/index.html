@@ -7,15 +7,31 @@
     <link rel="stylesheet" href="/lib/bower_components/angular-material/angular-material.css">
     <!-- endinject -->
 </head>
-<body>
+<body ng-app="rentITApp">
+
+<div ui-view="navbar"></div>
+
+<!-- bower:js -->
+<!-- bower installed scripts will go here... -->
+<!-- endinject -->
 
 <!-- inject:js -->
 <script src="/lib/bower_components/angular/angular.js"></script>
 <script src="/lib/bower_components/angular-animate/angular-animate.js"></script>
 <script src="/lib/bower_components/angular-aria/angular-aria.js"></script>
 <script src="/lib/bower_components/angular-messages/angular-messages.js"></script>
+<script src="/lib/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="/lib/bower_components/jquery/dist/jquery.js"></script>
 <script src="/lib/bower_components/angular-material/angular-material.js"></script>
-<!-- endinject-->
+<!-- endinject -->
+
+<script src="/app/app.module.js"></script>
+<script src="/app/app.state.js"></script>
+<script src="/app/app.state.handler.js"></script>
+<script src="/app/navbar/navbar.controller.js"></script>
+<script src="/app/authorization/principal.service.js"></script>
+<script src="/app/authorization/account.service.js"></script>
+<script src="/app/authorization/authorization.jwt.js"></script>
+<script src="/app/authorization/authorization.service.js"></script>
 </body>
 </html>

@@ -7,7 +7,7 @@
     Account.$inject = ['$http'];
 
     function Account($http) {
-        return: {
+        return {
             getAccount: getAccount
         }
 

@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "description": "Rent Properties Application",
   "devDependencies": {
+    "event-stream": "^3.3.4",
     "gulp": "3.9.1",
     "gulp-angular-filesort": "^1.1.1",
     "gulp-debug": "^3.0.0",
     "gulp-inject": "^4.1.0",
+    "gulp-load-plugins": "^1.4.0",
     "gulp-main-bower-files": "^1.6.0"
   },
   "dependencies": {

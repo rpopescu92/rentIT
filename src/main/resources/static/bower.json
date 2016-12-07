@@ -5,6 +5,7 @@
   "dependencies": {
     "angular": "1.5.5",
     "angular-material": "latest",
+    "angular-ui-router": "latest",
     "jquery": "^3.1.1"
   }
 }
