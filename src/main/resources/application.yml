@@ -1,0 +1,16 @@
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/rentIT
+        username: postgres
+        password: root
+        driverClassName: org.postgresql.Driver
+
+    jpa:
+        databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            show_sql: true
+            ddl-auto: create
+
+    jwt:
+        secret: AmUnSecret
+        tokenValidityInSeconds: 3600
