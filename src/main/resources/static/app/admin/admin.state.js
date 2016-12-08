@@ -1,4 +1,4 @@
-(function(){
+(function() {
     'use strict';
 
     angular.module('rentITApp')
@@ -7,17 +7,18 @@
     stateConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function stateConfig($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('home');
-        $stateProvider.state('/home', {
-            url: '/home',
+        $urlRouterProvider.otherwise('/admin');
+        $stateProvider.state('admin', {
+            url: '/admin',
             parent: 'app',
             views: {
                 'content@': {
-                    templateUrl: '/app/home/home.html',
-                    controller: 'HomeController'
-
-                }
+                    templateUrl: '/app/admin/admin.html',
+                    controller: 'AdminController'
+                   }
             }
-        });
+        }
+
+        )
     }
 })();

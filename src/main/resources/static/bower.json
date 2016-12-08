@@ -6,6 +6,11 @@
     "angular": "1.5.5",
     "angular-material": "latest",
     "angular-ui-router": "latest",
-    "jquery": "^3.1.1"
+    "jquery": "^3.1.1",
+    "bootstrap": "3.3.7",
+    "ngstorage": "0.3.10",
+    "angular-animate": "latest",
+    "angular-aria": "latest",
+    "angular-cache-buster": "0.4.3"
   }
 }

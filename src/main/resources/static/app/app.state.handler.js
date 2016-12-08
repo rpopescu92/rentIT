@@ -4,9 +4,9 @@
     angular.module('rentITApp')
             .factory('stateHandler', stateHandler);
 
-    stateHandler.$inject['$rootScope','$state', '$sessionStorage', '$window','AuthorizationService','Principal'];
+    stateHandler.$inject = ['$rootScope','$state', '$sessionStorage', '$window','AuthorizationService','PrincipalService'];
 
-    function stateHandler($rootScope, $state, $sessionStorage, $window, AuthorizationService, Principal) {
+    function stateHandler($rootScope, $state, $sessionStorage, $window, AuthorizationService, PrincipalService) {
          return {
             initialize: initialize
          }
@@ -22,7 +22,7 @@
                                 $window.open(toState.url, '_self');
                             }
 
-                            if (Principal.isIdentityResolved()) {
+                            if (PrincipalService.isIdentityResolved()) {
                                 AuthorizationService.authorize();
                             }
 

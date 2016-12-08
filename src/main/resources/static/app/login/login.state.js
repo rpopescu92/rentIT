@@ -7,15 +7,14 @@
     stateConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function stateConfig($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('home');
-        $stateProvider.state('/home', {
-            url: '/home',
+        $urlRouterProvider.otherwise('login');
+        $stateProvider.state('/login', {
+            url: '/login',
             parent: 'app',
             views: {
                 'content@': {
-                    templateUrl: '/app/home/home.html',
-                    controller: 'HomeController'
-
+                    templateUrl: '/app/login/login.html',
+                    controller: 'LoginController'
                 }
             }
         });

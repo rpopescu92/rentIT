@@ -4,9 +4,16 @@
     angular.module('rentITAp')
             .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$scope'];
+    NavbarController.$inject = ['$scope', '$rootScope','PrincipalService'];
 
-    function NavbarController($scope) {
+    function NavbarController($scope, $rootScope, PrincipalService) {
+        $scope.init = init;
 
+        init();
+
+
+        function init() {
+            $scope.isAuthenticated = PrincipalService.isAuthenticated();
+        }
     }
 })();

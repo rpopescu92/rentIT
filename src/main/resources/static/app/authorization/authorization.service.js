@@ -5,10 +5,10 @@
     angular.module('rentITApp')
             .service('AuthorizationService', AuthorizationService);
 
-    AuthorizationService.$inject = ['$http', '$rootScope', '$scope','Principal','$state',
+    AuthorizationService.$inject = ['$http', '$rootScope', 'PrincipalService','$state',
                         '$sessionStorage','$q', 'AuthServerProvider'];
 
-    function AuthorizationService($http, $rootScope, $scope, Principal, $state,
+    function AuthorizationService($http, $rootScope, PrincipalService, $state,
                     $sessionStorage, $q, AuthServerProvider) {
 
         return {
@@ -22,10 +22,10 @@
         }
 
         function authorize(force) {
-            Principal.identity(force).then(authThen);
+            PrincipalService.identity(force).then(authThen);
 
             function authThen() {
-                var isAuthenticated = Principal.isAuthenticated();
+                var isAuthenticated = PrincipalService.isAuthenticated();
 
                 if(isAuthenticated && $rootScope.toState.name === 'admin') {
                     $state.go('admin');
@@ -50,6 +50,44 @@
                         $state.go('login');
                    }
             }
+        }
+
+        function login(credentials, callback) {
+            var cb = callback || angular.noop;
+            var deferred = $q.defer();
+            AuthServerProvider.login(credentials)
+                                .then(loginThen)
+                                .catch(function(err){
+                                    this.logout();
+                                    deferred.reject(err);
+                                    return cb(err);
+                                }.bind(this));
+             function loginThen(data) {
+                PrincipalService.identity(true).then(function(account){
+                    deferred.resolve(data);
+                });
+                return cb();
+             }
+             return deferred.promise;
+        }
+
+        function logout() {
+            AuthServerProvider.logout();
+            PrincipalService.authenticate(null);
+        }
+        function loginWithToken(jwt) {
+            return AuthServerProvider.loginWithToken(jwt);
+        }
+
+        function resetPreviousState() {
+            delete $sessionStorage.previousState;
+        }
+
+        function getPreviousState() {
+            return $sessionStorage.previousState;
+        }
+        function storePreviousState(previousStateName, previousStateParams){
+            $sessionStorage.previousState = {"name": previousStateName, "params": previousStateParams};
         }
     }
 })();

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Rent It</title>
     <!-- inject:css -->
     <link rel="stylesheet" href="/lib/bower_components/angular-material/angular-material.css">
     <!-- endinject -->
@@ -10,6 +10,7 @@
 <body ng-app="rentITApp">
 
 <div ui-view="navbar"></div>
+<div ui-view="content"></div>
 
 <!-- bower:js -->
 <!-- bower installed scripts will go here... -->
@@ -22,16 +23,25 @@
 <script src="/lib/bower_components/angular-messages/angular-messages.js"></script>
 <script src="/lib/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="/lib/bower_components/jquery/dist/jquery.js"></script>
+<script src="/lib/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/lib/bower_components/ngstorage/ngStorage.js"></script>
+<script src="/lib/bower_components/angular-cache-buster/angular-cache-buster.js"></script>
 <script src="/lib/bower_components/angular-material/angular-material.js"></script>
 <!-- endinject -->
 
 <script src="/app/app.module.js"></script>
-<script src="/app/app.state.js"></script>
-<script src="/app/app.state.handler.js"></script>
 <script src="/app/navbar/navbar.controller.js"></script>
 <script src="/app/authorization/principal.service.js"></script>
+<script src="/app/app.state.js"></script>
+<script src="/app/app.state.handler.js"></script>
 <script src="/app/authorization/account.service.js"></script>
 <script src="/app/authorization/authorization.jwt.js"></script>
 <script src="/app/authorization/authorization.service.js"></script>
+<script src="/app/home/home.controller.js"></script>
+<script src="/app/home/home.state.js"></script>
+<script src="/app/login/login.controller.js"></script>
+<script src="/app/login/login.state.js"></script>
+<script src="/app/admin/admin.state.js"></script>
+<script src="/app/admin/admin.controller.js"></script>
 </body>
 </html>
