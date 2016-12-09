@@ -9,12 +9,17 @@
     function NavbarController($scope, $rootScope, PrincipalService) {
         $scope.init = init;
 
+        $scope.isAuthenticated = false;
+
         init();
-        $scope.message;
+
+        $rootScope.$on("authenticationSuccess", function(event, data) {
+            $scope.isAuthenticated = true;
+        });
 
         function init() {
             $scope.isAuthenticated = PrincipalService.isAuthenticated();
-            $scope.message = "hi";
+
         }
     }
 })();

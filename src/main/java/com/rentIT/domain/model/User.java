@@ -28,4 +28,8 @@ public class User {
     @OneToOne
     private UserDetails userDetails;
 
+    public User(String username) {
+        this.username = username;
+    }
+
 }

@@ -16,7 +16,13 @@
                     templateUrl: '/app/admin/admin.html',
                     controller: 'AdminController'
                    }
-            }
+            },
+            resolve: {
+                authorize: ['AuthorizationService',
+                        function (AuthorizationService) {
+                            return AuthorizationService.authorize();
+                        }]
+             }
         }
 
         )
