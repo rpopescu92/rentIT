@@ -31,7 +31,7 @@
                     $state.go('admin');
                 }
 
-                if(isAuthenticated && $rootScope.toState.name === 'login') {
+               if(isAuthenticated && $rootScope.toState.name === 'login') {
                     $state.go('home')
                 }
 
