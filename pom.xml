@@ -23,6 +23,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<postgres.version>9.3-1102-jdbc41</postgres.version>
+		<spring.security.data.version>4.1.0.RELEASE</spring.security.data.version>
+        <jjwt.version>0.6.0</jjwt.version>
 	</properties>
 
 	<dependencies>
@@ -44,6 +46,22 @@
 			<scope>provided</scope>
 		</dependency>
 
+        <!--security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-data</artifactId>
+			<version>${spring.security.data.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+
 		<!-- db -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,6 +73,11 @@
 			<version>${postgres.version}</version>
 		</dependency>
 
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
 	</dependencies>
 
 	<build>

@@ -1,14 +1,28 @@
 package com.rentIT.service;
 
 import com.rentIT.domain.model.User;
-import org.springframework.http.ResponseEntity;
+import com.rentIT.domain.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
-/**
- * Created by roxanap on 09.12.2016.
- */
+import java.util.Optional;
+
+
+@Service
 public class UserService {
 
-    public User getAuthenticatedUser() {
-        return null;
+    @Autowired
+    private UserRepository userRepository;
+
+    public Optional<User> getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication == null) {
+            return null;
+        }
+
+        Optional<User> optional = userRepository.findByUsername(authentication.getName());
+        return optional;
     }
 }
