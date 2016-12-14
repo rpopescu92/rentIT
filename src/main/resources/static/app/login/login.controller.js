@@ -4,9 +4,9 @@
     angular.module('rentITApp')
             .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', '$rootScope', '$mdDialog', '$state', 'AuthorizationService', 'Account', 'Principal'];
+    LoginController.$inject = ['$scope', '$rootScope', '$mdDialog', '$state', 'AuthorizationService', 'Account', 'PrincipalService'];
 
-    function LoginController($scope, $rootScope, $mdDialog, $state, AuthorizationService, Account, Principal) {
+    function LoginController($scope, $rootScope, $mdDialog, $state, AuthorizationService, Account, PrincipalService) {
 
         $scope.registerDialog = registerDialog;
         $scope.currentUser = currentUser;
