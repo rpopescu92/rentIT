@@ -16,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
@@ -49,7 +50,12 @@ public class UserServiceTest {
         Authentication authentication = mock(Authentication.class);
         Mockito.when(authentication.getName()).thenReturn("username");
 
-        Mockito.when(userRepository.findByUsername("username")).thenReturn(Optional.of(new User("username")));
+        User userMock = new User();
+        userMock.setFirstName("Paul");
+        userMock.setLastName("Grave");
+        userMock.setUsername("PaulGrave");
+        Optional<User> userOptional = Optional.of(userMock);
+        Mockito.when(userRepository.findByUsername("username")).thenReturn(userOptional);
 
         Optional<User> optional = userService.getAuthenticatedUser();
         Assert.assertTrue(optional.isPresent());
@@ -59,10 +65,16 @@ public class UserServiceTest {
     @Test
     @Ignore
     public void testGetAccountWhenUserIsUnknown() {
-        Mockito.when(userRepository.findByUsername("username")).thenReturn(Optional.empty());
+        SecurityContextHolder securityContextHolder = Mockito.mock(SecurityContextHolder.class);
+        SecurityContext securityContext = Mockito.mock(SecurityContext.class);
+        Authentication authentication = Mockito.mock(Authentication.class);
 
-        Optional<User> optional = userService.getAuthenticatedUser();
-        Assert.assertTrue(!optional.isPresent());
+        Mockito.when(securityContext.getAuthentication()).thenReturn(authentication);
+        Optional<User> optional = Optional.empty();
+        Mockito.when(userRepository.findByUsername("username")).thenReturn(optional);
+
+        Optional<User> optionalResponse = userService.getAuthenticatedUser();
+        Assert.assertTrue(optionalResponse.isPresent());
     }
 
     @Test(expected = UserExistsException.class)

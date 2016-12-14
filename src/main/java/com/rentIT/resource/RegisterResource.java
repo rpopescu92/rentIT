@@ -3,12 +3,10 @@ package com.rentIT.resource;
 import com.rentIT.domain.model.User;
 import com.rentIT.exception.UserExistsException;
 import com.rentIT.service.UserService;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +28,8 @@ public class RegisterResource {
     public ResponseEntity register(@RequestBody User user) {
         log.info("Registering user with username {}",user.getUsername());
 
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
+        String encodedPassword = bCrypt.encode(user.getPassword());
         user.setPassword(encodedPassword);
         user.setCreateDate(new Date());
 
