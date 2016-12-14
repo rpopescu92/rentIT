@@ -4,6 +4,7 @@ package com.rentIT.domain.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_account")
@@ -25,6 +26,7 @@ public class User {
     private UserRole role;
     private boolean isOwner;
     private boolean isTenant;
+    private Date createDate;
     @OneToOne
     private UserDetails userDetails;
 

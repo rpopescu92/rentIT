@@ -2,6 +2,7 @@ package com.rentIT.service;
 
 import com.rentIT.domain.model.User;
 import com.rentIT.domain.repository.UserRepository;
+import com.rentIT.exception.UserExistsException;
 import com.rentIT.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Optional;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
@@ -61,5 +63,29 @@ public class UserServiceTest {
 
         Optional<User> optional = userService.getAuthenticatedUser();
         Assert.assertTrue(!optional.isPresent());
+    }
+
+    @Test(expected = UserExistsException.class)
+    public void testRegisterUserWhenUserExists() {
+        Mockito.when(userRepository.findByUsername("existsUsername")).thenReturn(Optional.of(new User("existsUsername")));
+
+        User user = User.builder().username("existsUsername").build();
+        userService.registerUser(user);
+    }
+
+    @Test
+    public void testRegisterUser() {
+        User userMock = new User();
+        userMock.setFirstName("Paul");
+        userMock.setLastName("Grave");
+        userMock.setUsername("PaulGrave");
+        Optional<User> optional = Optional.empty();
+
+        Mockito.when(userRepository.findByUsername("PaulGrave")).thenReturn(optional);
+        Mockito.when(userRepository.save(userMock)).thenReturn(userMock);
+
+        userService.registerUser(userMock);
+        Mockito.verify(userRepository, times(1)).findByUsername("PaulGrave");
+        Mockito.verify(userRepository, times(1)).save(userMock);
     }
 }
