@@ -9,8 +9,8 @@ spring:
         databasePlatform: org.hibernate.dialect.PostgreSQLDialect
         hibernate:
             show_sql: true
-            ddl-auto: create
+            ddl-auto: update
 
     jwt:
-        secret: AmUnSecret
+        secret: AmUnSecretMareDeTotPeCareNuIlSpunNimanuiDelocNiciodataGhicesteSiNuVeiAfla239090932091
         tokenValidityInSeconds: 3600

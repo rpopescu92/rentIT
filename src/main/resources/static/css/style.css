@@ -1,0 +1,25 @@
+.dialog{
+    width: 50%;
+    height: 50%;
+}
+
+.md-toolbar-tools{
+    background-color: #64B5F6;
+}
+
+.blueButtons{
+    color: #64B5F6;
+}
+
+svg {
+    fill: inherit;
+}
+
+md-dialog{
+    overflow-x:hidden;
+     width:100%;
+}
+.dialogContent {
+   overflow-x: hidden;
+   width:100%;
+}

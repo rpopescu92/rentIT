@@ -1,0 +1,38 @@
+<md-dialog class="dialog">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Create account</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon md-svg-src="/icons/close.svg" aria-label="Close dialog"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="dialogContent">
+        <div class="md-dialog-content">
+                <md-content>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>First Name</label>
+                        <input ng-model="firstName" type="text">
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Last Name</label>
+                        <input ng-model="lastName" type="text">
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Username</label>
+                        <md-icon md-svg-src="/icons/account_circle_black24px.svg" style="fill:#64B5F6"></md-icon>
+                        <input ng-model="username" type="text">
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <label>Password</label>
+                        <input ng-model="password" type="password">
+                    </md-input-container>
+                </md-content>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="center center">
+           <md-button ng-click="cancel()">Cancel</md-button>
+           <md-button md-no-ink class="md-primary blueButtons" ng-click="register()">Register</md-button>
+    </md-dialog-actions>
+</md-dialog>
