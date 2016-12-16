@@ -3,8 +3,10 @@
     height: 50%;
 }
 
-.md-toolbar-tools{
+.md-toolbar-tools, .blueNavbar{
     background-color: #64B5F6;
+    color: white;
+    padding: 2px;
 }
 
 .blueButtons{
@@ -22,4 +24,20 @@ md-dialog{
 .dialogContent {
    overflow-x: hidden;
    width:100%;
+}
+
+.sub-menu {
+  position: absolute;
+  display: none;
+  background-color: lightgreen;
+  padding: 5px;
+}
+
+.sub-menu > li {
+  display: block;
+  cursor: pointer;
+}
+
+li:hover .sub-menu {
+  display: block;
 }

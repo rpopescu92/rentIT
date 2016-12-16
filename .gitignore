@@ -30,3 +30,4 @@ nbdist/
 /mvnw
 /src/main/resources/static/node_modules/
 /node_modules/
+/src/test/java/com/rentIT/resource/Main.java
