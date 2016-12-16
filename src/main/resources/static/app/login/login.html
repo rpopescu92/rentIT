@@ -1,1 +1,35 @@
-<md-button ng-click="registerDialog()">Register</md-button>
+<div class="loginContainer">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <md-card>
+                <md-card-content>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1 col-centered">
+                            <md-input-container class="loginForm">
+                                <label>Username</label>
+                                <input type="text" ng-model="username">
+                            </md-input-container>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1 col-centered">
+                            <md-input-container class="loginForm" layout-align="center">
+                                <label>Password</label>
+                                <input type="password" ng-model="password">
+                            </md-input-container>
+                        </div>
+                    </div>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 col-centered" >
+                        <md-button class="blueButtons" ng-click="login()">Login</md-button>
+                        <md-button class="blueButtons" ng-click="registerDialog()">Register</md-button>
+                    </div>
+                </div>
+                </md-card-content>
+            </md-card>
+
+        </div>
+    </div>
+
+</div>
+

@@ -10,6 +10,7 @@
 
         $scope.registerDialog = registerDialog;
         $scope.currentUser = currentUser;
+        $scope.login = login;
 
         function registerDialog() {
             $mdDialog.show({
@@ -20,6 +21,22 @@
 
         function currentUser() {
 
+        }
+
+        function login() {
+            var data = {
+                username: $scope.username,
+                password: $scope.password
+            }
+
+            AuthorizationService.login(data)
+                        .then(function(data){
+
+                        },
+                           function(error){
+
+                           }
+                        )
         }
     }
 })();
