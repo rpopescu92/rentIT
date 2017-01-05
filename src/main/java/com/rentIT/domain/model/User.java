@@ -27,8 +27,6 @@ public class User {
     private boolean isOwner;
     private boolean isTenant;
     private Date createDate;
-    @OneToOne
-    private UserDetails userDetails;
 
     public User(String username) {
         this.username = username;

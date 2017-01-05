@@ -19,7 +19,9 @@ public class UserDetails {
     private String streetName;
     private String streetNumber;
     private String phoneNumber;
-    private String emailAddres;
+    private String emailAddress;
     private String city;
 
+    @OneToOne
+    private User user;
 }
