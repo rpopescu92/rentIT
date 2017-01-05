@@ -4,10 +4,11 @@
     angular.module('rentITApp')
             .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$scope', '$rootScope','PrincipalService'];
+    NavbarController.$inject = ['$scope', '$rootScope', '$state','PrincipalService'];
 
-    function NavbarController($scope, $rootScope, PrincipalService) {
+    function NavbarController($scope, $rootScope, $state, PrincipalService) {
         $scope.init = init;
+        $scope.goEditProfile = goEditProfile;
 
         $scope.isAuthenticated = false;
 
@@ -17,55 +18,13 @@
             $scope.isAuthenticated = true;
         });
 
-        $scope.konami = [{
-                name: "Konami",
-                link: "#",
-                subtree: [{
-                    name: "Metal Gear",
-                    link: "#",
-                    subtree: [{
-                        name: "Metal Gear",
-                        link: "metal-gear"
-                    }, {
-                        name: "Metal Gear 2: Solid Snake",
-                        link: "metal-gear2"
-                    }, {
-                        name: "Metal Gear Solid: The Twin Snakes",
-                        link: "metal-gear-solid"
-                    }]
-                }]
-            }];
-
-            $scope.trees = [{
-                name: "Konami",
-                link: "#",
-                subtree: [{
-                    name: "Metal Gear",
-                    link: "#",
-                    subtree: [{
-                        name: "Metal Gear",
-                        link: "metal-gear"
-                    }, {
-                        name: "Metal Gear 2: Solid Snake",
-                        link: "#"
-                    }, {
-                        name: "Metal Gear Solid: The Twin Snakes",
-                        link: "#"
-                    }]
-                }, {
-                    name: "divider",
-                    link: "#"
-                }, {
-                    name: "Castlevania",
-                    link: "#",
-                    subtree: [{
-
-                    }]
-                }]
-            }]
         function init() {
             $scope.isAuthenticated = PrincipalService.isAuthenticated();
 
+        }
+
+        function goEditProfile() {
+            $state.go('/profile');
         }
     }
 })();

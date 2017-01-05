@@ -24,4 +24,9 @@ public class AuthenticationDto implements Serializable{
     @NotNull
     @JsonProperty("remember_me")
     private boolean rememberMe;
+
+    public AuthenticationDto(String username, String password) {
+        setUsername(username);
+        setPassword(password);
+    }
 }

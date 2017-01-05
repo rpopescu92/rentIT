@@ -31,3 +31,4 @@ nbdist/
 /src/main/resources/static/node_modules/
 /node_modules/
 /src/test/java/com/rentIT/resource/Main.java
+/src/main/java/com/rentIT/util/Calculator.java

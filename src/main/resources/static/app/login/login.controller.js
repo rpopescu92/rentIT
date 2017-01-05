@@ -28,7 +28,7 @@
                 username: $scope.username,
                 password: $scope.password
             }
-
+            console.log(data);
             AuthorizationService.login(data)
                         .then(function(data){
 

@@ -53,6 +53,7 @@
         }
 
         function login(credentials, callback) {
+            console.log(credentials);
             var cb = callback || angular.noop;
             var deferred = $q.defer();
             AuthServerProvider.login(credentials)

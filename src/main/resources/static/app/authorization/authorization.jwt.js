@@ -28,10 +28,10 @@
             return $http.post('/api/authenticate', data)
                         .success(function(data, status, headers) {
                             var bearerToken = headers('Authorization');
-                            if(angular.isDefined(bearerToken) && bearerToken.slice(0,7) === 'Bearer') {
+                            if(angular.isDefined(bearerToken) && bearerToken.slice(0,7) === 'Bearer ') {
                                 var jwt = bearerToken.slice(7, bearerToken.length);
                                 $sessionStorage.authenticationToken = jwt;
-
+                                console.log(jwt);
                                 return jwt;
                             }
                         });
