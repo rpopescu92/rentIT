@@ -1,6 +1,8 @@
 package com.rentIT.resource;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.rentIT.domain.model.User;
+import com.rentIT.dto.UserDto;
 import com.rentIT.exception.UserExistsException;
 import com.rentIT.service.UserService;
 import org.junit.Assert;
@@ -31,18 +33,19 @@ public class RegisterResourceTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    @Test(expected = UserExistsException.class)
+    @Test
     public void registerUserExistsException() {
-        User userMock = User.builder().username("usernameExists").build();
+        UserDto userMock = UserDto.builder().username("usernameExists").password("1234").build();
         Mockito.doThrow(new UserExistsException("Username already exists")).when(userService).registerUser(userMock);
 
-        ResponseEntity<User> responseEntity = registerResource.register(userMock);
+        ResponseEntity responseEntity = registerResource.register(userMock);
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
+       // Assert.assertEquals(responseEntity.getBody(), "Username already exists.");
     }
 
     @Test
     public void registerUser(){
-        User userMock = User.builder().firstName("Paul").lastName("Giant").username("PaulGiant").build();
+        UserDto userMock = UserDto.builder().username("PaulGiant").password("1234").build();
 
         ResponseEntity<User> responseEntity = registerResource.register(userMock);
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);

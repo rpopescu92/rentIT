@@ -1,6 +1,7 @@
 package com.rentIT.resource;
 
 import com.rentIT.domain.model.User;
+import com.rentIT.dto.UserDto;
 import com.rentIT.exception.UserExistsException;
 import com.rentIT.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,16 +26,15 @@ public class RegisterResource {
     private UserService userService;
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity register(@RequestBody User user) {
-        log.info("Registering user with username {}",user.getUsername());
+    public ResponseEntity register(@RequestBody UserDto userDto) {
+        log.info("Registering user with username {}",userDto.getUsername());
 
         BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
-        String encodedPassword = bCrypt.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        user.setCreateDate(new Date());
+        String encodedPassword = bCrypt.encode(userDto.getPassword());
+        userDto.setPassword(encodedPassword);
 
         try{
-            userService.registerUser(user);
+            userService.registerUser(userDto);
             return new ResponseEntity(HttpStatus.OK);
         }catch (UserExistsException ex) {
             return new ResponseEntity(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST);

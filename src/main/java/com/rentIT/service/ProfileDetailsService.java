@@ -1,8 +1,9 @@
 package com.rentIT.service;
 
+import com.rentIT.domain.model.Address;
 import com.rentIT.domain.model.User;
-import com.rentIT.domain.model.UserDetails;
-import com.rentIT.domain.repository.UserDetailsRepository;
+import com.rentIT.domain.model.ProfileDetails;
+import com.rentIT.domain.repository.ProfileDetailsRepository;
 import com.rentIT.domain.repository.UserRepository;
 import com.rentIT.dto.UserDetailsDto;
 import lombok.extern.slf4j.Slf4j;
@@ -18,40 +19,47 @@ import java.util.Optional;
 public class ProfileDetailsService {
 
     @Autowired
-    private UserDetailsRepository userDetailsRepository;
+    private ProfileDetailsRepository profileDetailsRepository;
     @Autowired
     private UserRepository userRepository;
     private Logger logger = LoggerFactory.getLogger(ProfileDetailsService.class);
 
-    public UserDetails saveDetails(UserDetailsDto userDetailsDto) {
+    public ProfileDetails saveDetails(UserDetailsDto userDetailsDto) {
         logger.debug("Save user details {}",userDetailsDto);
-        UserDetails userDetails = UserDetails.builder().city(userDetailsDto.getCity())
+
+        Address address = buildAddress(userDetailsDto);
+        ProfileDetails profileDetails = ProfileDetails.builder().address(address)
                 .emailAddress(userDetailsDto.getEmailAddress())
-                .streetName(userDetailsDto.getStreetName())
-                .streetNumber(userDetailsDto.getStreetNumber())
                 .phoneNumber(userDetailsDto.getPhoneNumber())
                 .build();
-        User user = userRepository.findByUsername(userDetailsDto.getUsername()).get();
-        userDetails.setUser(user);
 
-        return userDetailsRepository.save(userDetails);
+        User user = userRepository.findByUsername(userDetailsDto.getUsername()).get();
+        profileDetails.setUser(user);
+
+        return profileDetailsRepository.save(profileDetails);
     }
 
-    public UserDetails updateDetails(UserDetailsDto userDetailsDto) {
+    public ProfileDetails updateDetails(UserDetailsDto userDetailsDto) {
         logger.debug("Update user details");
         Optional<User> optional = userRepository.findByUsername(userDetailsDto.getUsername());
-        UserDetails userDetails = userDetailsRepository.findByUser(optional.get());
+        ProfileDetails profileDetails = profileDetailsRepository.findByUser(optional.get());
 
-        if(userDetails!= null){
-            userDetails.setCity(userDetails.getCity());
-            userDetails.setEmailAddress(userDetailsDto.getEmailAddress());
-            userDetails.setPhoneNumber(userDetailsDto.getPhoneNumber());
-            userDetails.setStreetName(userDetailsDto.getStreetName());
-            userDetails.setStreetNumber(userDetails.getStreetNumber());
+        if(profileDetails != null){
+            profileDetails.setAddress(buildAddress(userDetailsDto));
+            profileDetails.setEmailAddress(userDetailsDto.getEmailAddress());
+            profileDetails.setPhoneNumber(userDetailsDto.getPhoneNumber());
 
-            userDetailsRepository.save(userDetails);
+            profileDetailsRepository.save(profileDetails);
         }
 
-        return userDetails;
+        return profileDetails;
+    }
+
+    private Address buildAddress(UserDetailsDto userDetailsDto) {
+        Address address = Address.builder().city(userDetailsDto.getCity())
+                .streetName(userDetailsDto.getStreetName())
+                .streetNumber(userDetailsDto.getStreetNumber())
+                .build();
+        return address;
     }
 }

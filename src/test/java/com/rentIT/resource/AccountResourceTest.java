@@ -36,7 +36,7 @@ public class AccountResourceTest {
 
     @Test
     public void testWhenAccountsExists() {
-        Mockito.when(userService.getAuthenticatedUser()).thenReturn(Optional.of(User.builder().firstName("paul").lastName("giant").username("paul_giant").role(UserRole.USER).build()));
+        Mockito.when(userService.getAuthenticatedUser()).thenReturn(Optional.of(User.builder().username("paul_giant").role(UserRole.USER).build()));
         ResponseEntity responseEntity = accountResource.getAccount();
 
         Assert.assertTrue(responseEntity.getStatusCode().equals(HttpStatus.OK));

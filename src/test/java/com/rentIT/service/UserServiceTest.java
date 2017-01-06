@@ -1,7 +1,9 @@
 package com.rentIT.service;
 
 import com.rentIT.domain.model.User;
+import com.rentIT.domain.repository.ProfileDetailsRepository;
 import com.rentIT.domain.repository.UserRepository;
+import com.rentIT.dto.UserDto;
 import com.rentIT.exception.UserExistsException;
 import com.rentIT.service.UserService;
 import org.junit.Assert;
@@ -33,6 +35,9 @@ public class UserServiceTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private ProfileDetailsRepository profileDetailsRepository;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -51,8 +56,6 @@ public class UserServiceTest {
         Mockito.when(authentication.getName()).thenReturn("username");
 
         User userMock = new User();
-        userMock.setFirstName("Paul");
-        userMock.setLastName("Grave");
         userMock.setUsername("PaulGrave");
         Optional<User> userOptional = Optional.of(userMock);
         Mockito.when(userRepository.findByUsername("username")).thenReturn(userOptional);
@@ -81,23 +84,21 @@ public class UserServiceTest {
     public void testRegisterUserWhenUserExists() {
         Mockito.when(userRepository.findByUsername("existsUsername")).thenReturn(Optional.of(new User("existsUsername")));
 
-        User user = User.builder().username("existsUsername").build();
+        UserDto user = UserDto.builder().username("existsUsername").build();
         userService.registerUser(user);
     }
 
     @Test
     public void testRegisterUser() {
-        User userMock = new User();
-        userMock.setFirstName("Paul");
-        userMock.setLastName("Grave");
-        userMock.setUsername("PaulGrave");
+        UserDto userDtoMock = new UserDto();
+        userDtoMock.setUsername("PaulGrave");
+        userDtoMock.setFirstName("Paul");
+        userDtoMock.setLastName("Grave");
         Optional<User> optional = Optional.empty();
 
         Mockito.when(userRepository.findByUsername("PaulGrave")).thenReturn(optional);
-        Mockito.when(userRepository.save(userMock)).thenReturn(userMock);
 
-        userService.registerUser(userMock);
+        userService.registerUser(userDtoMock);
         Mockito.verify(userRepository, times(1)).findByUsername("PaulGrave");
-        Mockito.verify(userRepository, times(1)).save(userMock);
     }
 }

@@ -5,23 +5,21 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_details")
+@Table(name = "address")
 @Builder
-@Setter
 @Getter
-@NoArgsConstructor
+@Setter
 @AllArgsConstructor
-public class UserDetails {
+@NoArgsConstructor
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String streetName;
     private String streetNumber;
-    private String phoneNumber;
-    private String emailAddress;
+    private String apartmentNumber;
+    private int floorNumber;
     private String city;
-
-    @OneToOne
-    private User user;
+    private String otherDirections;
 }
