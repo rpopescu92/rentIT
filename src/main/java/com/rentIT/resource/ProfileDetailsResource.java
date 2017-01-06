@@ -26,7 +26,7 @@ public class ProfileDetailsResource {
            ProfileDetails profileDetails = profileDetailsService.saveDetails(userDetailsDto);
             return new ResponseEntity(profileDetails, HttpStatus.OK);
         }catch (Exception ex) {
-            return new ResponseEntity(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(ex.getLocalizedMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -36,7 +36,7 @@ public class ProfileDetailsResource {
             ProfileDetails profileDetails = profileDetailsService.updateDetails(userDetailsDto);
             return new ResponseEntity(profileDetails, HttpStatus.OK);
         }catch (Exception ex) {
-            return new ResponseEntity(ex.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(ex.getLocalizedMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }

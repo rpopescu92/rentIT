@@ -24,8 +24,8 @@ public class Property {
     private User owner;
     @OneToOne
     private User tenant;
-    @OneToMany
-    private List<HistoryRating> historyRatings;
+    //@OneToMany
+    //private List<HistoryRating> historyRatings;
     @OneToOne
     private Address address;
 
@@ -34,6 +34,6 @@ public class Property {
     private int constructionYear;
     private int roomsNumber;
     private boolean isFurnished;
-    @OneToMany
-    private List<Image> images;
+    //@OneToMany
+    //private List<Image> images;
 }

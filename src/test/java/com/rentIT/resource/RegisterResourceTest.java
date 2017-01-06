@@ -40,7 +40,7 @@ public class RegisterResourceTest {
 
         ResponseEntity responseEntity = registerResource.register(userMock);
         Assert.assertEquals(responseEntity.getStatusCode(), HttpStatus.BAD_REQUEST);
-       // Assert.assertEquals(responseEntity.getBody(), "Username already exists.");
+        //Assert.assertEquals(responseEntity.getBody(), "Username already exists.");
     }
 
     @Test

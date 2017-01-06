@@ -22,4 +22,13 @@ public class Address {
     private int floorNumber;
     private String city;
     private String otherDirections;
+
+    public Address(String streetName, String streetNumber,
+                   String apartmentNumber, int floorNumber, String city) {
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+        this.apartmentNumber = apartmentNumber;
+        this.floorNumber = floorNumber;
+        this.city = city;
+    }
 }
