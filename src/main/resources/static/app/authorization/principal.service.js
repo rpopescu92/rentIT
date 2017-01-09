@@ -33,18 +33,17 @@
                 return deferred.promise;
             }
 
-            Account.getAccount()
-                    .then(function(data) {
-                        _identity = data.data;
-                        _authenticated = true;
-                        deferred.resolve(_identity);
-                    },
-                       function(error) {
-                         _identity = null;
-                         _authenticated = false;
-                         deferred.resolve(_identity);
-                       }
-                    );
+             Account.getAccount()
+                            .then(function(data) {
+                                _identity = data.data;
+                                _authenticated = true;
+                                deferred.resolve(_identity);
+                            }, function(error) {
+                                _identity = null;
+                                _authenticated = false;
+                                deferred.resolve(_identity);
+                            });
+
              return deferred.promise;
         }
 

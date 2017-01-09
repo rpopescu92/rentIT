@@ -11,7 +11,7 @@
 
         $stateProvider.state('profile', {
             url: '/profile',
-            parent: app,
+            parent: 'app',
             views: {
                 'content@': {
                     templateUrl: 'app/profile/profile.html',
