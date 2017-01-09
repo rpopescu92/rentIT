@@ -4,13 +4,13 @@
 }
 
 .md-toolbar-tools, .blueNavbar{
-    background-color: #64B5F6 !important;
+    background-color: #8BC34A !important;
     color: white;
     padding: 2px;
 }
 
 .blueButtons{
-    color: #64B5F6;
+    color: #8BC34A;
 }
 
 svg {
@@ -51,4 +51,7 @@ li:hover .sub-menu {
 .loginForm{
     width: 100%;
     color: !important black;
+}
+.homebrand{
+    color: #1A237E !important;
 }
