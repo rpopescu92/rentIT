@@ -3,6 +3,7 @@ package com.rentIT.domain.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -12,7 +13,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Property {
+public class Property implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,4 +36,6 @@ public class Property {
     private int roomsNumber;
     private boolean isFurnished;
     private boolean isRented;
+    @ElementCollection(targetClass=String.class)
+    private List<String> images;
 }

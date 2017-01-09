@@ -13,12 +13,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,19 +47,21 @@ public class PropertyService {
         }
 
         Address address = addressRepository.save(propertyDto.getAddress());
+
         Property property = Property.builder()
                             .owner((User)owner.get())
                             .address(address)
                             .averageRating(0)
                             .constructionYear(propertyDto.getConstructionYear())
                             //.historyRatings(new ArrayList<HistoryRating>())
-                            //.images(new ArrayList<Image>())
+                            .images(Arrays.asList(propertyDto.getImages()))
                             .isFurnished(propertyDto.isFurnished())
                             .longDescription(propertyDto.getLongDescription())
                             .shortDescription(propertyDto.getShortDescription())
                             .price(propertyDto.getPrice())
                             .roomsNumber(propertyDto.getRoomsNumber())
                             .build();
+
         propertyRepository.save(property);
     }
 
