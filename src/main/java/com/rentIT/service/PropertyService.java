@@ -8,11 +8,18 @@ import com.rentIT.dto.PropertyDto;
 import com.rentIT.exception.InvalidPropertyException;
 import com.rentIT.exception.UserNotAuthenticatedException;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,8 +33,10 @@ public class PropertyService {
     @Autowired
     private AddressRepository addressRepository;
 
-    public void saveProperty(PropertyDto propertyDto) {
+    private Logger logger = LoggerFactory.getLogger(PropertyService.class);
 
+    public void saveProperty(PropertyDto propertyDto) {
+        logger.debug("Save new property for user {}", propertyDto.getUsername());
         Optional<User> owner = userRepository.findByUsername(propertyDto.getUsername());
         if(!owner.isPresent()) {
             throw new UserNotAuthenticatedException();
@@ -53,5 +62,25 @@ public class PropertyService {
                             .roomsNumber(propertyDto.getRoomsNumber())
                             .build();
         propertyRepository.save(property);
+    }
+
+    public List<Property> getPropertiesByOwner(String username) {
+        Optional<User> owner = userRepository.findByUsername(username);
+        if(!owner.isPresent()) {
+            throw new UserNotAuthenticatedException();
+        }
+
+        List<Property> properties = propertyRepository.findPropertyByUserOwner(owner.get());
+        return properties;
+    }
+
+    public Page<Property> getAllProperties(Integer page, Integer limit, String option) {
+        Sort.Direction direction = option.startsWith("-") ? Sort.Direction.DESC: Sort.Direction.ASC;
+        if(option.startsWith("+")) {
+            option = option.substring(option.indexOf('+') +1);
+        } else {
+            option = option.substring(option.indexOf('-') +1);
+        }
+        return propertyRepository.findAllProperties(new PageRequest(page - 1, limit, direction, option));
     }
 }

@@ -34,6 +34,7 @@ public class Property {
     private int constructionYear;
     private int roomsNumber;
     private boolean isFurnished;
+    private boolean isRented;
     //@OneToMany
     //private List<Image> images;
 }

@@ -31,4 +31,8 @@ public class Address {
         this.floorNumber = floorNumber;
         this.city = city;
     }
+    public Address(String streetName, String streetNumber){
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+    }
 }

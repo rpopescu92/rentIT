@@ -1,6 +1,7 @@
 package com.rentIT.service;
 
 import com.rentIT.domain.model.Address;
+import com.rentIT.domain.model.Property;
 import com.rentIT.domain.model.User;
 import com.rentIT.domain.repository.AddressRepository;
 import com.rentIT.domain.repository.PropertyRepository;
@@ -8,6 +9,7 @@ import com.rentIT.domain.repository.UserRepository;
 import com.rentIT.dto.PropertyDto;
 import com.rentIT.exception.InvalidPropertyException;
 import com.rentIT.exception.UserNotAuthenticatedException;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +18,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -79,5 +87,42 @@ public class PropertyServiceTest {
                 .address(new Address("Brancoveanu","20","3", 3, "Bucharest"))
                 .build();
         propertyService.saveProperty(propertyDto);
+    }
+
+    @Test
+    public void testGetPropertiesByOwner() {
+        User user = User.builder().username("ana").id(1).build();
+        Mockito.when(userRepository.findByUsername("ana")).thenReturn(Optional.of(user));
+
+        Property property = Property.builder().price(233).shortDescription("property1").longDescription("property1 description").address(new Address("street1","nr2")).build();
+        List<Property> properties = new ArrayList<>();
+        properties.add(property);
+        Mockito.when(propertyRepository.findPropertyByUserOwner(user)).thenReturn(properties);
+
+        List<Property> propertiesResponse = propertyService.getPropertiesByOwner("ana");
+        Assert.assertNotNull(propertiesResponse);
+        Assert.assertEquals(propertiesResponse.size(), 1);
+
+    }
+
+    @Test(expected = UserNotAuthenticatedException.class)
+    public void testGetPropertiesWhenUserNotAuthenticated() {
+        Mockito.when(userRepository.findByUsername("doesNotExists")).thenReturn(Optional.empty());
+
+        List<Property> properties = propertyService.getPropertiesByOwner("doesNotExists");
+    }
+
+    @Test
+    @Ignore
+    public void testGetAllProperties() {
+        Property property = Property.builder().price(233).shortDescription("property1").longDescription("property1 description").address(new Address("street1","nr2")).build();
+        List<Property> properties = new ArrayList<>();
+        properties.add(property);
+        Page<Property> page = new PageImpl<Property>(properties,new PageRequest(1, 5, Sort.Direction.ASC, "+"), 1 );
+        Mockito.when(propertyRepository.findAllProperties(new PageRequest(1, 5, Sort.Direction.ASC, "+"))).thenReturn(page);
+
+        Page<Property> propertiesResponse = propertyService.getAllProperties(1, 5, "+");
+        Assert.assertNotNull(propertiesResponse);
+        Assert.assertEquals(propertiesResponse.getTotalElements(), 1);
     }
 }

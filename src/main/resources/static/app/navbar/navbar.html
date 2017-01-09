@@ -1,17 +1,18 @@
 <md-toolbar layout="row" layout-align="start end" class="blueNavbar">
     <div class="md-toolbar-tools">
         <span flex></span>
-         <div class="dropdown" ng-show="isAuthenticated">
+         <div class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <md-button ng-show="!isAuthenticated">
+                <md-button>
                 <md-icon md-svg-src="icons/account_circle_black24px.svg" class="accountIcon" style="fill:white" ></md-icon>
                 Account
                 </md-button>
             </a>
                 <ul class="dropdown-menu">
-                    <li ng-click="goEditProfile()"><a href="#">Edit Profile</a></li>
+                    <li><a href="#">Something</a></li>
+                    <!--<li><a href="#" ng-click="goEditProfile()">Edit Profile</a></li>-->
                     <li><a href="#">Page 1-3</a></li>
-                    <li ng-click="logout()"><a href="#">Logout</a></li>
+                    <li><a href="#" ng-click="logout()">Logout</a></li>
                     <li><md-divider></md-divider></li>
                     <li><md-subheader>Management</md-subheader></li>
                 </ul>
