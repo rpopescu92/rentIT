@@ -2,11 +2,13 @@ package com.rentIT.service;
 
 import com.rentIT.domain.model.Address;
 import com.rentIT.domain.model.User;
+import com.rentIT.domain.repository.AddressRepository;
 import com.rentIT.domain.repository.PropertyRepository;
 import com.rentIT.domain.repository.UserRepository;
 import com.rentIT.dto.PropertyDto;
 import com.rentIT.exception.InvalidPropertyException;
 import com.rentIT.exception.UserNotAuthenticatedException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -28,6 +30,8 @@ public class PropertyServiceTest {
     private PropertyRepository propertyRepository;
     @Mock
     private UserRepository userRepository;
+    @Mock
+    private AddressRepository addressRepository;
 
     @Test
     public void testNewPropertyAdded() {
