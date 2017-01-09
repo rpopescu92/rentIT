@@ -36,4 +36,9 @@ public class Property implements Serializable{
     private boolean isRented;
     @ElementCollection(targetClass=String.class)
     private List<String> images;
+
+    public Property(String shortDescription, User owner) {
+        this.shortDescription = shortDescription;
+        this.owner = owner;
+    }
 }

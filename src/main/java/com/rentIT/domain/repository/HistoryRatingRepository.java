@@ -24,4 +24,7 @@ public interface HistoryRatingRepository extends JpaRepository<HistoryRating, Lo
 
     @Query("select count(use) from HistoryRating hr where hr.user=?1 and hr.rating=?2")
     Integer countSpecificRatingForUser(User user, int rating);
+
+    @Query("select count(hr) from HistoryRating hr where hr.property=?1")
+    Integer countAllRatingsForProperty(Property property);
 }
