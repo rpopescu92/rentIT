@@ -25,8 +25,6 @@ public class Property implements Serializable{
     private User owner;
     @OneToOne
     private User tenant;
-    //@OneToMany
-    //private List<HistoryRating> historyRatings;
     @OneToOne
     private Address address;
 

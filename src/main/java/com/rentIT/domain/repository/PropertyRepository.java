@@ -15,7 +15,7 @@ import java.util.List;
 public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     @Query("select p from Property p where p.owner=?1")
-    List<Property> findPropertyByUserOwner(User owner);
+    Page<Property> findPropertyByUserOwner(User owner, Pageable pageable);
 
     @Query("select p from Property p")
     Page<Property> findAllProperties(Pageable pageable);

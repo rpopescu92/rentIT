@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 //@RequestMapping("/api")
@@ -45,6 +46,14 @@ public class PropertyResource {
                                                            @RequestParam("order") String order) {
         return new ResponseEntity<Page<Property>>(propertyService.getAllProperties(page,limit, order), HttpStatus.OK);
 
+    }
+
+    @RequestMapping(value = "/property/{username}", method = RequestMethod.GET)
+    public ResponseEntity<Page<Property>> getAllPropertiesByUser(@PathVariable("username") String username,
+                                                                 @RequestParam("page") Integer page,
+                                                                 @RequestParam("limit") Integer limit,
+                                                                 @RequestParam("order") String order){
+        return new ResponseEntity<Page<Property>>(propertyService.getPropertiesByOwner(page,limit,order,username), HttpStatus.OK);
     }
 
 }

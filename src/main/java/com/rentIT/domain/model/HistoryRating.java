@@ -19,4 +19,10 @@ public class HistoryRating {
     private int rating;
     private String comment;
 
+    @ManyToOne
+    private Property property;
+
+    @ManyToOne
+    private User user;
+
 }

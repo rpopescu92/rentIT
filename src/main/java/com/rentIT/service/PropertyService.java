@@ -53,7 +53,6 @@ public class PropertyService {
                             .address(address)
                             .averageRating(0)
                             .constructionYear(propertyDto.getConstructionYear())
-                            //.historyRatings(new ArrayList<HistoryRating>())
                             .images(Arrays.asList(propertyDto.getImages()))
                             .isFurnished(propertyDto.isFurnished())
                             .longDescription(propertyDto.getLongDescription())
@@ -65,13 +64,18 @@ public class PropertyService {
         propertyRepository.save(property);
     }
 
-    public List<Property> getPropertiesByOwner(String username) {
+    public Page<Property> getPropertiesByOwner(Integer page, Integer limit, String option, String username) {
         Optional<User> owner = userRepository.findByUsername(username);
         if(!owner.isPresent()) {
             throw new UserNotAuthenticatedException();
         }
-
-        List<Property> properties = propertyRepository.findPropertyByUserOwner(owner.get());
+        Sort.Direction direction = option.startsWith("-") ? Sort.Direction.DESC: Sort.Direction.ASC;
+        if(option.startsWith("+")) {
+            option = option.substring(option.indexOf('+') +1);
+        } else {
+            option = option.substring(option.indexOf('-') +1);
+        }
+        Page<Property> properties = propertyRepository.findPropertyByUserOwner(owner.get(),new PageRequest(page - 1, limit, direction, option));
         return properties;
     }
 
