@@ -10,7 +10,7 @@
 }
 
 .blueButtons{
-    color: #8BC34A;
+    color: #8BC34A !important;
 }
 
 svg {
@@ -54,4 +54,9 @@ li:hover .sub-menu {
 }
 .homebrand{
     color: #1A237E !important;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+    color: #1A237E !important;
+    border-color: #1A237E;
 }
