@@ -15,10 +15,12 @@
         init();
 
         $rootScope.$on("authenticationSuccess", function(event, data) {
+            console.log("emit success");
             $scope.isAuthenticated = true;
         });
 
         function init() {
+            console.log("login: "+ $scope.isAuthenticated);
             $scope.isAuthenticated = PrincipalService.isAuthenticated();
 
         }

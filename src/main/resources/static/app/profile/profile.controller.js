@@ -7,6 +7,6 @@
     ProfileController.$inject = ['$scope', '$rootScope', '$state', 'ProfileService'];
 
     function ProfileController($scope, $rootScope, $state, ProfileService) {
-
+        console.log("profile");
     }
 })();

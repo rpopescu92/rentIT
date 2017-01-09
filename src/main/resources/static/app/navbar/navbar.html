@@ -1,7 +1,7 @@
-<md-toolbar layout="row" layout-align="start end">
+<md-toolbar layout="row" layout-align="start end" class="blueNavbar">
     <div class="md-toolbar-tools">
         <span flex></span>
-         <div class="dropdown">
+         <div class="dropdown" ng-show="isAuthenticated">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                 <md-button ng-show="!isAuthenticated">
                 <md-icon md-svg-src="icons/account_circle_black24px.svg" class="accountIcon" style="fill:white" ></md-icon>
@@ -15,6 +15,6 @@
                     <li><md-divider></md-divider></li>
                     <li><md-subheader>Management</md-subheader></li>
                 </ul>
-             </div>
+         </div>
     </div>
 </md-toolbar>

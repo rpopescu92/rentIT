@@ -27,15 +27,15 @@
             function authThen() {
                 var isAuthenticated = PrincipalService.isAuthenticated();
 
-                if(isAuthenticated && $rootScope.toState.name === 'admin') {
+                if(isAuthenticated && ($rootScope.toState.name === 'admin')) {
                     $state.go('admin');
                 }
 
-               if(isAuthenticated && $rootScope.toState.name === 'login') {
+               if(isAuthenticated && ($rootScope.toState.name === 'login')) {
                     $state.go('home')
                 }
 
-                if(isAuthenticated && $rootScope.toState.name !== 'login') {
+                if(isAuthenticated && ($rootScope.toState.name !== 'login')) {
                     $state.go($rootScope.toState.name);
                  }
 

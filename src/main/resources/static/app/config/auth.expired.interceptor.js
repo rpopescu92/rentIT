@@ -18,7 +18,7 @@
             if (response.status === 401) {
                 delete $sessionStorage.authenticationToken;
 
-                var Principal = $injector.get('Principal');
+                var Principal = $injector.get('PrincipalService');
 
                 if (Principal.isAuthenticated()) {
                     var Auth = $injector.get('Auth');

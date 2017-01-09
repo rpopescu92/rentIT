@@ -4,7 +4,7 @@
 }
 
 .md-toolbar-tools, .blueNavbar{
-    background-color: #64B5F6;
+    background-color: #64B5F6 !important;
     color: white;
     padding: 2px;
 }

@@ -28,13 +28,19 @@
                 username: $scope.username,
                 password: $scope.password
             }
-            console.log(data);
             AuthorizationService.login(data)
                         .then(function(data){
+                            $state.go('home');
 
+                            $scope.$emit("authenticationSuccess");
+                            if(AuthorizationService.getPreviousState()) {
+                                var previousState = AuthorizationService.getPreviousState();
+                                AuthorizationService.resetPreviousState();
+                                $state.go(previousState.name, previousState.params);
+                            }
                         },
                            function(error){
-
+                               console.log("error login");
                            }
                         )
         }
