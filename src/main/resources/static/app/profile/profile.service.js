@@ -14,7 +14,7 @@
         }
 
         function getProfileDetails(username) {
-            return $http.get("/profile/" + username)
+            return $http.get("/api/profile/" + username)
                    .then(function(data){
                             return data.data;
                    });
@@ -23,7 +23,7 @@
         function updateProfileDetails(profileDetails) {
             return $http({
                 method: 'post',
-                url: '/profile/'+ profileDetails.username,
+                url: '/api//profile/'+ profileDetails.username,
                 data: profileDetails
             });
         }

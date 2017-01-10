@@ -10,6 +10,9 @@
         $scope.init = init;
         $scope.goEditProfile = goEditProfile;
         $scope.logout = logout;
+        $scope.goToProperties = goToProperties;
+        $scope.myProperties = myProperties;
+        $scope.goHome = goHome;
 
         $scope.isAuthenticated = false;
 
@@ -40,6 +43,15 @@
         function goHome() {
             console.log("go home");
             $state.go('home');
+        }
+
+        function goToProperties() {
+            console.log("go properties");
+            $state.go('properties');
+        }
+
+        function myProperties() {
+
         }
     }
 })();

@@ -18,14 +18,14 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/api")
+@RequestMapping("/api")
 @Slf4j
 public class PropertyResource {
 
     @Autowired
     private PropertyService propertyService;
 
-    @RequestMapping(value = "/property", method = RequestMethod.POST)
+    @RequestMapping(value = "/properties", method = RequestMethod.POST)
     public ResponseEntity addProperty(@Valid @RequestBody PropertyDto propertyDto) {
         if(StringUtils.isEmpty(propertyDto.getUsername())) {
             propertyDto.setUsername(AuthenticatedUser.getAuthenticatedUsername());
@@ -40,20 +40,20 @@ public class PropertyResource {
 
     }
 
-    @RequestMapping(value = "/property", method = RequestMethod.GET)
+    @RequestMapping(value = "/properties", method = RequestMethod.GET)
     public ResponseEntity<Page<Property>> getAllProperties(@RequestParam("page") Integer page,
                                                            @RequestParam("limit") Integer limit,
                                                            @RequestParam("order") String order) {
-        return new ResponseEntity<Page<Property>>(propertyService.getAllProperties(page,limit, order), HttpStatus.OK);
+        return new ResponseEntity(propertyService.getAllProperties(page,limit, order), HttpStatus.OK);
 
     }
 
-    @RequestMapping(value = "/property/{username}", method = RequestMethod.GET)
+    @RequestMapping(value = "/properties/{username}", method = RequestMethod.GET)
     public ResponseEntity<Page<Property>> getAllPropertiesByUser(@PathVariable("username") String username,
                                                                  @RequestParam("page") Integer page,
                                                                  @RequestParam("limit") Integer limit,
                                                                  @RequestParam("order") String order){
-        return new ResponseEntity<Page<Property>>(propertyService.getPropertiesByOwner(page,limit,order,username), HttpStatus.OK);
+        return new ResponseEntity(propertyService.getPropertiesByOwner(page,limit,order,username), HttpStatus.OK);
     }
 
 }
