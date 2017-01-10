@@ -31,8 +31,7 @@ public class UserService {
             return null;
         }
 
-        Optional<User> optional = userRepository.findByUsername(authentication.getName());
-        return optional;
+        return userRepository.findByUsername(authentication.getName());
     }
 
     public void registerUser(UserDto userDto) {

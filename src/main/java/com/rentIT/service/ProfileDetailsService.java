@@ -7,6 +7,7 @@ import com.rentIT.domain.repository.AddressRepository;
 import com.rentIT.domain.repository.ProfileDetailsRepository;
 import com.rentIT.domain.repository.UserRepository;
 import com.rentIT.dto.UserDetailsDto;
+import com.rentIT.exception.UserNotAuthenticatedException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,9 @@ public class ProfileDetailsService {
     public ProfileDetails updateDetails(ProfileDetails profileDetails) {
         logger.debug("Update user details");
         Optional<User> optional = userRepository.findByUsername(profileDetails.getUser().getUsername());
+        if(!optional.isPresent()) {
+            throw new UserNotAuthenticatedException();
+        }
         ProfileDetails existingProfileDetails = profileDetailsRepository.findByUser(optional.get());
 
         if(existingProfileDetails != null){
