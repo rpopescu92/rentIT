@@ -8,13 +8,16 @@
 
     function PrincipalService($q, Account) {
         var _identity,
+            _username,
             _authenticated = false;
 
         return {
             identity: identity,
             isAuthenticated: isAuthenticated,
             isIdentityResolved: isIdentityResolved,
-            authenticate: authenticate
+            authenticate: authenticate,
+            theUsername: theUsername,
+            getUsername: getUsername
         }
 
         function authenticate(identity) {
@@ -54,6 +57,16 @@
 
         function isIdentityResolved() {
             return angular.isDefined(_identity);
+        }
+
+        function theUsername(username) {
+            console.log(username);
+            _username = username;
+        }
+
+        function getUsername() {
+            console.log("principal user "+ _username);
+            return _username;
         }
     }
 })();

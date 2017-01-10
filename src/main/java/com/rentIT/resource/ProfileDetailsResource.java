@@ -7,10 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 //@RequestMapping("/api")
@@ -20,23 +17,23 @@ public class ProfileDetailsResource {
     @Autowired
     private ProfileDetailsService profileDetailsService;
 
-    @RequestMapping(value = "/profile", method = RequestMethod.POST)
-    public ResponseEntity registerDetails(@RequestBody UserDetailsDto userDetailsDto) {
+    @RequestMapping(value = "/profile/{username}", method = RequestMethod.POST)
+    public ResponseEntity registerDetails(@PathVariable("username")String username, @RequestBody ProfileDetails profileDetails) {
         try {
-           ProfileDetails profileDetails = profileDetailsService.saveDetails(userDetailsDto);
-            return new ResponseEntity(profileDetails, HttpStatus.OK);
+           ProfileDetails updatedProfileDetails = profileDetailsService.updateDetails(profileDetails);
+            return new ResponseEntity(updatedProfileDetails, HttpStatus.OK);
         }catch (Exception ex) {
-            return new ResponseEntity(ex.getLocalizedMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(ex.getStackTrace(),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
-    public ResponseEntity updateDetails (@RequestBody UserDetailsDto userDetailsDto) {
-        try {
-            ProfileDetails profileDetails = profileDetailsService.updateDetails(userDetailsDto);
-            return new ResponseEntity(profileDetails, HttpStatus.OK);
-        }catch (Exception ex) {
-            return new ResponseEntity(ex.getLocalizedMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+    @RequestMapping(value = "/profile/{username}", method = RequestMethod.GET)
+    public ResponseEntity<ProfileDetails> getProfileDetails(@PathVariable("username") String username) {
+        ProfileDetails profileDetails = profileDetailsService.getProfileDetails(username);
+        if(profileDetails == null) {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+
+        return new ResponseEntity(profileDetails, HttpStatus.OK);
     }
 }

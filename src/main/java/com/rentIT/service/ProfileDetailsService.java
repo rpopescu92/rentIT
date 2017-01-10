@@ -30,43 +30,41 @@ public class ProfileDetailsService {
 
     private Logger logger = LoggerFactory.getLogger(ProfileDetailsService.class);
 
-    public ProfileDetails saveDetails(UserDetailsDto userDetailsDto) {
-        logger.debug("Save user details {}",userDetailsDto);
 
-        Address address = buildAddress(userDetailsDto);
-        ProfileDetails profileDetails = ProfileDetails.builder().address(address)
-                .emailAddress(userDetailsDto.getEmailAddress())
-                .phoneNumber(userDetailsDto.getPhoneNumber())
-                .build();
-
-        User user = userRepository.findByUsername(userDetailsDto.getUsername()).get();
-        profileDetails.setUser(user);
-
-        return profileDetailsRepository.save(profileDetails);
-    }
-
-    public ProfileDetails updateDetails(UserDetailsDto userDetailsDto) {
+    public ProfileDetails updateDetails(ProfileDetails profileDetails) {
         logger.debug("Update user details");
-        Optional<User> optional = userRepository.findByUsername(userDetailsDto.getUsername());
-        ProfileDetails profileDetails = profileDetailsRepository.findByUser(optional.get());
+        Optional<User> optional = userRepository.findByUsername(profileDetails.getUser().getUsername());
+        ProfileDetails existingProfileDetails = profileDetailsRepository.findByUser(optional.get());
 
-        if(profileDetails != null){
-            profileDetails.setAddress(buildAddress(userDetailsDto));
-            profileDetails.setEmailAddress(userDetailsDto.getEmailAddress());
-            profileDetails.setPhoneNumber(userDetailsDto.getPhoneNumber());
+        if(existingProfileDetails != null){
+            existingProfileDetails.setAddress(buildAddress(profileDetails));
+            existingProfileDetails.setEmailAddress(profileDetails.getEmailAddress());
+            existingProfileDetails.setPhoneNumber(profileDetails.getPhoneNumber());
 
-            profileDetailsRepository.save(profileDetails);
+            profileDetailsRepository.save(existingProfileDetails);
         }
 
-        return profileDetails;
+        return existingProfileDetails;
     }
 
-    private Address buildAddress(UserDetailsDto userDetailsDto) {
-        Address address = Address.builder().city(userDetailsDto.getCity())
-                .streetName(userDetailsDto.getStreetName())
-                .streetNumber(userDetailsDto.getStreetNumber())
-                .build();
-        address = addressRepository.save(address);
+    public ProfileDetails getProfileDetails(String username){
+        Optional<User> optional = userRepository.findByUsername(username);
+        if(!optional.isPresent()) {
+            return null;
+        }
+        return profileDetailsRepository.findByUser(optional.get());
+    }
+
+    private Address buildAddress(ProfileDetails profileDetails) {
+        Address address = addressRepository.findOne(profileDetails.getAddress().getId());
+        address.setApartmentNumber(profileDetails.getAddress().getApartmentNumber());
+        address.setCity(profileDetails.getAddress().getCity());
+        address.setStreetName(profileDetails.getAddress().getStreetName());
+        address.setStreetNumber(profileDetails.getAddress().getStreetNumber());
+        address.setFloorNumber(profileDetails.getAddress().getFloorNumber());
+        address.setOtherDirections(profileDetails.getAddress().getOtherDirections());
+
+        addressRepository.save(address);
         return address;
     }
 }

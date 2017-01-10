@@ -2,9 +2,10 @@
     <div class="md-toolbar-tools">
         <a class="navbar-brand homebrand">Search for a home!</a>
         <md-button>Home</md-button>
-        <md-button>My Properties</md-button>
-        <md-button>All Properties</md-button>
+        <md-button ng-click="myProperties()">My Properties</md-button>
+        <md-button>Properties</md-button>
         <md-button>Market Analysis</md-button>
+        <md-button>Messages</md-button>
         <span flex></span>
         <div class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -16,7 +17,7 @@
                 <ul class="dropdown-menu">
                     <!--<li><a href="#" ng-click="goEditProfile()">Edit Profile</a></li>-->
                     <li><md-divider></md-divider></li>
-                    <li><a href="#">Edit Profile</a></li>
+                    <li ng-click="goEditProfile()"><a href="#">Edit Profile</a></li>
                     <li><md-divider></md-divider></li>
                     <li><a href="#" ng-click="logout()">Logout</a></li>
                 </ul>

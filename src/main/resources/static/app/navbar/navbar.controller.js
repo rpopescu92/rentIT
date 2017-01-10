@@ -27,6 +27,7 @@
         }
 
         function goEditProfile() {
+            console.log("go profile");
             $state.go('profile');
         }
 
@@ -34,6 +35,11 @@
             AuthorizationService.logout();
             $scope.isAuthenticated = false;
             $state.go('login');
+        }
+
+        function goHome() {
+            console.log("go home");
+            $state.go('home');
         }
     }
 })();

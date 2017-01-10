@@ -1,1 +1,77 @@
-<div>profile</div>
+<div class="row" style="padding:4px;">
+    <div class="col-md-3">
+       <md-card>
+           <md-card-content>
+               <div class="row">
+                   <thumbnail file-type="image" source="'image.jpg'" max-height="150" max-width="300"></thumbnail>
+               </div>
+               <div class="row">
+                   <md-button>Upload photo</md-button>
+               </div>
+           </md-card-content>
+       </md-card>
+    </div>
+    <div class="col-md-9">
+        <md-card>
+            <md-card-title>
+                <h2>{{$scope.username}}</h2>
+            </md-card-title>
+            <md-card-content>
+                <div class="row" style="padding:10px;">
+                    <md-input-container>
+                        <label>First Name</label>
+                        <input ng-model="firstName" type="text">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Last Name</label>
+                        <input ng-model="lastName" type="text">
+                    </md-input-container>
+                </div>
+                <div class="row" style="padding:10px;">
+                    <md-input-container>
+                        <label>Email</label>
+                        <input ng-model="email" type="email">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Phone number</label>
+                        <input ng-model="phoneNumber" type="text">
+                    </md-input-container>
+                </div>
+                <div class="row" style="padding:10px;">
+                    <md-input-container>
+                        <label>Street name</label>
+                        <input ng-model="streetName" type="text">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Street no.</label>
+                        <input ng-model="streetNumber" type="text">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Apartment no.</label>
+                        <input ng-model="apartmentNumber" type="text">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Floor no.</label>
+                        <input ng-model="floorNumber" type="number">
+                    </md-input-container>
+                </div>
+                <div class="row" style="padding:10px;">
+                    <md-input-container>
+                        <label>City</label>
+                        <input ng-model="city" type="text">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Other directions</label>
+                        <input ng-model="otherDirections" type="text">
+                    </md-input-container>
+                </div>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="left">
+                <md-button class="md-raised md-primary raisedButton" ng-click="updateProfile()">
+                   Update
+                </md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+
+</div>

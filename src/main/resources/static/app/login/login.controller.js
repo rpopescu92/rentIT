@@ -9,7 +9,7 @@
     function LoginController($scope, $rootScope, $mdDialog, $state, AuthorizationService, Account, PrincipalService) {
 
         $scope.registerDialog = registerDialog;
-        $scope.currentUser = currentUser;
+        $scope.currentUser;
         $scope.login = login;
 
         function registerDialog() {
@@ -31,7 +31,7 @@
             AuthorizationService.login(data)
                         .then(function(data){
                             $state.go('home');
-
+                            PrincipalService.theUsername($scope.username);
                             $scope.$emit("authenticationSuccess");
                             if(AuthorizationService.getPreviousState()) {
                                 var previousState = AuthorizationService.getPreviousState();
