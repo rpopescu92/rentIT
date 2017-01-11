@@ -4,9 +4,9 @@
     angular.module('rentITApp')
             .controller('PropertiesController', PropertiesController);
 
-    PropertiesController.$inject = ['$scope', '$rootScope', 'PropertiesService', 'ViewPropertyService', '$state'];
+    PropertiesController.$inject = ['$scope', '$rootScope', 'PropertiesService', 'ViewPropertyService', '$state', 'PrincipalService'];
 
-    function PropertiesController($scope, $rootScope, PropertiesService, ViewPropertyService, $state){
+    function PropertiesController($scope, $rootScope, PropertiesService, ViewPropertyService, $state, PrincipalService){
         $scope.getProperties = getProperties;
         $scope.queryProperties = {
                     order: 'price',

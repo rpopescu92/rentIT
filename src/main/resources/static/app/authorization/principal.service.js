@@ -41,7 +41,6 @@
                                 _identity = data.data;
                                 _authenticated = true;
                                 deferred.resolve(_identity);
-                                console.log("get account");
                             }, function(error) {
                                 _identity = null;
                                 _authenticated = false;

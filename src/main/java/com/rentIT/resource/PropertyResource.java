@@ -56,4 +56,10 @@ public class PropertyResource {
         return new ResponseEntity(propertyService.getPropertiesByOwner(page,limit,order,username), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/properties/{id}", method = RequestMethod.POST)
+    public ResponseEntity<Property> updateProperty(@PathVariable("id") long id, @RequestBody Property property) {
+        Property updatedProperty = propertyService.updateProperty(property);
+
+        return new ResponseEntity(updatedProperty, HttpStatus.OK);
+    }
 }

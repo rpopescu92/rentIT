@@ -16,12 +16,10 @@
         }
 
         function getProperty() {
-            console.log("property "+viewProperty);
             return viewProperty;
         }
 
         function setProperty(property) {
-            console.log("set "+ property);
             viewProperty = property;
         }
     }

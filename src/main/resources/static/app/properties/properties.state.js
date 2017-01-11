@@ -17,7 +17,13 @@
                     templateUrl: 'app/properties/properties.html',
                     controller: 'PropertiesController'
                 }
-            }
+            },
+            resolve: {
+                authorize: ['AuthorizationService',
+                function (AuthorizationService) {
+                     return AuthorizationService.authorize();
+            }]
+          }
         });
      }
 })();

@@ -1,1 +1,9 @@
-<div>view property</div>
+<div>view properties</div>
+<div class="row">
+    <img ng-repeat="image in images"
+         ng-hide="!isCurrentSlideIndex($index)" ng-src={{image}} >
+    <a class="arrow prev" href="#" ng-click="nextSlide()"></a>
+    <a class="arrow next" href="#" ng-click="prevSlide()"></a>
+    <a href="#" ng-class="{'active':isCurrentSlideIndex($index)}"
+       ng-click="setCurrentSlideIndex($index);"></a>
+</div>

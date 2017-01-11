@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -87,5 +88,36 @@ public class PropertyService {
             option = option.substring(option.indexOf('-') +1);
         }
         return propertyRepository.findAllProperties(new PageRequest(page - 1, limit, direction, option));
+    }
+
+    public Property updateProperty(Property property) {
+        Optional<User> owner = userRepository.findByUsername(property.getOwner().getUsername());
+        if(!owner.isPresent()) {
+            throw new UserNotAuthenticatedException();
+        }
+        Property updatedProperty = propertyRepository.findOne(property.getId());
+        updateAddress(property);
+        updatedProperty.setAverageRating(property.getAverageRating());
+        updatedProperty.setAddress(property.getAddress());
+        updatedProperty.setConstructionYear(property.getConstructionYear());
+        updatedProperty.setAddress(property.getAddress());
+        updatedProperty.setFurnished(property.isFurnished());
+        updatedProperty.setImages(property.getImages());
+        updatedProperty.setLongDescription(property.getLongDescription());
+        updatedProperty.setShortDescription(property.getShortDescription());
+        updatedProperty.setPrice(property.getPrice());
+        updatedProperty.setRented(property.isRented());
+        updatedProperty.setRoomsNumber(property.getRoomsNumber());
+        updatedProperty.setTenant(property.getTenant());
+
+        propertyRepository.save(updatedProperty);
+
+        return updatedProperty;
+    }
+
+    private void updateAddress(Property property) {
+        Address address = addressRepository.findOne(property.getAddress().getId());
+        address = property.getAddress();
+        addressRepository.save(address);
     }
 }

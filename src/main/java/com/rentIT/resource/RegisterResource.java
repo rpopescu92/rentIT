@@ -27,7 +27,7 @@ public class RegisterResource {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity register(@RequestBody UserDto userDto) {
-        log.info("Registering user with username {}",userDto.getUsername());
+        log.info("Register user with username {}",userDto.getUsername());
 
         BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder();
         String encodedPassword = bCrypt.encode(userDto.getPassword());

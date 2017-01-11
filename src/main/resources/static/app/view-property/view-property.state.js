@@ -17,7 +17,13 @@
                     templateUrl: '/app/view-property/view-property.html',
                     controller: 'ViewProperty'
                 }
-            }
+            },
+            resolve: {
+                  authorize: ['AuthorizationService',
+                   function (AuthorizationService) {
+                         return AuthorizationService.authorize();
+              }]
+      }
         });
     }
 })();
