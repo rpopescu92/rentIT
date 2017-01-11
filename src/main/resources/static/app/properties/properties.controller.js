@@ -4,9 +4,9 @@
     angular.module('rentITApp')
             .controller('PropertiesController', PropertiesController);
 
-    PropertiesController.$inject = ['$scope', '$rootScope', 'PropertiesService'];
+    PropertiesController.$inject = ['$scope', '$rootScope', 'PropertiesService', 'ViewPropertyService', '$state'];
 
-    function PropertiesController($scope, $rootScope, PropertiesService){
+    function PropertiesController($scope, $rootScope, PropertiesService, ViewPropertyService, $state){
         $scope.getProperties = getProperties;
         $scope.queryProperties = {
                     order: 'price',
@@ -14,7 +14,7 @@
                     page: 1
            };
         $scope.properties = [];
-
+        $scope.viewProperty = viewProperty;
         init();
 
         function init() {
@@ -34,6 +34,11 @@
                                 function(error){
 
                                 } );
+        }
+        function viewProperty(property) {
+            ViewPropertyService.setProperty(property);
+            $scope.$broadcast('view-property', property);
+            $state.go('view-property');
         }
 
         $rootScope.$on('load-properties', function() {

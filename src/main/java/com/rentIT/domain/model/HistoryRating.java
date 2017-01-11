@@ -3,6 +3,7 @@ package com.rentIT.domain.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "history_rating")
@@ -18,6 +19,7 @@ public class HistoryRating {
     private long id;
     private int rating;
     private String comment;
+    private Date createdDate;
 
     @ManyToOne
     private Property property;
