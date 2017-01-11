@@ -13,6 +13,7 @@
                     limit: 5,
                     page: 1
            };
+        $scope.properties = [];
 
         init();
 

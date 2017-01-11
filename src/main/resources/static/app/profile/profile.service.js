@@ -10,7 +10,8 @@
 
         return{
             getProfileDetails: getProfileDetails,
-            updateProfileDetails: updateProfileDetails
+            updateProfileDetails: updateProfileDetails,
+            getAuthenticatedUser: getAuthenticatedUser
         }
 
         function getProfileDetails(username) {
@@ -26,6 +27,13 @@
                 url: '/api//profile/'+ profileDetails.username,
                 data: profileDetails
             });
+        }
+
+        function getAuthenticatedUser() {
+            return $http.get("/api/account")
+                    .then(function(data) {
+                        return data.data;
+                    });
         }
     }
 })();

@@ -21,28 +21,35 @@
         init();
 
         function init() {
-            $scope.username = PrincipalService.getUsername();
+            ProfileService.getAuthenticatedUser()
+                            .then(function(data){
+                                $scope.username = data.username;
 
-            ProfileService.getProfileDetails(PrincipalService.getUsername())
-                            .then(function(data) {
-                                $scope.id = data.id;
-                                $scope.firstName = data.firstName;
-                                $scope.lastName = data.lastName;
-                                $scope.email = data.emailAddress;
-                                $scope.phoneNumber = data.phoneNumber;
-                                $scope.addressId = data.address.id;
-                                $scope.streetName = data.address.streetName;
-                                $scope.streetNumber = data.address.streetNumber;
-                                $scope.apartmentNumber = data.address.apartmentNumber;
-                                $scope.floorNumber = data.address.floorNumber;
-                                $scope.city = data.address.city;
-                                $scope.otherDirections = data.address.otherDirections;
-                                $scope.userId = data.user.id;
-                                $scope.userName = PrincipalService.getUsername();
+                                 ProfileService.getProfileDetails($scope.username)
+                                                .then(function(data) {
+                                                        $scope.id = data.id;
+                                                        $scope.firstName = data.firstName;
+                                                        $scope.lastName = data.lastName;
+                                                        $scope.email = data.emailAddress;
+                                                        $scope.phoneNumber = data.phoneNumber;
+                                                        $scope.addressId = data.address.id;
+                                                        $scope.streetName = data.address.streetName;
+                                                        $scope.streetNumber = data.address.streetNumber;
+                                                        $scope.apartmentNumber = data.address.apartmentNumber;
+                                                        $scope.floorNumber = data.address.floorNumber;
+                                                        $scope.city = data.address.city;
+                                                        $scope.otherDirections = data.address.otherDirections;
+                                                        $scope.userId = data.user.id;
+                                                     },
+                                                 function(error) {
+                                         });
                             },
-                            function(error) {
+                            function(error){
+                                console.log("user not authenticated");
+                            }
+                            );
 
-                            });
+
 
         }
 
@@ -64,7 +71,7 @@
                 },
                 user: {
                     id: $scope.userId,
-                    username: $scope.userName
+                    username: $scope.username
                 }
             }
 

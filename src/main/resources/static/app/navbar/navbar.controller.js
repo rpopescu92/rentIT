@@ -4,15 +4,16 @@
     angular.module('rentITApp')
             .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$scope', '$rootScope', '$state','PrincipalService', 'AuthorizationService'];
+    NavbarController.$inject = ['$scope', '$rootScope', '$state','PrincipalService', 'AuthorizationService', 'NavbarService'];
 
-    function NavbarController($scope, $rootScope, $state, PrincipalService, AuthorizationService) {
+    function NavbarController($scope, $rootScope, $state, PrincipalService, AuthorizationService, NavbarService) {
         $scope.init = init;
         $scope.goEditProfile = goEditProfile;
         $scope.logout = logout;
         $scope.goToProperties = goToProperties;
         $scope.myProperties = myProperties;
         $scope.goHome = goHome;
+        $scope.username;
 
         $scope.isAuthenticated = false;
 
@@ -27,6 +28,10 @@
             console.log("login: "+ $scope.isAuthenticated);
             $scope.isAuthenticated = PrincipalService.isAuthenticated();
 
+            NavbarService.getAuthenticatedUser()
+                            .then(function(data){
+                                $scope.username = data.username;
+                            });
         }
 
         function goEditProfile() {
