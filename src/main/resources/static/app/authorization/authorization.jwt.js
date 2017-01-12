@@ -31,7 +31,6 @@
                             if(angular.isDefined(bearerToken) && bearerToken.slice(0,7) === 'Bearer ') {
                                 var jwt = bearerToken.slice(7, bearerToken.length);
                                 $sessionStorage.authenticationToken = jwt;
-                                console.log(jwt);
                                 return jwt;
                             }
                         },

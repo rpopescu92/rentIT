@@ -2,9 +2,8 @@
     'use strict';
 
     angular.module('rentITApp', ['ui.router', 'ngMaterial',
-                    'ngStorage','ui.bootstrap', 'ui.navbar',
-                    'ngCacheBuster',
-                    'angular-thumbnails'])
+                    'ngStorage','ui.bootstrap',
+                    'ngCacheBuster'])
                     .run(stateInitializer);
     stateInitializer.$inject = ['stateHandler'];
 

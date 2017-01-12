@@ -7,7 +7,7 @@
     stateConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function stateConfig($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/view-property');
+        $urlRouterProvider.otherwise('/home');
 
         $stateProvider.state('view-property', {
             url: '/view-property',

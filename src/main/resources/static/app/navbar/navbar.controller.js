@@ -20,18 +20,16 @@
         init();
 
         $rootScope.$on("authenticationSuccess", function(event, data) {
-            console.log("emit success");
             $scope.isAuthenticated = true;
+
+            getAuthenticatedUser();
         });
 
         function init() {
             console.log("login: "+ $scope.isAuthenticated);
             $scope.isAuthenticated = PrincipalService.isAuthenticated();
 
-            NavbarService.getAuthenticatedUser()
-                            .then(function(data){
-                                $scope.username = data.username;
-                            });
+            getAuthenticatedUser();
         }
 
         function goEditProfile() {
@@ -57,6 +55,13 @@
 
         function myProperties() {
 
+        }
+
+        function getAuthenticatedUser() {
+            NavbarService.getAuthenticatedUser()
+                             .then(function(data){
+                                $scope.username = data.username;
+                       });
         }
     }
 })();
