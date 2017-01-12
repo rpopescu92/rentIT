@@ -25,13 +25,13 @@
 
         function addProperty() {
             AddPropertyService.addProperty($scope.property)
-                        .then(function(response){
-                            console.log("property added");
+                        .then(function(data){
+                            console.log('go to my properties');
+                            $state.go('my-properties');
                         },
-                        function(response){
+                        function(error){
 
-                        }
-                        )
+                        });
         }
 
 

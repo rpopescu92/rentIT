@@ -55,7 +55,7 @@
         }
 
         function myProperties() {
-
+            $state.go('my-properties');
         }
 
         function addProperty() {
