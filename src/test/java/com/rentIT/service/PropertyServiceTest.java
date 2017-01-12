@@ -101,7 +101,7 @@ public class PropertyServiceTest {
         Page<Property> page = new PageImpl<Property>(properties,new PageRequest(1, 5, Sort.Direction.ASC, "+"), 1 );
         Mockito.when(propertyRepository.findPropertyByUserOwner(user, new PageRequest(1, 5, Sort.Direction.ASC, "+"))).thenReturn(page);
 
-        Page<Property> pageResponse = propertyService.getPropertiesByOwner(1, 5, "+","ana");
+        Page<Property> pageResponse = propertyService.getPropertiesByOwner(String.valueOf(1), String.valueOf(5), "+","ana");
         Assert.assertNotNull(pageResponse);
         Assert.assertEquals(pageResponse.getContent().size(), 1);
 
@@ -111,7 +111,7 @@ public class PropertyServiceTest {
     public void testGetPropertiesWhenUserNotAuthenticated() {
         Mockito.when(userRepository.findByUsername("doesNotExists")).thenReturn(Optional.empty());
 
-        Page<Property> page = propertyService.getPropertiesByOwner(1, 5, "+","doesNotExists");
+        Page<Property> page = propertyService.getPropertiesByOwner(String.valueOf(1), String.valueOf(5), "+","doesNotExists");
     }
 
     @Test

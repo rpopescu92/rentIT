@@ -51,10 +51,10 @@ public class PropertyResource {
 
     @RequestMapping(value = "/properties/{username}", method = RequestMethod.GET)
     public ResponseEntity<Page<Property>> getAllPropertiesByUser(@PathVariable("username") String username,
-                                                                 @RequestParam("page") Integer page,
-                                                                 @RequestParam("limit") Integer limit,
+                                                                 @RequestParam("page") String page,
+                                                                 @RequestParam("limit") String limit,
                                                                  @RequestParam("order") String order){
-        return new ResponseEntity(propertyService.getPropertiesByOwner(page,limit,order,username), HttpStatus.OK);
+        return new ResponseEntity(propertyService.getPropertiesByOwner(username,page,limit,order), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/properties/{id}", method = RequestMethod.POST)

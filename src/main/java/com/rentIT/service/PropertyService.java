@@ -65,7 +65,7 @@ public class PropertyService {
         propertyRepository.save(property);
     }
 
-    public Page<Property> getPropertiesByOwner(Integer page, Integer limit, String option, String username) {
+    public Page<Property> getPropertiesByOwner(String username, String page, String limit, String option) {
         Optional<User> owner = userRepository.findByUsername(username);
         if(!owner.isPresent()) {
             throw new UserNotAuthenticatedException();
@@ -76,7 +76,7 @@ public class PropertyService {
         } else {
             option = option.substring(option.indexOf('-') +1);
         }
-        Page<Property> properties = propertyRepository.findPropertyByUserOwner(owner.get(),new PageRequest(page - 1, limit, direction, option));
+        Page<Property> properties = propertyRepository.findPropertyByUserOwner(owner.get(),new PageRequest(Integer.parseInt(page) - 1, Integer.parseInt(limit), direction, option));
         return properties;
     }
 

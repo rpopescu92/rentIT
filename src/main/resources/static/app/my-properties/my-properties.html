@@ -1,1 +1,17 @@
-<div>my properties</div>
+<div class="col-md-8 col-md-offset-2">
+    <div class="row" ng-repeat="property in properties">
+        <md-card>
+            <md-card-title style="width:90%;">
+                <img ng-src="/icons/house.jpg" class="md-card-image" alt="Washed Out">
+                <span class="md-headline" style="padding:5px;">{{property.title}}</span>
+                <span class="md-headline" style="padding:5px;">{{property.price}}</span>
+            </md-card-title>
+            <md-card-content>
+                <p>{{price.longDescription}}</p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button>View</md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+</div>

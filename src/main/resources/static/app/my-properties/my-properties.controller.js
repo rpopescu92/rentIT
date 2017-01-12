@@ -12,14 +12,13 @@
         $scope.properties = [];
         $scope.query = {
                     order: 'price',
-                    limit: 5,
+                    limit: 6,
                     page: 1
                 };
 
         init();
         $scope.username;
 
-        getUserProperties($scope.username, $scope.query.page);
         function init() {
              Account.getAccount()
                       .then(function(data) {
@@ -33,10 +32,13 @@
         function getUserProperties(username, page) {
             $scope.query.page = page;
             MyPropertiesService.getUserProperties($scope.username, $scope.query)
-                                 .then(function(data){
-                                        console.log('properties retrieved');
+                                 .then(function(response){
+                                       if(response.status == 200){
+                                            $scope.properties = response.data.content;
+                                        }
                                   }, function(error) {
-             });
+                                        console.log("error get properties");
+                                });
         }
     }
 })();
