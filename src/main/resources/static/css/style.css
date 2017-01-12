@@ -9,7 +9,7 @@
     padding: 2px;
 }
 
-.blueButtons{
+.customButton{
     color: #8BC34A !important;
 }
 
@@ -53,15 +53,19 @@ li:hover .sub-menu {
     color: !important black;
 }
 .homebrand{
-    color: #1A237E !important;
+    color: black !important;
 }
 
 md-input-container:not(.md-input-invalid).md-input-focused .md-input {
-    color: #1A237E !important;
-    border-color: #1A237E;
+    color: black !important;
+    border-color: black;
 }
 
 .raisedButton{
     background-color: #8BC34A !important;
 
+}
+
+md-checkbox.md-checked .md-icon {
+         background-color: #8BC34A !important;
 }

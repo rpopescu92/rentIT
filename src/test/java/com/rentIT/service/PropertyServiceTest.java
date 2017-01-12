@@ -52,7 +52,7 @@ public class PropertyServiceTest {
                 .address(new Address("Brancoveanu","20","3", 3, "Bucharest"))
                 .averageRating(0)
                 .constructionYear(1992)
-                .shortDescription("short")
+                .title("short")
                 .isFurnished(true)
                 .build();
 
@@ -95,7 +95,7 @@ public class PropertyServiceTest {
         User user = User.builder().username("ana").id(1).build();
         Mockito.when(userRepository.findByUsername("ana")).thenReturn(Optional.of(user));
 
-        Property property = Property.builder().price(233).shortDescription("property1").longDescription("property1 description").address(new Address("street1","nr2")).build();
+        Property property = Property.builder().price(233).title("property1").longDescription("property1 description").address(new Address("street1","nr2")).build();
         List<Property> properties = new ArrayList<>();
         properties.add(property);
         Page<Property> page = new PageImpl<Property>(properties,new PageRequest(1, 5, Sort.Direction.ASC, "+"), 1 );
@@ -117,7 +117,7 @@ public class PropertyServiceTest {
     @Test
     @Ignore
     public void testGetAllProperties() {
-        Property property = Property.builder().price(233).shortDescription("property1").longDescription("property1 description").address(new Address("street1","nr2")).build();
+        Property property = Property.builder().price(233).title("property1").longDescription("property1 description").address(new Address("street1","nr2")).build();
         List<Property> properties = new ArrayList<>();
         properties.add(property);
         Page<Property> page = new PageImpl<Property>(properties,new PageRequest(1, 5, Sort.Direction.ASC, "+"), 1 );

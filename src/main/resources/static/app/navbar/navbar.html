@@ -1,12 +1,16 @@
 <md-toolbar layout="row" layout-align="start end" class="blueNavbar">
     <div class="md-toolbar-tools" ng-class="{active: isActive('/home')}">
-        <a class="navbar-brand homebrand">Search for a home!</a>
+        <a class="navbar-brand homebrand">Search for home!</a>
         <md-button ng-click="goHome()">Home</md-button>
         <md-button ng-click="myProperties()">My Properties</md-button>
         <md-button ng-click="goToProperties()">Properties</md-button>
         <md-button>Market Analysis</md-button>
         <md-button>Messages</md-button>
         <span flex></span>
+        <md-button style="background-color:#FBA100;" ng-click="addProperty()">
+            <md-icon md-svg-src="icons/plus.svg" style="fill:white;"></md-icon>
+            Add property
+        </md-button>
         <div class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown">
                 <md-button>
@@ -15,7 +19,6 @@
                 </md-button>
             </a>
                 <ul class="dropdown-menu">
-                    <li><md-divider></md-divider></li>
                     <li ng-click="goEditProfile()"><a>Edit Profile</a></li>
                     <li><md-divider></md-divider></li>
                     <li><a ng-click="logout()">Logout</a></li>

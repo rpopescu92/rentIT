@@ -18,7 +18,7 @@ public class Property implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String shortDescription;
+    private String title;
     private String longDescription;
 
     @OneToOne
@@ -38,7 +38,7 @@ public class Property implements Serializable{
     private List<String> images;
 
     public Property(String shortDescription, User owner) {
-        this.shortDescription = shortDescription;
+        this.title = shortDescription;
         this.owner = owner;
     }
 }

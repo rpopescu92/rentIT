@@ -47,7 +47,7 @@ public class PropertyResourceTest {
                 .address(new Address())
                 .averageRating(0)
                 .constructionYear(1992)
-                .shortDescription("short")
+                .title("title")
                 .isFurnished(true)
                 .build();
 
@@ -65,7 +65,7 @@ public class PropertyResourceTest {
                 .address(new Address())
                 .averageRating(0)
                 .constructionYear(1992)
-                .shortDescription("short")
+                .title("short")
                 .isFurnished(true)
                 .build();
 

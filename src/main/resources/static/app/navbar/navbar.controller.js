@@ -13,6 +13,7 @@
         $scope.goToProperties = goToProperties;
         $scope.myProperties = myProperties;
         $scope.goHome = goHome;
+        $scope.addProperty = addProperty;
         $scope.username;
 
         $scope.isAuthenticated = false;
@@ -57,6 +58,9 @@
 
         }
 
+        function addProperty() {
+            $state.go('add-property');
+        }
         function getAuthenticatedUser() {
             NavbarService.getAuthenticatedUser()
                              .then(function(data){

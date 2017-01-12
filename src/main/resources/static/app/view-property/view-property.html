@@ -4,6 +4,6 @@
          ng-hide="!isCurrentSlideIndex($index)" ng-src={{image}} >
     <a class="arrow prev" ng-click="nextSlide()"></a>
     <a class="arrow next" ng-click="prevSlide()"></a>
-    <a href="#" ng-class="{'active':isCurrentSlideIndex($index)}"
+    <a ng-class="{'active':isCurrentSlideIndex($index)}"
        ng-click="setCurrentSlideIndex($index);"></a>
 </div>

@@ -42,7 +42,7 @@ public class PropertyService {
             throw new UserNotAuthenticatedException();
         }
         if(StringUtils.isEmpty(propertyDto.getAddress().getStreetName()) || StringUtils.isEmpty(propertyDto.getAddress().getStreetNumber())
-                || StringUtils.isEmpty(propertyDto.getShortDescription())
+                || StringUtils.isEmpty(propertyDto.getTitle())
                 || StringUtils.isEmpty(propertyDto.getConstructionYear())) {
             throw new InvalidPropertyException("Invalid fields. Address cannot be empty");
         }
@@ -57,7 +57,7 @@ public class PropertyService {
                             .images(Arrays.asList(propertyDto.getImages()))
                             .isFurnished(propertyDto.isFurnished())
                             .longDescription(propertyDto.getLongDescription())
-                            .shortDescription(propertyDto.getShortDescription())
+                            .title(propertyDto.getTitle())
                             .price(propertyDto.getPrice())
                             .roomsNumber(propertyDto.getRoomsNumber())
                             .build();
@@ -104,7 +104,7 @@ public class PropertyService {
         updatedProperty.setFurnished(property.isFurnished());
         updatedProperty.setImages(property.getImages());
         updatedProperty.setLongDescription(property.getLongDescription());
-        updatedProperty.setShortDescription(property.getShortDescription());
+        updatedProperty.setTitle(property.getTitle());
         updatedProperty.setPrice(property.getPrice());
         updatedProperty.setRented(property.isRented());
         updatedProperty.setRoomsNumber(property.getRoomsNumber());

@@ -1,8 +1,10 @@
 package com.rentIT.service;
 
+import com.rentIT.domain.model.Address;
 import com.rentIT.domain.model.ProfileDetails;
 import com.rentIT.domain.model.User;
 import com.rentIT.domain.model.UserRole;
+import com.rentIT.domain.repository.AddressRepository;
 import com.rentIT.domain.repository.ProfileDetailsRepository;
 import com.rentIT.domain.repository.UserRepository;
 import com.rentIT.dto.UserDto;
@@ -24,6 +26,8 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private ProfileDetailsRepository profileDetailsRepository;
+    @Autowired
+    private AddressRepository addressRepository;
 
     public Optional<User> getAuthenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -45,9 +49,13 @@ public class UserService {
                         .createDate(new Date())
                         .role(UserRole.USER)
                         .build();
+
+        Address address = new Address();
+        address = addressRepository.save(address);
         ProfileDetails profileDetails = ProfileDetails.builder()
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
+                .address(address)
                 .build();
         user = userRepository.save(user);
         profileDetails.setUser(user);

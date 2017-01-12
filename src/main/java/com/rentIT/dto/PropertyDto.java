@@ -15,7 +15,7 @@ import java.util.List;
 public class PropertyDto implements Serializable{
 
     private String username;
-    private String shortDescription;
+    private String title;
     private String longDescription;
     private Address address;
 
