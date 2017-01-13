@@ -1,9 +1,43 @@
 <div>view properties</div>
-<div class="row">
-    <img ng-repeat="image in images"
+<md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="60" layout="column" layout-align="center center">
+    <!--<img ng-repeat="image in images"
          ng-hide="!isCurrentSlideIndex($index)" ng-src={{image}} >
     <a class="arrow prev" ng-click="nextSlide()"></a>
     <a class="arrow next" ng-click="prevSlide()"></a>
     <a ng-class="{'active':isCurrentSlideIndex($index)}"
        ng-click="setCurrentSlideIndex($index);"></a>
+       -->
+    <md-card  style="padding:5px;">
+        <md-card-title>
+            <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
+            <span>
+                <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
+                    {{property.averageRating}}
+            </span>
+
+        </md-card-title>
+        <md-card-content>
+            <span class="md-headline" style="padding:5px;">{{property.title}}</span>
+            <p style="padding:5px;">{{property.longDescription}}</p>
+            <div class="row" style="padding:5px;">
+                Address: {{property.address.streetName}}, {{property.address.streetNumber}}
+            </div>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+        </md-card-actions>
+    </md-card>
 </div>
+</md-content>
+<form ng-show=""> <!-- doar daca userul e diferit de owner-->
+    Post your Review
+    <form>
+        <textarea ng-model="historyRating.comment" placeholder="Your Comment" style='width:550px'></textarea>
+        <button ng-click="addComment(historyRating.comment)" style='margin-top:10px;'>Submit</button>
+
+        <h4>Comments</h4>
+        <ul>
+            <li ng-repeat="comment in comments"> {{ comment }}</li>
+        </ul>
+    </form>
+    </form>

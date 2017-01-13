@@ -15,7 +15,8 @@
             views: {
                 'content@': {
                     templateUrl: '/app/my-properties/my-properties.html',
-                    controller: 'MyPropertiesController'
+                    controller: 'MyPropertiesController',
+                    title: 'My Properties'
                 }
             },
             resolve: {

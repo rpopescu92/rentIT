@@ -8,9 +8,11 @@
 
     function ViewProperty($scope, $state, ViewPropertyService, $rootScope) {
 
-        $scope.property;
+        $scope.property = {};
         $scope.images = [];
         $scope.isAuthenticated = true;
+        $scope.addComment = addComment;
+        $scope.comments = [];
 
         init();
 
@@ -33,5 +35,9 @@
          $scope.nextSlide = function () {
              $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
          };
+
+         function addComment(comment) {
+            $scope.comments.push(comment);
+         }
     }
 })();

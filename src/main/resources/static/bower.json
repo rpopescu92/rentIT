@@ -16,7 +16,8 @@
   "devDependencies": {
     "angular-ui-bootstrap": "^2.3.1",
     "angular-bootstrap": "^2.3.1",
-    "angular-file-upload": "^2.4.1"
+    "angular-file-upload": "^2.4.1",
+    "material-design-icons": "^3.0.1"
   },
   "resolutions": {
     "angular": "~1.5.8"
