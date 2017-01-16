@@ -1,0 +1,5 @@
+.searchBar, .searchCity{
+    border-radius: 2px;
+    width: 50%
+    padding: 14px !important;
+}

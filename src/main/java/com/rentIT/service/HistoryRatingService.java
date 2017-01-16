@@ -2,8 +2,10 @@ package com.rentIT.service;
 
 import com.rentIT.domain.model.HistoryRating;
 import com.rentIT.domain.model.Property;
+import com.rentIT.domain.model.User;
 import com.rentIT.domain.repository.HistoryRatingRepository;
 import com.rentIT.domain.repository.PropertyRepository;
+import com.rentIT.domain.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,11 +20,21 @@ public class HistoryRatingService {
     private HistoryRatingRepository historyRatingRepository;
     @Autowired
     private PropertyRepository propertyRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     private Logger logger = LoggerFactory.getLogger(HistoryRatingService.class);
 
     public HistoryRating addNewRating(HistoryRating historyRating) {
-
+        if(historyRating.getProperty()!= null) {
+            Property property = propertyRepository.findOne(historyRating.getProperty().getId());
+            property.setAverageRating(calculateRatingAverage(historyRating));
+            propertyRepository.save(property);
+        } else if(historyRating.getUser() != null) {
+            User user = userRepository.findOne(historyRating.getUser().getId());
+            user.setAverageRating(calculateRatingAverage(historyRating));
+            userRepository.save(user);
+        }
         return historyRatingRepository.save(historyRating);
     }
 

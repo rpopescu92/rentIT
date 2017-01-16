@@ -2,11 +2,30 @@
     'use strict';
 
     angular.module('rentITApp')
-            .controller('PropertiesController', PropertiesController);
+            .controller('PropertiesController', PropertiesController)
+            .filter('searchFor', function(){
 
-    PropertiesController.$inject = ['$scope', '$rootScope', 'PropertiesService', 'ViewPropertyService', '$state', 'PrincipalService'];
+            	return function(arr, searchString){
+            		if(!searchString){
+            			return arr;
+            		}
 
-    function PropertiesController($scope, $rootScope, PropertiesService, ViewPropertyService, $state, PrincipalService){
+            		var result = [];
+
+            		searchString = searchString.toLowerCase();
+
+            		angular.forEach(arr, function(item){
+            			if(item.title.toLowerCase().indexOf(searchString) !== -1){
+            				result.push(item);
+            			}
+            		});
+            		return result;
+            	};
+            });
+
+    PropertiesController.$inject = ['$scope', '$rootScope', 'PropertiesService', 'ViewPropertyService', '$state', 'PrincipalService', 'filterFilter'];
+
+    function PropertiesController($scope, $rootScope, PropertiesService, ViewPropertyService, $state, PrincipalService, filterFilter){
         $scope.getProperties = getProperties;
         $scope.queryProperties = {
                     order: 'price',

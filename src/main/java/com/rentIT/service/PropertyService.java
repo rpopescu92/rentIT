@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -58,6 +59,7 @@ public class PropertyService {
                             .title(propertyDto.getTitle())
                             .price(propertyDto.getPrice())
                             .roomsNumber(propertyDto.getRoomsNumber())
+                            .dateAdded(new Date())
                             .build();
 
         propertyRepository.save(property);

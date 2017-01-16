@@ -1,27 +1,45 @@
-
-    <div class="row" ng-class="{active: isActive('/home')}">
-        <div class="col-md-6 col-md-offset-3">
-            <md-card style="width:100%" ng-repeat="property in properties">
-                <md-card-title>
-                    <md-card-title-text>
-                        <span class="md-headline">{{property.title}}</span>
-                    </md-card-title-text>
-                </md-card-title>
-                <md-card-content>
-                    <div class="col-md-5">
-                        <div class="md-media-lg card-media">
-                            <img src="/icons/close.svg" class="md-card-image" alt="user avatar">
-                        </div>
-                    </div>
-                    <div class="col-md-7">
-                        <p>{{property.longDescription}}</p>
-                    </div>
-                </md-card-content>
-                <md-card-actions layout="row" layout-align="end center">
-                    <md-button ng-click="viewProperty(property)">View</md-button>
-                </md-card-actions>
-            </md-card>
+<div class="row">
+    <form class="searchBar" style="width: 50%; padding: 5px;">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </div>
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
+            </div>
         </div>
-
+    </form>
+    <form class="searchCity" style="width: 50%; padding: 5px;">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search" ng-model="property.city">
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row" ng-class="{active: isActive('/home')}">
+    <div class="col-md-6 col-md-offset-3">
+        <md-card style="width:100%" ng-repeat="property in properties | searchFor:searchString | searchFor: property.city">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{property.title}}</span>
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <div class="col-md-5">
+                    <div class="md-media-lg card-media">
+                        <img src="/icons/close.svg" class="md-card-image" alt="user avatar">
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <p>{{property.longDescription}}</p>
+                </div>
+            </md-card-content>
+            <md-card-footer>
+                <span>{{property.address.city}}</span>
+            </md-card-footer>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button ng-click="viewProperty(property)">View</md-button>
+            </md-card-actions>
+        </md-card>
     </div>
+</div>
 

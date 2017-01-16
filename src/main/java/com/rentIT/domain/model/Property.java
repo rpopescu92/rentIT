@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -34,6 +35,7 @@ public class Property implements Serializable{
     private int roomsNumber;
     private boolean isFurnished;
     private boolean isRented;
+    private Date dateAdded;
     @ElementCollection(targetClass=String.class)
     private List<String> images;
 
