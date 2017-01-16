@@ -2,6 +2,7 @@ package com.rentIT.service;
 
 import com.rentIT.domain.model.*;
 import com.rentIT.domain.repository.AddressRepository;
+import com.rentIT.domain.repository.CityRepository;
 import com.rentIT.domain.repository.PropertyRepository;
 import com.rentIT.domain.repository.UserRepository;
 import com.rentIT.dto.PropertyDto;
@@ -31,6 +32,8 @@ public class PropertyService {
     private UserRepository userRepository;
     @Autowired
     private AddressRepository addressRepository;
+    @Autowired
+    private CityRepository cityRepository;
 
     private Logger logger = LoggerFactory.getLogger(PropertyService.class);
 
@@ -46,7 +49,14 @@ public class PropertyService {
             throw new InvalidPropertyException("Invalid fields. Address cannot be empty");
         }
 
-        Address address = addressRepository.save(propertyDto.getAddress());
+        City city = cityRepository.findByCityAndRegion(propertyDto.getAddress().getCity().getCity(), propertyDto.getAddress().getCity().getRegion());
+        Address address = Address.builder().streetName(propertyDto.getAddress().getStreetName())
+                                    .streetNumber(propertyDto.getAddress().getStreetNumber())
+                                    .apartmentNumber(propertyDto.getAddress().getApartmentNumber())
+                                    .floorNumber(propertyDto.getAddress().getFloorNumber())
+                                    .otherDirections(propertyDto.getAddress().getOtherDirections())
+                                    .city(city).build();
+        Address savedAddress = addressRepository.save(address);
 
         Property property = Property.builder()
                             .owner((User)owner.get())
@@ -116,8 +126,12 @@ public class PropertyService {
     }
 
     private void updateAddress(Property property) {
+        City city = cityRepository.findByCityAndRegion(property.getAddress().getCity().getCity()
+                , property.getAddress().getCity().getRegion());
+        property.getAddress().setCity(city);
         Address address = addressRepository.findOne(property.getAddress().getId());
         address = property.getAddress();
+
         addressRepository.save(address);
     }
 }

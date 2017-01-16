@@ -1,6 +1,7 @@
 package com.rentIT.service;
 
 import com.rentIT.domain.model.Address;
+import com.rentIT.domain.model.City;
 import com.rentIT.domain.model.Property;
 import com.rentIT.domain.model.User;
 import com.rentIT.domain.repository.AddressRepository;
@@ -49,7 +50,7 @@ public class PropertyServiceTest {
 
         PropertyDto propertyDto = PropertyDto.builder()
                 .username("ana")
-                .address(new Address("Brancoveanu","20","3", 3, "Bucharest"))
+                .address(new Address("Brancoveanu","20","3", 3, new City("Bucharest")))
                 .averageRating(0)
                 .constructionYear(1992)
                 .title("short")
@@ -69,7 +70,7 @@ public class PropertyServiceTest {
 
         PropertyDto propertyDto = PropertyDto.builder()
                 .username("ana")
-                .address(new Address("Brancoveanu","20","3", 3, "Bucharest"))
+                .address(new Address("Brancoveanu","20","3", 3,  new City("Bucharest")))
                 .averageRating(0)
                 .constructionYear(1992)
                 .isFurnished(true)
@@ -84,7 +85,7 @@ public class PropertyServiceTest {
         Mockito.when(userRepository.findByUsername("ana")).thenReturn(Optional.empty());
         PropertyDto propertyDto = PropertyDto.builder()
                 .username("ana")
-                .address(new Address("Brancoveanu","20","3", 3, "Bucharest"))
+                .address(new Address("Brancoveanu","20","3", 3,  new City("Bucharest")))
                 .build();
         propertyService.saveProperty(propertyDto);
     }

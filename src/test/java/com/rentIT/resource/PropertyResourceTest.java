@@ -1,6 +1,7 @@
 package com.rentIT.resource;
 
 import com.rentIT.domain.model.Address;
+import com.rentIT.domain.model.City;
 import com.rentIT.domain.model.Property;
 import com.rentIT.dto.PropertyDto;
 import com.rentIT.exception.InvalidPropertyException;
@@ -31,7 +32,7 @@ public class PropertyResourceTest {
     public void testAddProperty() {
         PropertyDto propertyDto = PropertyDto.builder()
                 .username("ana")
-                .address(new Address("Brancoveanu","20","3", 3, "Bucharest"))
+                .address(new Address("Brancoveanu","20","3", 3, new City("Bucharest")))
                 .averageRating(0)
                 .constructionYear(1992)
                 .isFurnished(true)

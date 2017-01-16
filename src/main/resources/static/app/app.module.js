@@ -3,7 +3,8 @@
 
     angular.module('rentITApp', ['ui.router', 'ngMaterial',
                     'ngStorage','ui.bootstrap',
-                    'ngCacheBuster'])
+                    'ngCacheBuster',
+                    'ngLocale'])
                     .run(stateInitializer);
     stateInitializer.$inject = ['stateHandler', '$rootScope'];
 

@@ -31,10 +31,21 @@
         </div>
         <div class="row">
             <md-input-container style="width:30%">
-                <label>City</label>
-                <input ng-model="property.address.city" type="text">
+                <label>Region</label>
+                <select ng-model="property.address.city.region" ng-options="region for region in regions">
+                    <option></option>
+                </select>
             </md-input-container>
-            <md-input-container  style="width:40%">
+            <md-input-container style="width:30%">
+                <label>City</label>
+                <md-select ng-model="property.address.city.city">
+                    <md-option><em>None</em></md-option>
+                    <md-option ng-repeat="city in resultCities" ng-disabled="$index === 1">
+                        {{city.city}}
+                    </md-option>
+                </md-select>
+            </md-input-container>
+            <md-input-container  style="width:30%">
                 <label>Other directions</label>
                 <input ng-model="property.address.otherDirections" type="text">
             </md-input-container>

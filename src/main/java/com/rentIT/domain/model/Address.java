@@ -15,16 +15,17 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long Id;
     private String streetName;
     private String streetNumber;
     private String apartmentNumber;
     private int floorNumber;
-    private String city;
+    @OneToOne
+    private City city;
     private String otherDirections;
 
     public Address(String streetName, String streetNumber,
-                   String apartmentNumber, int floorNumber, String city) {
+                   String apartmentNumber, int floorNumber, City city) {
         this.streetName = streetName;
         this.streetNumber = streetNumber;
         this.apartmentNumber = apartmentNumber;
