@@ -32,15 +32,14 @@
         <div class="row">
             <md-input-container style="width:30%">
                 <label>Region</label>
-                <select ng-model="property.address.city.region" ng-options="region for region in regions">
-                    <option></option>
-                </select>
+                <md-select ng-model="property.address.city.region" placeholder="Region" ng-change="changedValue(property.address.city.region)">
+                    <md-option ng-value="region" ng-repeat="region in regions">{{ region }}</md-option>
+                </md-select>
             </md-input-container>
             <md-input-container style="width:30%">
                 <label>City</label>
                 <md-select ng-model="property.address.city.city">
-                    <md-option><em>None</em></md-option>
-                    <md-option ng-repeat="city in resultCities" ng-disabled="$index === 1">
+                    <md-option ng-value="city" ng-repeat="city in resultCities" ng-disabled="$index === 1">
                         {{city.city}}
                     </md-option>
                 </md-select>

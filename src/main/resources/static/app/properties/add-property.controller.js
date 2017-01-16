@@ -55,9 +55,9 @@
         }
 
         function changedValue(region) {
-           for(var j=0; j< cities.length; j++) {
-                if(cities[j].region === region) {
-                    resultCities.push(cities[j]);
+           for(var j=0; j< $scope.cities.length; j++) {
+                if($scope.cities[j].region === region) {
+                    resultCities.push($scope.cities[j]);
                 }
            }
         }
