@@ -17,7 +17,8 @@
     "angular-ui-bootstrap": "^2.3.1",
     "angular-bootstrap": "^2.3.1",
     "angular-file-upload": "^2.4.1",
-    "glyphicons": "^0.0.2"
+    "glyphicons": "^0.0.2",
+    "angular-jk-rating-stars": "^1.0.3"
   },
   "resolutions": {
     "angular": "~1.5.8"
