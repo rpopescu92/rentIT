@@ -19,6 +19,9 @@ public interface HistoryRatingRepository extends JpaRepository<HistoryRating, Lo
     @Query("select hr from HistoryRating hr where hr.user=null and hr.property=?1")
     Page<HistoryRating> findAllPropertyRatings(Property property, Pageable pageable);
 
+    @Query("select hr from HistoryRating hr where hr.property.id=?1")
+    List<HistoryRating> findAllPropertyRatings(Long propertyId);
+
     @Query("select count(hr) from HistoryRating hr where hr.property=?1 and hr.rating=?2")
     Integer countSpecificRatingForProperty (Property property, int rating);
 

@@ -12,7 +12,9 @@
 
         return {
             getProperty: getProperty,
-            setProperty: setProperty
+            setProperty: setProperty,
+            addHistoryRating: addHistoryRating,
+            getHistoryRatings: getHistoryRatings
         }
 
         function getProperty() {
@@ -21,6 +23,21 @@
 
         function setProperty(property) {
             viewProperty = property;
+        }
+
+        function addHistoryRating(historyRating) {
+            return $http({
+                url:'/api/ratings/'+ historyRating.property.id,
+                method: 'POST',
+                data: historyRating
+            });
+        }
+
+        function getHistoryRatings(propertyId){
+            return $http.get('/api/ratings/'+propertyId)
+                    .then(function(data){
+                            return data.data;
+                    });
         }
     }
 })();

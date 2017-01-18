@@ -56,13 +56,15 @@
         $scope.myComment;
         $scope.getSelectedRating = getSelectedRating;
         $scope.rating = 5;
+        $scope.historyRating = {};
+        $scope.historyRatings = [];
 
         init();
 
         function init() {
             $scope.property = ViewPropertyService.getProperty();
             $scope.images = $scope.property.images;
-
+            getHistoryRatings($scope.property.id);
         }
 
         $scope.currentIndex = 0;
@@ -82,11 +84,22 @@
          function addComment(comment) {
             $scope.comments.push(comment);
             $scope.myComment = "";
-
+            $scope.historyRating.comment = comment;
+            $scope.historyRating.property = $scope.property;
+            ViewPropertyService.addHistoryRating($scope.historyRating);
+            getHistoryRatings($scope.property.id);
          }
+
+         function getHistoryRatings(propertyId) {
+            ViewPropertyService.getHistoryRatings(propertyId)
+                        .then(function(data){
+                            $scope.historyRatings = data.data;
+                        });
+         };
 
          function getSelectedRating(rating) {
              console.log(rating);
+             $scope.historyRating.rating = rating;
          }
     }
 })();

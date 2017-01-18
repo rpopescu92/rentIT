@@ -12,6 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.List;
+
 @Service
 @Slf4j
 public class HistoryRatingService {
@@ -35,15 +38,20 @@ public class HistoryRatingService {
             user.setAverageRating(calculateRatingAverage(historyRating));
             userRepository.save(user);
         }
+        historyRating.setCreatedDate(new Date());
         return historyRatingRepository.save(historyRating);
     }
 
     private float calculateRatingAverage(HistoryRating historyRating) {
         int count = historyRatingRepository.countAllRatingsForProperty(historyRating.getProperty());
         float pastRating = historyRating.getProperty().getAverageRating();
-        float currentRating = (pastRating + historyRating.getRating())/count;
+        float currentRating = (count == 0) ? (pastRating + historyRating.getRating())/1 : (pastRating + historyRating.getRating())/count;
         historyRating.getProperty().setAverageRating(currentRating);
 
         return currentRating;
+    }
+
+    public List<HistoryRating> getHistoryRatings(long propertyId) {
+        return historyRatingRepository.findAllPropertyRatings(propertyId);
     }
 }

@@ -46,11 +46,11 @@
             <h4>Comments</h4>
             <md-content>
                 <md-list flex>
-                    <md-list-item class="md-3-line md-long-text" ng-repeat="comment in comments">
+                    <md-list-item class="md-3-line md-long-text" ng-repeat="historyRating in historyRatings">
                         <img ng-src="" class="md-avatar" />
                         <div class="md-list-item-text" layout="column">
                             <h3><!--stars rating--></h3>
-                            <p>{{ comment }}</p>
+                            <p>{{ historyRating.comment }}</p>
                         </div>
                     </md-list-item>
                 </md-list>

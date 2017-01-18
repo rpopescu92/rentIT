@@ -39,7 +39,7 @@
             <md-input-container style="width:30%">
                 <label>City</label>
                 <md-select ng-model="property.address.city.city">
-                    <md-option ng-value="city" ng-repeat="city in resultCities" ng-disabled="$index === 1">
+                    <md-option ng-value="city" ng-repeat="city in resultCities">
                         {{city.city}}
                     </md-option>
                 </md-select>

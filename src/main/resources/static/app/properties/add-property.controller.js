@@ -43,6 +43,7 @@
         function getRegions() {
             CitiesService.getRegions()
                         .then(function(data) {
+                            $scope.resultCities = [];
                             $scope.regions = data.data;
                         });
         }
@@ -55,9 +56,10 @@
         }
 
         function changedValue(region) {
+            $scope.resultCities = [];
            for(var j=0; j< $scope.cities.length; j++) {
                 if($scope.cities[j].region === region) {
-                    resultCities.push($scope.cities[j]);
+                    $scope.resultCities.push($scope.cities[j]);
                 }
            }
         }
