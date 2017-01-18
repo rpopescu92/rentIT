@@ -87,13 +87,13 @@
             $scope.historyRating.comment = comment;
             $scope.historyRating.property = $scope.property;
             ViewPropertyService.addHistoryRating($scope.historyRating);
-            getHistoryRatings($scope.property.id);
+            $scope.historyRatings.push($scope.historyRating);
          }
 
          function getHistoryRatings(propertyId) {
             ViewPropertyService.getHistoryRatings(propertyId)
                         .then(function(data){
-                            $scope.historyRatings = data.data;
+                            $scope.historyRatings = data;
                         });
          };
 
