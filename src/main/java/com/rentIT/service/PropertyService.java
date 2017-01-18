@@ -49,7 +49,7 @@ public class PropertyService {
             throw new InvalidPropertyException("Invalid fields. Address cannot be empty");
         }
 
-        City city = cityRepository.findByCityAndRegion(propertyDto.getAddress().getCity().getCity(), propertyDto.getAddress().getCity().getRegion());
+        City city = cityRepository.findByCityNameAndRegion(propertyDto.getAddress().getCity().getCityName(), propertyDto.getAddress().getCity().getRegion());
         Address address = Address.builder().streetName(propertyDto.getAddress().getStreetName())
                                     .streetNumber(propertyDto.getAddress().getStreetNumber())
                                     .apartmentNumber(propertyDto.getAddress().getApartmentNumber())
@@ -126,7 +126,7 @@ public class PropertyService {
     }
 
     private void updateAddress(Property property) {
-        City city = cityRepository.findByCityAndRegion(property.getAddress().getCity().getCity()
+        City city = cityRepository.findByCityNameAndRegion(property.getAddress().getCity().getCityName()
                 , property.getAddress().getCity().getRegion());
         property.getAddress().setCity(city);
         Address address = addressRepository.findOne(property.getAddress().getId());

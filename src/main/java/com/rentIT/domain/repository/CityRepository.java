@@ -11,11 +11,11 @@ public interface CityRepository extends JpaRepository<City, Long> {
 
     List<City> findByRegion(String region);
 
-    City findByCity(String city);
+    City findByCityName(String cityName);
 
-    City findByCityAndRegion(String city, String region);
+    City findByCityNameAndRegion(String cityName, String region);
 
-    @Query("select distinct region  from City")
+    @Query("select distinct region from City")
     List<String> findDistinctRegions();
 
 }

@@ -1,8 +1,11 @@
 package com.rentIT.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "city")
@@ -11,16 +14,19 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Builder
-public class City {
+public class City implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
     private String region;
-    private String city;
+    @Column(name = "city_name")
+    @JsonProperty("cityName")
+    private String cityName;
+    @JsonIgnore
     private String country;
 
-    public City(String city) {
-        this.city = city;
+    public City(String cityName) {
+        this.cityName = cityName;
     }
 }

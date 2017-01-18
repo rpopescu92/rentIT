@@ -8,7 +8,7 @@
         <div class="row">
             <md-input-container style="width:90%">
                 <label>Description</label>
-                <textarea ng-model="property.longDescription" type="text" md-maxlength="400" rows="5"></textarea>
+                <textarea ng-model="property.longDescription" type="text" md-maxlength="700" rows="5"></textarea>
             </md-input-container>
         </div>
         <div class="row">
@@ -38,9 +38,9 @@
             </md-input-container>
             <md-input-container style="width:30%">
                 <label>City</label>
-                <md-select ng-model="property.address.city.city">
+                <md-select ng-model="property.address.city.cityName">
                     <md-option ng-value="city" ng-repeat="city in resultCities">
-                        {{city.city}}
+                        {{city}}
                     </md-option>
                 </md-select>
             </md-input-container>

@@ -1,3 +1,6 @@
+--ALTER TABLE address ADD FOREIGN KEY (city_id) REFERENCES city;
+
+
 insert into city values('Alba', 'Aiud',16, 'Romania');
 insert into city values('Braila', 'Ianca',3, 'Romania');
 insert into city values('Alba', 'Abrud',37, 'Romania');
@@ -7,6 +10,7 @@ insert into city values('Alba', 'Campeni',32, 'Romania');
 insert into city values('Alba', 'Cugir',33, 'Romania');
 insert into city values('Alba', 'Ocna Mures',34, 'Romania');
 insert into city values('Alba', 'Sebes',35, 'Romania');
+
 insert into city values('Alba', 'Teius',36, 'Romania');
 insert into city values('Alba', 'Zlatna',38, 'Romania');
 

@@ -10,6 +10,8 @@
 
         $scope.addProperty = addProperty;
         $scope.property = {};
+        $scope.property.address = {};
+        $scope.property.address.city = {};
         $scope.property.images = [];
         $scope.cities = [];
         $scope.regions = [];
@@ -59,7 +61,7 @@
             $scope.resultCities = [];
            for(var j=0; j< $scope.cities.length; j++) {
                 if($scope.cities[j].region === region) {
-                    $scope.resultCities.push($scope.cities[j]);
+                    $scope.resultCities.push($scope.cities[j].cityName);
                 }
            }
         }

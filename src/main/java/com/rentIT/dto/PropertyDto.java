@@ -2,6 +2,7 @@ package com.rentIT.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rentIT.domain.model.Address;
+import com.rentIT.domain.model.City;
 import lombok.*;
 
 import java.io.Serializable;
