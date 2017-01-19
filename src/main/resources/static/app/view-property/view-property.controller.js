@@ -44,9 +44,9 @@
             .controller('ViewProperty', ViewProperty)
             ;
 
-    ViewProperty.$inject = ['$scope', '$state', 'ViewPropertyService', '$rootScope'];
+    ViewProperty.$inject = ['$scope', '$state', 'ViewPropertyService', '$rootScope', 'Account'];
 
-    function ViewProperty($scope, $state, ViewPropertyService, $rootScope) {
+    function ViewProperty($scope, $state, ViewPropertyService, $rootScope, Account) {
 
         $scope.property = {};
         $scope.images = [];
@@ -57,13 +57,16 @@
         $scope.getSelectedRating = getSelectedRating;
         $scope.rating = 5;
         $scope.historyRating = {};
+        $scope.historyRating.author = {};
         $scope.historyRatings = [];
+        $scope.username;
 
         init();
 
         function init() {
             $scope.property = ViewPropertyService.getProperty();
             $scope.images = $scope.property.images;
+            getAccount();
             getHistoryRatings($scope.property.id);
         }
 
@@ -86,6 +89,7 @@
             $scope.myComment = "";
             $scope.historyRating.comment = comment;
             $scope.historyRating.property = $scope.property;
+            $scope.historyRating.author.username = $scope.username;
             ViewPropertyService.addHistoryRating($scope.historyRating);
             $scope.historyRatings.push($scope.historyRating);
          }
@@ -100,6 +104,13 @@
          function getSelectedRating(rating) {
              console.log(rating);
              $scope.historyRating.rating = rating;
+         }
+
+         function getAccount() {
+            Account.getAccount()
+                    .then(function(data){
+                        $scope.username = data.username;
+                    });
          }
     }
 })();

@@ -27,4 +27,7 @@ public class HistoryRating {
     @ManyToOne
     private User user;
 
+    @OneToOne
+    private User author;
+
 }

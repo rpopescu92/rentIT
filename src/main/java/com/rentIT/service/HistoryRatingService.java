@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -39,6 +40,8 @@ public class HistoryRatingService {
             userRepository.save(user);
         }
         historyRating.setCreatedDate(new Date());
+        Optional<User> author = userRepository.findByUsername(historyRating.getAuthor().getUsername());
+        historyRating.setAuthor(historyRating.getAuthor());
         return historyRatingRepository.save(historyRating);
     }
 

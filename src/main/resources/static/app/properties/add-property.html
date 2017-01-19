@@ -58,11 +58,11 @@
         <div class="row">
             <md-input-container>
                 <label>Construction year</label>
-                <input ng-model="property.constructionYear" type="number">
+                <input ng-model="property.constructionYear" type="number" min="1890" max="2017">
             </md-input-container>
             <md-input-container>
                 <label>Rooms</label>
-                <input ng-model="property.roomsNumber" type="number">
+                <input ng-model="property.roomsNumber" type="number" min="1">
             </md-input-container>
             <md-checkbox ng-model="property.isFurnished" aria-label="Furnished"
                          style="margin-left:5px; margin-bottom:3px;">
