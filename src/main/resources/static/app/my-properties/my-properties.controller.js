@@ -20,13 +20,13 @@
         $scope.properties = [];
         $scope.query = {
                     order: 'price',
-                    limit: 4,
+                    limit: 3,
                     page: 1
                 };
 
         $scope.currentPage = 1;
         $scope.itemsPerPage = $scope.query.limit;
-        $scope.numberOfPages;
+        $scope.pages = [];
         $scope.totalItems;
 
         init();
@@ -49,7 +49,7 @@
                                        if(response.status == 200){
                                             $scope.properties = response.data.content;
                                             $scope.totalItems = response.data.totalElements;
-                                            $scope.numberOfPages = response.data.totalPages;
+                                            $scope.pages = response.data.totalPages;
                                         }
                                   }, function(error) {
                                         console.log("error get properties");
@@ -66,7 +66,7 @@
              $scope.currentPage = pageNo;
            };
 
-           $scope.pageChanged = function() {
+           $scope.pageChanged = function(currentPage) {
              console.log('Page changed to: ' + $scope.currentPage);
              $scope.query.page = $scope.currentPage;
              getUserProperties($scope.username, $scope.query.page);
