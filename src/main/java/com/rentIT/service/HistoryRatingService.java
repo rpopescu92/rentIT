@@ -41,7 +41,7 @@ public class HistoryRatingService {
         }
         historyRating.setCreatedDate(new Date());
         Optional<User> author = userRepository.findByUsername(historyRating.getAuthor().getUsername());
-        historyRating.setAuthor(historyRating.getAuthor());
+        historyRating.setAuthor(author.get());
         return historyRatingRepository.save(historyRating);
     }
 

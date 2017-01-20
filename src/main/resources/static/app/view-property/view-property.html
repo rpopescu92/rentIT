@@ -29,12 +29,12 @@
 </div>
 </md-content>
 
-<div class="col-md-6 col-md-offset-1" style="padding: 5px;">
-    <div class="row">
-        <div ng-init="rating = star.rating + 1"></div>
-        <div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="getSelectedRating(rating)"></div>
-    </div>
-    <div class="row">
+<div class="row" ng-show="!isOwner">
+    <div class="col-md-6 col-md-offset-1" style="padding: 5px;">
+        <div class="row">
+            <div ng-init="rating = star.rating + 1"></div>
+            <div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="getSelectedRating(rating)"></div>
+        </div>
         <form class="commentBox">
             <md-input-container style="width:90%"><!-- doar daca userul e diferit de owner-->
                 <label>Your review</label>
@@ -43,18 +43,22 @@
             <div class="row">
                 <md-button class="customButton" ng-click="addComment(myComment)" style='margin-top:10px;'>Submit</md-button>
             </div>
-            <h4>Comments</h4>
-            <md-content>
-                <md-list flex>
-                    <md-list-item class="md-3-line md-long-text" ng-repeat="historyRating in historyRatings">
-                        <img ng-src="" class="md-avatar" />
-                        <div class="md-list-item-text" layout="column">
-                            <h3><!--stars rating--></h3>
-                            <p>{{ historyRating.comment }}</p>
-                        </div>
-                    </md-list-item>
-                </md-list>
-            </md-content>
         </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-1" style="padding: 5px;">
+        <h4>Comments</h4>
+        <md-content>
+            <md-list flex>
+                <md-list-item class="md-3-line md-long-text" ng-repeat="historyRating in historyRatings">
+                    <img ng-src="" class="md-avatar" />
+                    <div class="md-list-item-text" layout="column">
+                        <h3><!--stars rating--></h3>
+                        <p>{{ historyRating.comment }}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
     </div>
 </div>

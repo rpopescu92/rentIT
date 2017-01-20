@@ -34,12 +34,30 @@
            };
         $scope.properties = [];
         $scope.viewProperty = viewProperty;
+        $scope.items = [1, 2, 3, 4, 5];
+        $scope.toggle = toggle;
+        $scope.selected = [];
+        $scope.exists = exists;
+
         init();
 
         function init() {
             getProperties($scope.queryProperties.page);
         }
 
+        function toggle(item, list) {
+           var idx = list.indexOf(item);
+                           if (idx > -1) {
+                             list.splice(idx, 1);
+                           }
+                           else {
+                             list.push(item);
+                           }
+        }
+
+        function exists(item, list) {
+            return list.indexOf(item) > -1;
+        }
 
         function getProperties(page) {
             $scope.queryProperties.page = page;

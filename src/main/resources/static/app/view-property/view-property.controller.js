@@ -60,6 +60,7 @@
         $scope.historyRating.author = {};
         $scope.historyRatings = [];
         $scope.username;
+        $scope.isOwner = false;;
 
         init();
 
@@ -84,6 +85,11 @@
              $scope.currentIndex = ($scope.currentIndex > 0) ? --$scope.currentIndex : $scope.slides.length - 1;
          };
 
+         function isOwner(){
+            if($scope.property.owner.username === $scope.username) {
+                $scope.isOwner = true;
+            }
+         }
          function addComment(comment) {
             $scope.comments.push(comment);
             $scope.myComment = "";
@@ -110,6 +116,7 @@
             Account.getAccount()
                     .then(function(data){
                         $scope.username = data.username;
+                        isOwner();
                     });
          }
     }
