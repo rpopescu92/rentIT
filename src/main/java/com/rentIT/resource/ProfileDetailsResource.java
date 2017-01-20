@@ -1,5 +1,6 @@
 package com.rentIT.resource;
 
+import com.rentIT.domain.model.Photo;
 import com.rentIT.domain.model.ProfileDetails;
 import com.rentIT.dto.UserDetailsDto;
 import com.rentIT.service.ProfileDetailsService;
@@ -35,5 +36,11 @@ public class ProfileDetailsResource {
         }
 
         return new ResponseEntity(profileDetails, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/profile/{username}/photo", method = RequestMethod.POST)
+    public ResponseEntity<Photo> uploadProfilePhoto(@PathVariable("username") String username, @RequestBody Photo photo){
+        profileDetailsService.uploadPhoto(username, photo);
+        return new ResponseEntity( HttpStatus.OK);
     }
 }

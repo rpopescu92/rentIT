@@ -1,13 +1,7 @@
 package com.rentIT.service;
 
-import com.rentIT.domain.model.Address;
-import com.rentIT.domain.model.City;
-import com.rentIT.domain.model.User;
-import com.rentIT.domain.model.ProfileDetails;
-import com.rentIT.domain.repository.AddressRepository;
-import com.rentIT.domain.repository.CityRepository;
-import com.rentIT.domain.repository.ProfileDetailsRepository;
-import com.rentIT.domain.repository.UserRepository;
+import com.rentIT.domain.model.*;
+import com.rentIT.domain.repository.*;
 import com.rentIT.dto.UserDetailsDto;
 import com.rentIT.exception.UserNotAuthenticatedException;
 import lombok.extern.slf4j.Slf4j;
@@ -33,6 +27,9 @@ public class ProfileDetailsService {
 
     @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    private PhotoRepository photoRepository;
 
     private Logger logger = LoggerFactory.getLogger(ProfileDetailsService.class);
 
@@ -78,5 +75,17 @@ public class ProfileDetailsService {
 
         addressRepository.save(address);
         return address;
+    }
+
+    public void uploadPhoto(String username, Photo photo) {
+        Optional<User> user = userRepository.findByUsername(username);
+        if(user.isPresent()) {
+            ProfileDetails profileDetails = profileDetailsRepository.findByUser(user.get());
+
+            photo = photoRepository.save(photo);
+            profileDetails.setPhoto(photo);
+            profileDetailsRepository.save(profileDetails);
+        }
+        throw new UserNotAuthenticatedException();
     }
 }
