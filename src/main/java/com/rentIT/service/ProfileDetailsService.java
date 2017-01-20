@@ -1,9 +1,11 @@
 package com.rentIT.service;
 
 import com.rentIT.domain.model.Address;
+import com.rentIT.domain.model.City;
 import com.rentIT.domain.model.User;
 import com.rentIT.domain.model.ProfileDetails;
 import com.rentIT.domain.repository.AddressRepository;
+import com.rentIT.domain.repository.CityRepository;
 import com.rentIT.domain.repository.ProfileDetailsRepository;
 import com.rentIT.domain.repository.UserRepository;
 import com.rentIT.dto.UserDetailsDto;
@@ -28,6 +30,9 @@ public class ProfileDetailsService {
 
     @Autowired
     private AddressRepository addressRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
 
     private Logger logger = LoggerFactory.getLogger(ProfileDetailsService.class);
 
@@ -62,7 +67,10 @@ public class ProfileDetailsService {
     private Address buildAddress(ProfileDetails profileDetails) {
         Address address = addressRepository.findOne(profileDetails.getAddress().getId());
         address.setApartmentNumber(profileDetails.getAddress().getApartmentNumber());
-        address.setCity(profileDetails.getAddress().getCity());
+        City city = cityRepository.findByCityName(profileDetails.getAddress().getCity().getCityName());
+        if(city != null) {
+            address.setCity(city);
+        }
         address.setStreetName(profileDetails.getAddress().getStreetName());
         address.setStreetNumber(profileDetails.getAddress().getStreetNumber());
         address.setFloorNumber(profileDetails.getAddress().getFloorNumber());

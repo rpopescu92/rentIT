@@ -4,9 +4,10 @@
     angular.module('rentITApp')
             .controller('HomeController', HomeController);
 
+    HomeController.$inject = ['$scope','Upload'];
 
 
-    function HomeController() {
+    function HomeController($scope, Upload) {
 
      }
 })();

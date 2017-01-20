@@ -24,7 +24,7 @@
         function updateProfileDetails(profileDetails) {
             return $http({
                 method: 'post',
-                url: '/api//profile/'+ profileDetails.username,
+                url: '/api/profile/'+ profileDetails.user.username,
                 data: profileDetails
             });
         }

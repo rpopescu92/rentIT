@@ -4,7 +4,9 @@
     angular.module('rentITApp', ['ui.router', 'ngMaterial',
                     'ngStorage','ui.bootstrap',
                     'ngCacheBuster',
-                    'ngLocale'])
+                    'ngLocale',
+                    'angularFileUpload',
+                    'ngFileUpload'])
                     .run(stateInitializer);
     stateInitializer.$inject = ['stateHandler', '$rootScope'];
 

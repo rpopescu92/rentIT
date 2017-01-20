@@ -5,23 +5,44 @@
             .controller('ProfileController', ProfileController);
 
     ProfileController.$inject = ['$scope', '$rootScope', '$state',
-                                'ProfileService', 'PrincipalService', '$mdToast'];
+                                'ProfileService', 'PrincipalService', '$mdToast',
+                                'Upload', 'Account'];
 
-    function ProfileController($scope, $rootScope, $state, ProfileService, PrincipalService, $mdToast) {
-        console.log("profile");
+    function ProfileController($scope, $rootScope, $state, ProfileService,
+                PrincipalService, $mdToast, Upload, Account) {
+
         $scope.username;
         $scope.updateProfile = updateProfile;
-         var last = {
+        var last = {
               bottom: false,
               top: true,
               left: false,
               right: true
             };
 
+
+        $scope.$watch('file', function (file) {
+              $scope.upload($scope.file);
+         });
+
+         $scope.upload = function (file) {
+                Upload.upload({
+                     url: 'upload/url',
+                     fields: {'username': $scope.username},
+                     file: file
+                 }).progress(function (evt) {
+                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                     console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                 }).success(function (data, status, headers, config) {
+                     console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                 }).error(function (data, status, headers, config) {
+                      console.log('error status: ' + status);
+                  })
+           };
         init();
 
         function init() {
-            ProfileService.getAuthenticatedUser()
+           Account.getAccount()
                             .then(function(data){
                                 $scope.username = data.username;
 
@@ -37,7 +58,7 @@
                                                         $scope.streetNumber = data.address.streetNumber;
                                                         $scope.apartmentNumber = data.address.apartmentNumber;
                                                         $scope.floorNumber = data.address.floorNumber;
-                                                        $scope.city = data.address.city;
+                                                        $scope.city = data.address.city.cityName;
                                                         $scope.otherDirections = data.address.otherDirections;
                                                         $scope.userId = data.user.id;
                                                      },
@@ -66,7 +87,9 @@
                     streetNumber: $scope.streetNumber,
                     apartmentNumber: $scope.apartmentNumber,
                     floorNumber: $scope.floorNumber,
-                    city: $scope.city,
+                    city: {
+                        cityName: $scope.cityName
+                    },
                     otherDirections: $scope.otherDirections
                 },
                 user: {

@@ -48,7 +48,7 @@ public class HistoryRatingService {
     private float calculateRatingAverage(HistoryRating historyRating) {
         int count = historyRatingRepository.countAllRatingsForProperty(historyRating.getProperty());
         float pastRating = historyRating.getProperty().getAverageRating();
-        float currentRating = (pastRating + historyRating.getRating())/2;
+        float currentRating = (count == 0)? historyRating.getRating(): (pastRating + historyRating.getRating())/2;
         historyRating.getProperty().setAverageRating(currentRating);
 
         return currentRating;

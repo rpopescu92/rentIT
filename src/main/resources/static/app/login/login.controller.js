@@ -13,6 +13,8 @@
         $scope.login = login;
 
         function registerDialog() {
+            $scope.username = "";
+            $scope.password = "";
             $mdDialog.show({
                 templateUrl: 'app/register/register.html',
                 controller: 'RegisterController'

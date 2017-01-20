@@ -22,7 +22,8 @@ public class ProfileDetails {
     private Address address;
     private String phoneNumber;
     private String emailAddress;
-
+    @OneToOne
+    private Photo photo;
     @OneToOne
     private User user;
 }

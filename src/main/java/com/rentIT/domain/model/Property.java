@@ -1,6 +1,7 @@
 package com.rentIT.domain.model;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -20,6 +21,7 @@ public class Property implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String title;
+    @Type(type="text")
     private String longDescription;
 
     @OneToOne

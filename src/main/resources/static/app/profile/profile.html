@@ -2,11 +2,10 @@
     <div class="col-md-3">
        <md-card>
            <md-card-content>
-               <div class="row">
-                   <thumbnail file-type="image" source="'image.jpg'" max-height="150" max-width="300"></thumbnail>
-               </div>
-               <div class="row">
-                   <md-button>Upload photo</md-button>
+               <div class="row" style="padding:4px;">
+                   <label>Upload profile photo</label>
+                   <input ngf-select ng-model="file" name="file" ngf-accept="'image/*'" required="" type="file">
+                   <img ngf-src="file" class="img-responsive" style="width:80%" >
                </div>
            </md-card-content>
        </md-card>
