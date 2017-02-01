@@ -60,7 +60,8 @@
         $scope.historyRating.author = {};
         $scope.historyRatings = [];
         $scope.username;
-        $scope.isOwner = false;;
+        $scope.isOwner = false;
+        $scope.owner= {};
 
         init();
 
@@ -88,6 +89,12 @@
          function isOwner(){
             if($scope.property.owner.username === $scope.username) {
                 $scope.isOwner = true;
+            } else {
+                ViewPropertyService.getOwnerDetails($scope.property.owner)
+                                    .then(function(data) {
+                                        $scope.owner.emailAddress = data.emailAddress;
+                                        $scope.owner.phoneNumber = data.phoneNumber;
+                                    });
             }
          }
          function addComment(comment) {

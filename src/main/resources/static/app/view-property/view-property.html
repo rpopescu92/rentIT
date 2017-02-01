@@ -26,6 +26,15 @@
         <md-card-actions layout="row" layout-align="end center">
         </md-card-actions>
     </md-card>
+        <md-card ng-show="!isOwner">
+            <md-card-title>
+                <span>Contact owner- {{property.owner.username}}</span>
+            </md-card-title>
+            <md-card-content>
+                <span>{{owner.phoneNumber}}</span>
+                <span>{{owner.emailAddress}}</span>
+            </md-card-content>
+        </md-card>
 </div>
 </md-content>
 

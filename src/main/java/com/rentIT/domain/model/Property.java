@@ -40,6 +40,8 @@ public class Property implements Serializable{
     private Date dateAdded;
     @ElementCollection(targetClass=String.class)
     private List<String> images;
+    @OneToOne
+    private Facilities facilities;
 
     public Property(String shortDescription, User owner) {
         this.title = shortDescription;

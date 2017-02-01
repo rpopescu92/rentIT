@@ -11,7 +11,8 @@
         return{
             getProfileDetails: getProfileDetails,
             updateProfileDetails: updateProfileDetails,
-            getAuthenticatedUser: getAuthenticatedUser
+            getAuthenticatedUser: getAuthenticatedUser,
+            uploadPhoto: uploadPhoto
         }
 
         function getProfileDetails(username) {
@@ -34,6 +35,14 @@
                     .then(function(data) {
                         return data.data;
                     });
+        }
+
+        function uploadPhoto(username, photo) {
+            return $http({
+                method: 'post',
+                url:'/api/profile/'+ username+'/photo',
+                data: photo
+            });
         }
     }
 })();

@@ -14,7 +14,8 @@
             getProperty: getProperty,
             setProperty: setProperty,
             addHistoryRating: addHistoryRating,
-            getHistoryRatings: getHistoryRatings
+            getHistoryRatings: getHistoryRatings,
+            getOwnerDetails: getOwnerDetails
         }
 
         function getProperty() {
@@ -38,6 +39,13 @@
                     .then(function(data){
                             return data.data;
                     });
+        }
+
+        function getOwnerDetails(owner) {
+            return $http.get('/api/profile/'+ owner.username)
+                        .then(function(data){
+                            return data.data;
+                        });
         }
     }
 })();
