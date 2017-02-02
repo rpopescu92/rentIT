@@ -1,5 +1,5 @@
 <md-content class="md-padding" layout-xs="column" layout="row">
-    <div flex-xs flex-gt-xs="60" layout="column" layout-align="center center">
+    <!--<div flex-xs flex-gt-xs="60" layout="column" layout-align="center center">-->
     <!--<img ng-repeat="image in images"
          ng-hide="!isCurrentSlideIndex($index)" ng-src={{image}} >
     <a class="arrow prev" ng-click="nextSlide()"></a>
@@ -7,15 +7,16 @@
     <a ng-class="{'active':isCurrentSlideIndex($index)}"
        ng-click="setCurrentSlideIndex($index);"></a>
        -->
-    <md-card  style="padding:5px;">
-        <md-card-title>
-            <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
-            <span>
-                <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
-                    {{property.averageRating}}
-            </span>
+    <div layout="row" layout-align="center center">
+        <md-card  style="padding:5px; width:50%;">
+            <md-card-title>
+                <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
+                <span>
+                    <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
+                        {{property.averageRating}}
+                </span>
 
-        </md-card-title>
+            </md-card-title>
         <md-card-content>
             <span class="md-headline" style="padding:5px;">{{property.title}}</span>
             <p style="padding:5px;">{{property.longDescription}}</p>
@@ -26,15 +27,15 @@
         <md-card-actions layout="row" layout-align="end center">
         </md-card-actions>
     </md-card>
-        <md-card ng-show="!isOwner">
-            <md-card-title>
-                <span>Contact owner- {{property.owner.username}}</span>
-            </md-card-title>
-            <md-card-content>
-                <span>{{owner.phoneNumber}}</span>
-                <span>{{owner.emailAddress}}</span>
-            </md-card-content>
-        </md-card>
+    <md-card ng-show="!isOwner" style="width:30%;">
+        <md-card-title>
+            <span>Contact owner- {{property.owner.username}}</span>
+        </md-card-title>
+        <md-card-content>
+            <span>{{owner.phoneNumber}}</span>
+            <span>{{owner.emailAddress}}</span>
+        </md-card-content>
+     </md-card>
 </div>
 </md-content>
 
