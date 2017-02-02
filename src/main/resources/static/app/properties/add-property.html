@@ -50,9 +50,16 @@
             </md-input-container>
         </div>
         <div class="row">
-            <md-input-container>
+            <md-input-container style="width:40%;">
                 <label>Price</label>
                 <input ng-model="property.price" type="number">
+            </md-input-container>
+            <md-input-container style="padding:3px; width:30%;">
+                <label>Currency</label>
+                <md-select name="currency" ng-model="property.currency" required>
+                    <md-option value="EUR">EUR</md-option>
+                    <md-option value="RON">RON</md-option>
+                </md-select>
             </md-input-container>
         </div>
         <div class="row">

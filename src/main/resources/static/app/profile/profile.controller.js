@@ -60,7 +60,7 @@
 
         function upload (file) {
                         Upload.upload({
-                             url: 'upload/url',
+                             url: '/api/profile/'+ $scope.username+'/photo',
                              fields: {'username': $scope.username},
                              file: file
                          }).progress(function (evt) {
@@ -72,9 +72,7 @@
                          }).error(function (data, status, headers, config) {
                               console.log('error status: ' + status);
                           });
-
-
-                   };
+        };
         function updateProfile() {
             var profileDetails = {
                 id: $scope.id,

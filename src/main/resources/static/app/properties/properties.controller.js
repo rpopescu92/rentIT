@@ -38,6 +38,7 @@
         $scope.toggle = toggle;
         $scope.selected = [];
         $scope.exists = exists;
+        $scope.favorite = favorite;
 
         init();
 
@@ -82,6 +83,9 @@
             $scope.getProperties($scope.query.page);
         });
 
+        function favorite(property) {
+
+        }
 
     }
 }) ();

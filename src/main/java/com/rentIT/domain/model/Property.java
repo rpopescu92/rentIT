@@ -33,6 +33,7 @@ public class Property implements Serializable{
 
     private float averageRating;
     private float price;
+    private Currency currency;
     private int constructionYear;
     private int roomsNumber;
     private boolean isFurnished;

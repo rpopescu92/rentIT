@@ -68,6 +68,7 @@ public class PropertyService {
                             .longDescription(propertyDto.getLongDescription())
                             .title(propertyDto.getTitle())
                             .price(propertyDto.getPrice())
+                            .currency(propertyDto.getCurrency())
                             .roomsNumber(propertyDto.getRoomsNumber())
                             .dateAdded(new Date())
                             .build();

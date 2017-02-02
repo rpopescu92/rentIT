@@ -11,6 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/api")
@@ -43,9 +50,28 @@ public class ProfileDetailsResource {
     }
 
     @RequestMapping(value = "/profile/{username}/photo", method = RequestMethod.POST)
-    public ResponseEntity<Photo> uploadProfilePhoto(@PathVariable("username") String username, @RequestBody Photo photo){
-        profileDetailsService.uploadPhoto(username, photo);
-        logger.debug("Photo for {} username uploaded",username);
-        return new ResponseEntity( HttpStatus.OK);
+    public ResponseEntity<Photo> uploadProfilePhoto(@PathVariable("username") String username, @RequestBody MultipartFile file,
+                                                    RedirectAttributes redirectAttributes){
+        if (file.isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+            return new ResponseEntity("Please select file", HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Photo photo = Photo.builder().content(file.getBytes()).name(file.getName()).build();
+            profileDetailsService.uploadPhoto(username, photo);
+
+            redirectAttributes.addFlashAttribute("message",
+                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
+            logger.debug("Photo for {} username uploaded",username);
+            return new ResponseEntity( HttpStatus.OK);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

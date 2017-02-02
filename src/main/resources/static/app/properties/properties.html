@@ -33,13 +33,18 @@
         <md-card style="width:100%" ng-repeat="property in properties | searchFor:searchString | searchFor: property.city">
             <md-card-title>
                 <md-card-title-text>
-                    <span class="md-headline">{{property.title}}</span>
+                    <span class="md-headline">{{property.title}}
+                         <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
+                        {{property.averageRating}}
+                        <span style="float:right;">{{property.price}} {{property.currency}}</span>
+                    </span>
+
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
                 <div class="col-md-5">
                     <div class="md-media-lg card-media">
-                        <img src="/icons/close.svg" class="md-card-image" alt="user avatar">
+                        <img src="/icons/house.jpg" class="md-card-image" alt="user avatar">
                     </div>
                 </div>
                 <div class="col-md-7">
@@ -47,9 +52,13 @@
                 </div>
             </md-card-content>
             <md-card-footer>
+                <md-icon md-svg-src="/icons/ic_room_black_18px.svg"></md-icon>
                 <span>{{property.address.city.cityName}}</span>
             </md-card-footer>
             <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-icon-button" aria-label="Favorite" ng-click="favorite(property)">
+                    <md-icon md-svg-icon="/icons/ic_favorite_black_18px.svg" style="fill:#E57373;"></md-icon>
+                </md-button>
                 <md-button ng-click="viewProperty(property)">View</md-button>
             </md-card-actions>
         </md-card>
