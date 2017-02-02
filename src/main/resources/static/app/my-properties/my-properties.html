@@ -1,10 +1,10 @@
 
     <h2 style="padding:5px;">My Properties</h2>
     <md-content class="md-padding" layout="row" layout-wrap>
-        <div class="col-md-9 col-md-offset-2">
-            <md-card flex="30" flex-sm="70" ng-repeat="property in properties.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+        <div layout="row" layout-align="center center">
+            <md-card flex="30" flex-sm="60" ng-repeat="property in properties.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
             <md-card-title ng-click="viewProperty()">
-                <img class="img-responsive" ng-src="/icons/house.jpg" alt="Washed Out" style="width:100%;">
+                <img class="img-responsive" ng-src="/icons/house.jpg" alt="Washed Out" style="width:70%;">
                 <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
                 <span>
                     <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
