@@ -29,12 +29,12 @@
     </md-card>
     <md-card ng-show="!isOwner" style="width:30%;">
         <md-card-title>
-            <md-icon src="/icons/account_circle.png"></md-icon>
-            <span>Contact owner- {{property.owner.username}}</span>
+            <img class="img-responsive" src="/icons/default_photo.png" style="width:30%">
+            <span>Username: {{property.owner.username}}</span>
         </md-card-title>
         <md-card-content>
-            <span>{{owner.phoneNumber}}</span>
-            <span>{{owner.emailAddress}}</span>
+            <span>Tel. {{owner.phoneNumber}}</span>
+            <span>Email: {{owner.emailAddress}}</span>
         </md-card-content>
      </md-card>
 </div>

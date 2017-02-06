@@ -37,8 +37,9 @@
         $scope.items = [1, 2, 3, 4, 5];
         $scope.toggle = toggle;
         $scope.selected = [];
-        $scope.exists = exists;
+        $scope.roomsChecked = roomsChecked;
         $scope.favorite = favorite;
+        $scope.rooms = [];
 
         init();
 
@@ -56,10 +57,23 @@
                            }
         }
 
-        function exists(item, list) {
-            return list.indexOf(item) > -1;
+        function roomsChecked(room) {
+            var i = $.inArray(room, $scope.rooms);
+                if (i > -1) {
+                    $scope.rooms.splice(i, 1);
+                } else {
+                    $scope.rooms.push(room);
+                }
         }
 
+        $scope.roomFilter = function(properties) {
+                if ($scope.rooms.length > 0) {
+                    if ($.inArray(properties.roomsNumber, $scope.rooms) < 0)
+                        return;
+                }
+
+            return properties;
+     }
         function getProperties(page) {
             $scope.queryProperties.page = page;
 

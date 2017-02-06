@@ -17,9 +17,9 @@
     </form>
         <div class="row">
             <label>Rooms</label>
-            <div ng-repeat="item in items" class="standard" flex="50" layout="row">
+            <div ng-repeat="item in items" class="standard" flex="30">
                 <label>
-                    <input type="checkbox" ng-checked="exists(item, selected)"
+                    <input type="checkbox" ng-checked="roomsChecked(item)"
                            ng-click="toggle(item, selected)"/>
                     {{ item }}
                 </label>
@@ -30,7 +30,7 @@
 </div>
 <div class="row" ng-class="{active: isActive('/home')}">
     <div class="col-md-6 col-md-offset-3">
-        <md-card style="width:100%" ng-repeat="property in properties | searchFor:searchString | searchFor: property.city">
+        <md-card style="width:100%" ng-repeat="property in properties | searchFor:searchString | searchFor: property.city | filter:roomFilter">
             <md-card-title>
                 <md-card-title-text>
                     <span class="md-headline">{{property.title}}
