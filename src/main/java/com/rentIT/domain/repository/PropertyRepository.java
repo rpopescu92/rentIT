@@ -7,9 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-/**
- * Created by roxanap on 06.01.2017.
- */
 public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     @Query("select p from Property p where p.owner=?1")
