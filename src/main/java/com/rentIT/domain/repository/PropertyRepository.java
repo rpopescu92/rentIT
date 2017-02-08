@@ -15,7 +15,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     @Query("select p from Property p where p.owner=?1")
     Page<Property> findPropertyByUserOwner(User owner, Pageable pageable);
 
-    @Query("select p from Property p")
+    @Query("select p from Property p where p.isRented=false")
     Page<Property> findAllProperties(Pageable pageable);
 
 }
