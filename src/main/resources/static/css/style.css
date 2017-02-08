@@ -70,3 +70,15 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
 md-checkbox.md-checked .md-icon {
          background-color: #8BC34A !important;
 }
+
+#slides_control > div{
+  height: 200px;
+}
+
+#slides_control {
+  position:absolute;
+  width: 400px;
+  left:50%;
+  top:20px;
+ margin-left:-200px;
+}

@@ -15,7 +15,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -27,15 +26,15 @@ public class PropertyResource {
 
     @RequestMapping(value = "/properties", method = RequestMethod.POST)
     public ResponseEntity addProperty(@Valid @RequestBody PropertyDto propertyDto) {
-        if(StringUtils.isEmpty(propertyDto.getUsername())) {
+        if (StringUtils.isEmpty(propertyDto.getUsername())) {
             propertyDto.setUsername(AuthenticatedUser.getAuthenticatedUsername());
         }
 
-        try{
+        try {
             propertyService.saveProperty(propertyDto);
             return new ResponseEntity(HttpStatus.OK);
         } catch (InvalidPropertyException | UserNotAuthenticatedException ex) {
-            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -45,7 +44,7 @@ public class PropertyResource {
                                                            @RequestParam("limit") Integer limit,
                                                            @RequestParam("order") String order) {
 
-        return new ResponseEntity(propertyService.getAllProperties(page,limit, order), HttpStatus.OK);
+        return new ResponseEntity<>(propertyService.getAllProperties(page, limit, order), HttpStatus.OK);
 
     }
 
@@ -53,14 +52,14 @@ public class PropertyResource {
     public ResponseEntity<Page<Property>> getAllPropertiesByUser(@PathVariable("username") String username,
                                                                  @RequestParam("page") String page,
                                                                  @RequestParam("limit") String limit,
-                                                                 @RequestParam("order") String order){
-        return new ResponseEntity(propertyService.getPropertiesByOwner(username,page,limit,order), HttpStatus.OK);
+                                                                 @RequestParam("order") String order) {
+        return new ResponseEntity<>(propertyService.getPropertiesByOwner(username, page, limit, order), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/properties/{id}", method = RequestMethod.POST)
     public ResponseEntity<Property> updateProperty(@PathVariable("id") long id, @RequestBody Property property) {
         Property updatedProperty = propertyService.updateProperty(property);
 
-        return new ResponseEntity(updatedProperty, HttpStatus.OK);
+        return new ResponseEntity<>(updatedProperty, HttpStatus.OK);
     }
 }

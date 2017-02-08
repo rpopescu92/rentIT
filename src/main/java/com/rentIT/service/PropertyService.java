@@ -1,6 +1,9 @@
 package com.rentIT.service;
 
-import com.rentIT.domain.model.*;
+import com.rentIT.domain.model.Address;
+import com.rentIT.domain.model.City;
+import com.rentIT.domain.model.Property;
+import com.rentIT.domain.model.User;
 import com.rentIT.domain.repository.AddressRepository;
 import com.rentIT.domain.repository.CityRepository;
 import com.rentIT.domain.repository.PropertyRepository;
@@ -40,10 +43,10 @@ public class PropertyService {
     public void saveProperty(PropertyDto propertyDto) {
         logger.debug("Save new property for user {}", propertyDto.getUsername());
         Optional<User> owner = userRepository.findByUsername(propertyDto.getUsername());
-        if(!owner.isPresent()) {
+        if (!owner.isPresent()) {
             throw new UserNotAuthenticatedException();
         }
-        if(StringUtils.isEmpty(propertyDto.getAddress().getStreetName()) || StringUtils.isEmpty(propertyDto.getAddress().getStreetNumber())
+        if (StringUtils.isEmpty(propertyDto.getAddress().getStreetName()) || StringUtils.isEmpty(propertyDto.getAddress().getStreetNumber())
                 || StringUtils.isEmpty(propertyDto.getTitle())
                 || StringUtils.isEmpty(propertyDto.getConstructionYear())) {
             throw new InvalidPropertyException("Invalid fields. Address cannot be empty");
@@ -51,59 +54,58 @@ public class PropertyService {
 
         City city = cityRepository.findByCityNameAndRegion(propertyDto.getAddress().getCity().getCityName(), propertyDto.getAddress().getCity().getRegion());
         Address address = Address.builder().streetName(propertyDto.getAddress().getStreetName())
-                                    .streetNumber(propertyDto.getAddress().getStreetNumber())
-                                    .apartmentNumber(propertyDto.getAddress().getApartmentNumber())
-                                    .floorNumber(propertyDto.getAddress().getFloorNumber())
-                                    .otherDirections(propertyDto.getAddress().getOtherDirections())
-                                    .city(city).build();
+                .streetNumber(propertyDto.getAddress().getStreetNumber())
+                .apartmentNumber(propertyDto.getAddress().getApartmentNumber())
+                .floorNumber(propertyDto.getAddress().getFloorNumber())
+                .otherDirections(propertyDto.getAddress().getOtherDirections())
+                .city(city).build();
         Address savedAddress = addressRepository.save(address);
 
         Property property = Property.builder()
-                            .owner((User)owner.get())
-                            .address(address)
-                            .averageRating(0)
-                            .constructionYear(propertyDto.getConstructionYear())
-                            .images(Arrays.asList(propertyDto.getImages()))
-                            .isFurnished(propertyDto.isFurnished())
-                            .longDescription(propertyDto.getLongDescription())
-                            .title(propertyDto.getTitle())
-                            .price(propertyDto.getPrice())
-                            .currency(propertyDto.getCurrency())
-                            .roomsNumber(propertyDto.getRoomsNumber())
-                            .dateAdded(new Date())
-                            .build();
+                .owner((User) owner.get())
+                .address(address)
+                .averageRating(0)
+                .constructionYear(propertyDto.getConstructionYear())
+                .images(Arrays.asList(propertyDto.getImages()))
+                .isFurnished(propertyDto.isFurnished())
+                .longDescription(propertyDto.getLongDescription())
+                .title(propertyDto.getTitle())
+                .price(propertyDto.getPrice())
+                .currency(propertyDto.getCurrency())
+                .roomsNumber(propertyDto.getRoomsNumber())
+                .dateAdded(new Date())
+                .build();
 
         propertyRepository.save(property);
     }
 
     public Page<Property> getPropertiesByOwner(String username, String page, String limit, String option) {
         Optional<User> owner = userRepository.findByUsername(username);
-        if(!owner.isPresent()) {
+        if (!owner.isPresent()) {
             throw new UserNotAuthenticatedException();
         }
-        Sort.Direction direction = option.startsWith("-") ? Sort.Direction.DESC: Sort.Direction.ASC;
-        if(option.startsWith("+")) {
-            option = option.substring(option.indexOf('+') +1);
+        Sort.Direction direction = option.startsWith("-") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        if (option.startsWith("+")) {
+            option = option.substring(option.indexOf('+') + 1);
         } else {
-            option = option.substring(option.indexOf('-') +1);
+            option = option.substring(option.indexOf('-') + 1);
         }
-        Page<Property> properties = propertyRepository.findPropertyByUserOwner(owner.get(),new PageRequest(Integer.parseInt(page) - 1, Integer.parseInt(limit), direction, option));
-        return properties;
+        return propertyRepository.findPropertyByUserOwner(owner.get(), new PageRequest(Integer.parseInt(page) - 1, Integer.parseInt(limit), direction, option));
     }
 
     public Page<Property> getAllProperties(Integer page, Integer limit, String option) {
-        Sort.Direction direction = option.startsWith("-") ? Sort.Direction.DESC: Sort.Direction.ASC;
-        if(option.startsWith("+")) {
-            option = option.substring(option.indexOf('+') +1);
+        Sort.Direction direction = option.startsWith("-") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        if (option.startsWith("+")) {
+            option = option.substring(option.indexOf('+') + 1);
         } else {
-            option = option.substring(option.indexOf('-') +1);
+            option = option.substring(option.indexOf('-') + 1);
         }
         return propertyRepository.findAllProperties(new PageRequest(page - 1, limit, direction, option));
     }
 
     public Property updateProperty(Property property) {
         Optional<User> owner = userRepository.findByUsername(property.getOwner().getUsername());
-        if(!owner.isPresent()) {
+        if (!owner.isPresent()) {
             throw new UserNotAuthenticatedException();
         }
         Property updatedProperty = propertyRepository.findOne(property.getId());

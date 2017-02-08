@@ -17,11 +17,17 @@
                 </span>
 
             </md-card-title>
-        <md-card-content>
+        <md-card-content style="padding:6px;">
             <span class="md-headline" style="padding:5px;">{{property.title}}</span>
             <p style="padding:5px;">{{property.longDescription}}</p>
-            <div class="row" style="padding:5px;">
+            <div class="row" style="padding:6px;">
                 Address: {{property.address.streetName}}, {{property.address.streetNumber}}
+            </div>
+            <div class="row">
+                Construction Year: {{property.constructionYear}}
+            </div>
+            <div class="row">
+                {{property.roomsNumber}} Rooms
             </div>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">

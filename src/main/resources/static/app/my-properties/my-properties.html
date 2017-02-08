@@ -1,49 +1,64 @@
-
-    <h2 style="padding:5px;">My Properties</h2>
-    <md-content class="md-padding" layout="row" layout-wrap>
-        <div layout="row" layout-align="center center">
-            <md-card flex="30" flex-sm="60" ng-repeat="property in properties.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
-            <md-card-title ng-click="viewProperty()">
-                <img class="img-responsive" ng-src="/icons/house.jpg" alt="Washed Out" style="width:70%;">
-                <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
-                <span>
+<div class="row">
+    <div class="col-md-12">
+        <h2 style="padding:5px;">My Properties</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-3" ng-repeat="property in properties">
+            <md-card>
+                <md-card-title ng-click="viewProperty()">
+                    <img class="img-responsive" ng-src="/icons/house.jpg" alt="Washed Out" style="width:70%;">
+                    <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
+                    <span>
                     <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
                     {{property.averageRating}}
                 </span>
 
-            </md-card-title>
-            <md-card-content>
-                <span class="md-headline" style="padding:5px;">{{property.title}}</span>
-                <p style="padding:5px;">{{property.longDescription}}</p>
-            </md-card-content>
-            <md-card-actions layout="row" layout-align="end center">
-                <md-button ng-click="viewProperty(property)">View</md-button>
-            </md-card-actions>
+                </md-card-title>
+                <md-card-content>
+                    <span class="md-headline" style="padding:5px;">{{property.title}}</span>
+                    <p style="padding:5px;">{{property.longDescription}}</p>
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="viewProperty(property)">View</md-button>
+                </md-card-actions>
             </md-card>
         </div>
-    </md-content>
+    </div>
+</div>
 <div class="row">
-    <div class="col-md-6 col-md-offset-1">
-        View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.
-        <div class="pagination">
-            <ul>
-                <li ng-class="{disabled: noPrevious()}"><a ng-click="selectPrevious()">Previous</a></li>
-                <li ng-repeat="page in pages" ng-class="{active: isActive(page)}"><a ng-click="pageChanged(page)">{{page}}</a></li>
-               <!-- <li ng-class="{disabled: noNext()}"><a ng-click="selectNext()">Next</a></li>-->
-            </ul>
+    <div class="col-md-12 col-md-offset-1">
+        <div class="col-md-3" style="padding-top: 48px;">
+            View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
+            <option>3</option>
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+            <option>30</option>
+            <option>40</option>
+            <option>50</option>
+        </select> records at a time.
+        </div>
+        <div class="col-md-6">
+            <div class="pagination">
+                <ul uib-pagination total-items="totalItems" items-per-page="query.limit" ng-model="query.page"
+                    ng-change="pageChanged()"></ul>
+            </div>
         </div>
     </div>
 
+
 </div>
 
-    <!--<div class="row">
-        <div class="pagination pull-right">
-            <button ng-disabled="currentPage == 0" ng-click="previous(currentPage-1)">
-                Previous
-            </button>
-            {{currentPage+1}}/{{numberOfPages}}
-            <button ng-disabled="currentPage >= properties.length/pageSize" ng-click="next(currentPage+1)">
-                Next
-            </button>
-        </div>
-    </div>-->
+<!--<div class="row">
+    <div class="pagination pull-right">
+        <button ng-disabled="currentPage == 0" ng-click="previous(currentPage-1)">
+            Previous
+        </button>
+        {{currentPage+1}}/{{numberOfPages}}
+        <button ng-disabled="currentPage >= properties.length/pageSize" ng-click="next(currentPage+1)">
+            Next
+        </button>
+    </div>
+</div>-->
