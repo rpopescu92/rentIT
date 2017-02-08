@@ -20,7 +20,7 @@
         $scope.properties = [];
         $scope.query = {
             order: 'price',
-            limit: 2,
+            limit: 3,
             page: 1
         };
 

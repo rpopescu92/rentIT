@@ -27,9 +27,9 @@
 
     function PropertiesController($scope, $rootScope, PropertiesService, ViewPropertyService, $state, PrincipalService, filterFilter){
         $scope.getProperties = getProperties;
-        $scope.queryProperties = {
+        $scope.query = {
                     order: 'price',
-                    limit: 5,
+                    limit: 3,
                     page: 1
            };
         $scope.properties = [];
@@ -41,10 +41,15 @@
         $scope.favorite = favorite;
         $scope.rooms = [];
 
+        $scope.currentPage = 1;
+        $scope.itemsPerPage = $scope.query.limit;
+        $scope.pages = [];
+        $scope.totalItems = [];
+
         init();
 
         function init() {
-            getProperties($scope.queryProperties.page);
+            getProperties($scope.query.page);
         }
 
         function toggle(item, list) {
@@ -75,17 +80,19 @@
             return properties;
      }
         function getProperties(page) {
-            $scope.queryProperties.page = page;
+            $scope.query.page = page;
 
-            PropertiesService.getProperties($scope.queryProperties)
-                                .then(function(response){
-                                    if(response.status == 200){
-                                        $scope.properties = response.data.content;
-                                    }
-                                },
-                                function(error){
-
-                                } );
+            PropertiesService.getProperties($scope.query)
+                             .then(function(response){
+                                  if(response.status == 200){
+                                      $scope.properties = response.data.content;
+                                      $scope.totalItems = response.data.totalElements;
+                                      $scope.pages = response.data.totalPages;
+                                  }
+                             },
+                             function(error){
+                                console.log("error get properties");
+                            });
         }
         function viewProperty(property) {
             ViewPropertyService.setProperty(property);
@@ -101,5 +108,27 @@
 
         }
 
+        $scope.setPage = function (pageNo) {
+             $scope.currentPage = pageNo;
+          };
+
+        $scope.pageChanged = function() {
+             getProperties($scope.query.page);
+        }
+
+        $scope.setItemsPerPage = function (num) {
+              $scope.query.limit = num;
+              getProperties(1);
+         };
+
+        $scope.previous = function () {
+              $scope.query.page = $scope.currentPage;
+              getUserProperties($scope.username, $scope.query.page);
+       };
+
+        $scope.next = function () {
+              $scope.query.page = $scope.currentPage;
+              getUserProperties($scope.username, $scope.query.page);
+       };
     }
 }) ();
