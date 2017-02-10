@@ -60,18 +60,15 @@
 
         function upload (file) {
                         Upload.upload({
-                             url: '/api/profile/'+ $scope.username+'/photo',
-                             fields: {'username': $scope.username},
-                             file: file
-                         }).progress(function (evt) {
-                             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                             console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-                             ProfileService.uploadPhoto($scope.username, file);
-                         }).success(function (data, status, headers, config) {
-                             console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-                         }).error(function (data, status, headers, config) {
-                              console.log('error status: ' + status);
-                          });
+                                url: '/upload',
+                                fields: {'username': $scope.username}, // additional data to send
+                                file: file
+                            }).progress(function (evt) {
+                                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                                console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+                            }).success(function (data, status, headers, config) {
+                                console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+                            });
         };
         function updateProfile() {
             var profileDetails = {

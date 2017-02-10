@@ -49,29 +49,17 @@ public class ProfileDetailsResource {
         return new ResponseEntity(profileDetails, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/profile/{username}/photo", method = RequestMethod.POST)
-    public ResponseEntity<Photo> uploadProfilePhoto(@PathVariable("username") String username, @RequestBody MultipartFile file,
-                                                    RedirectAttributes redirectAttributes){
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return new ResponseEntity("Please select file", HttpStatus.BAD_REQUEST);
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public ResponseEntity<Photo> uploadProfilePhoto(@RequestParam("file") MultipartFile file,
+                                                    @RequestParam("username") String username ) throws IOException{
+        byte[] bytes;
+        logger.debug("file upload");
+        if (!file.isEmpty()) {
+            bytes = file.getBytes();
+            //store file in storage
+            logger.debug("file upload has bytes");
+            return new ResponseEntity<Photo>(HttpStatus.OK);
         }
-
-        try {
-
-            // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Photo photo = Photo.builder().content(file.getBytes()).name(file.getName()).build();
-            profileDetailsService.uploadPhoto(username, photo);
-
-            redirectAttributes.addFlashAttribute("message",
-                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
-            logger.debug("Photo for {} username uploaded",username);
-            return new ResponseEntity( HttpStatus.OK);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return new ResponseEntity<Photo>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
