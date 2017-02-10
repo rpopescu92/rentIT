@@ -17,17 +17,19 @@
                 </span>
 
             </md-card-title>
-        <md-card-content style="padding:6px;">
+        <md-card-content>
             <span class="md-headline" style="padding:5px;">{{property.title}}</span>
             <p style="padding:5px;">{{property.longDescription}}</p>
-            <div class="row" style="padding:6px;">
-                Address: {{property.address.streetName}}, {{property.address.streetNumber}}
+            <div class="row">
+                <p style="padding:5px;">
+                    Address: {{property.address.streetName}}, {{property.address.streetNumber}}
+                </p>
             </div>
             <div class="row">
-                Construction Year: {{property.constructionYear}}
+                <p style="padding:5px;">Construction Year: {{property.constructionYear}}</p>
             </div>
             <div class="row">
-                {{property.roomsNumber}} Rooms
+                <p style="padding:5px;">{{property.roomsNumber}} Rooms</p>
             </div>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
@@ -36,11 +38,15 @@
     <md-card ng-show="!isOwner" style="width:30%;">
         <md-card-title>
             <img class="img-responsive" src="/icons/default_photo.png" style="width:30%">
-            <span>Username: {{property.owner.username}}</span>
+            <span style="padding:3px">Username: {{property.owner.username}}</span>
         </md-card-title>
         <md-card-content>
-            <span>Tel. {{owner.phoneNumber}}</span>
-            <span>Email: {{owner.emailAddress}}</span>
+            <div class="row" ng-show="owner.phoneNumber != null">
+                <span>Tel. {{owner.phoneNumber}}</span>
+            </div>
+            <div class="row" ng-show="owner.emailAddress != null">
+                <span>Email: {{owner.emailAddress}}</span>
+            </div>
         </md-card-content>
      </md-card>
 </div>

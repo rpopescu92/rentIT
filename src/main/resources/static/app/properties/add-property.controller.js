@@ -26,8 +26,10 @@
                   }, function(error) {
 
                   });
-             getAllCities();
+
              getRegions();
+             getAllCities();
+
 
         }
 
@@ -58,7 +60,7 @@
         }
 
         function changedValue(region) {
-            $scope.resultCities = [];
+           $scope.resultCities = [];
            for(var j=0; j< $scope.cities.length; j++) {
                 if($scope.cities[j].region === region) {
                     $scope.resultCities.push($scope.cities[j].cityName);

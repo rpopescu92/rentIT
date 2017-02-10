@@ -6,7 +6,8 @@
                     'ngCacheBuster',
                     'ngLocale',
                     'angularFileUpload',
-                    'ngFileUpload'])
+                    'ngFileUpload',
+                    'ngAnimate'])
                     .run(stateInitializer);
     stateInitializer.$inject = ['stateHandler', '$rootScope'];
 
