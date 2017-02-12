@@ -34,7 +34,23 @@
            };
         $scope.properties = [];
         $scope.viewProperty = viewProperty;
-        $scope.items = [1, 2, 3, 4, 5];
+        $scope.roomsData = [
+                { "label":1,
+                 "id": 1},
+                 {"label":2,
+                 "id":2},
+                 {"label":3,
+                  "id":3},
+                  {"label":4,
+                   "id":4},
+                   {"label":5,
+                   "id":5}];
+        $scope.roomsModel = [];
+        $scope.roomsSettings = {
+                scrollableHeight: '200px',
+                scrollable: true,
+                enableSearch: true
+            };
         $scope.toggle = toggle;
         $scope.selected = [];
         $scope.roomsChecked = roomsChecked;

@@ -1,32 +1,27 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-    <form class="searchBar" style="width: 50%; padding: 5px;">
-        <div class="form-group">
-            <div class="input-group">
-                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </div>
-                <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
-            </div>
-        </div>
-    </form>
-    <form class="searchCity" style="width: 40%; padding: 5px;">
-        <div class="form-group">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search" ng-model="property.city">
-            </div>
-        </div>
-    </form>
         <div class="row">
-            <label>Rooms</label>
-            <div ng-repeat="item in items" class="standard" flex="30">
-                <label>
-                    <input type="checkbox" ng-checked="roomsChecked(item)"
-                           ng-click="toggle(item, selected)"/>
-                    {{ item }}
-                </label>
+                <div class="form-group searchBar col-xs-6">
+                    <div class="input-group">
+                        <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </div>
+                        <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
+                    </div>
+                </div>
+                <div class="form-group searchCity col-xs-6">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Location" ng-model="property.city">
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <div ng-dropdown-multiselect=""
+                 options="roomsData" selected-model="roomsModel" checkboxes="true" extra-settings="roomsSettings">
             </div>
         </div>
-    <md-button class="md-raised" style="color: black; border-color:#FBA100">Search</md-button>
-        </div>
+        <div class="row">
+        <md-button class="md-raised" style="color: black; border-color:#FBA100">Search</md-button>
+    </div>
+    </div>
 </div>
 <div class="row" ng-class="{active: isActive('/home')}" ng-repeat="property in properties | searchFor:searchString | searchFor: property.city | filter:roomFilter">
     <div class="col-md-6 col-md-offset-3">
