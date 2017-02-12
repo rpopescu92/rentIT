@@ -19,7 +19,7 @@
               left: false,
               right: true
             };
-
+        $scope.file = {};
 
         $scope.$watch('file', function (file) {
               $scope.upload($scope.file);
@@ -46,9 +46,17 @@
                                                         $scope.streetNumber = data.address.streetNumber;
                                                         $scope.apartmentNumber = data.address.apartmentNumber;
                                                         $scope.floorNumber = data.address.floorNumber;
-                                                        $scope.city = data.address.city.cityName;
-                                                        $scope.otherDirections = data.address.otherDirections;
+                                                        if(data.address.city!=null){
+                                                            $scope.city = data.address.city.cityName;
+                                                        }
+
+                                                        $scope.otherInfo = data.otherInfo;
                                                         $scope.userId = data.user.id;
+                                                        if(data.photo!=null) {
+                                                            $scope.file.content = data.photo.content;
+                                                            $scope.file.name = data.photo.name;
+                                                        }
+
                                                      },
                                                  function(error) {
                                          });
@@ -60,14 +68,12 @@
 
         function upload (file) {
                         Upload.upload({
-                                url: '/upload',
+                                url: '/api/upload',
                                 fields: {'username': $scope.username}, // additional data to send
                                 file: file
                             }).progress(function (evt) {
                                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                                console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
                             }).success(function (data, status, headers, config) {
-                                console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
                             });
         };
         function updateProfile() {
