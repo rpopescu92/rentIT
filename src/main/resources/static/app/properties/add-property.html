@@ -44,10 +44,6 @@
                     </md-option>
                 </md-select>
             </md-input-container>
-            <md-input-container  style="width:30%">
-                <label>Other directions</label>
-                <input ng-model="property.address.otherDirections" type="text">
-            </md-input-container>
         </div>
         <div class="row">
             <md-input-container style="width:40%;">
@@ -71,10 +67,21 @@
                 <label>Rooms</label>
                 <input ng-model="property.roomsNumber" type="number" min="1">
             </md-input-container>
+
+            <md-input-container style="width:30%;">
+                <label>Floor area (square meter)</label>
+                <input ng-model="property.floorArea" type="number" min="1">
+            </md-input-container>
+        </div>
+        <div class="row">
             <md-checkbox ng-model="property.isFurnished" aria-label="Furnished"
                          style="margin-left:5px; margin-bottom:3px;">
                 Furnished
             </md-checkbox>
+            <md-input-container  style="width:30%">
+                <label>Other info</label>
+                <input ng-model="property.otherInfo" type="text">
+            </md-input-container>
         </div>
         <div class="row">
             <md-button class="md-primary md-raised" style="background-color:#FBA100; color: white"

@@ -39,6 +39,8 @@ public class Property implements Serializable{
     private boolean isFurnished;
     private boolean isRented;
     private Date dateAdded;
+    private float floorArea;
+    private String otherInfo;
     @ElementCollection(targetClass=String.class)
     private List<String> images;
     @OneToOne

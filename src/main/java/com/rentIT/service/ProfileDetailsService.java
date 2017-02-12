@@ -71,7 +71,6 @@ public class ProfileDetailsService {
         address.setStreetName(profileDetails.getAddress().getStreetName());
         address.setStreetNumber(profileDetails.getAddress().getStreetNumber());
         address.setFloorNumber(profileDetails.getAddress().getFloorNumber());
-        address.setOtherDirections(profileDetails.getAddress().getOtherDirections());
 
         addressRepository.save(address);
         return address;

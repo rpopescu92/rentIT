@@ -57,13 +57,12 @@ public class PropertyService {
                 .streetNumber(propertyDto.getAddress().getStreetNumber())
                 .apartmentNumber(propertyDto.getAddress().getApartmentNumber())
                 .floorNumber(propertyDto.getAddress().getFloorNumber())
-                .otherDirections(propertyDto.getAddress().getOtherDirections())
                 .city(city).build();
         Address savedAddress = addressRepository.save(address);
 
         Property property = Property.builder()
-                .owner((User) owner.get())
-                .address(address)
+                .owner(owner.get())
+                .address(savedAddress)
                 .averageRating(0)
                 .constructionYear(propertyDto.getConstructionYear())
                 .images(Arrays.asList(propertyDto.getImages()))
@@ -73,6 +72,8 @@ public class PropertyService {
                 .price(propertyDto.getPrice())
                 .currency(propertyDto.getCurrency())
                 .roomsNumber(propertyDto.getRoomsNumber())
+                .floorArea(propertyDto.getFloorArea())
+                .otherInfo(propertyDto.getOtherInfo())
                 .dateAdded(new Date())
                 .build();
 
@@ -132,8 +133,7 @@ public class PropertyService {
         City city = cityRepository.findByCityNameAndRegion(property.getAddress().getCity().getCityName()
                 , property.getAddress().getCity().getRegion());
         property.getAddress().setCity(city);
-        Address address = addressRepository.findOne(property.getAddress().getId());
-        address = property.getAddress();
+        Address address = property.getAddress();
 
         addressRepository.save(address);
     }

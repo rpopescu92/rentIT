@@ -22,7 +22,6 @@ public class Address {
     private int floorNumber;
     @OneToOne
     private City city;
-    private String otherDirections;
 
     public Address(String streetName, String streetNumber,
                    String apartmentNumber, int floorNumber, City city) {

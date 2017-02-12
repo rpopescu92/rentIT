@@ -27,6 +27,8 @@ public class PropertyDto implements Serializable{
     private int constructionYear;
     private int roomsNumber;
     private boolean isFurnished;
+    private float floorArea;
+    private String otherInfo;
     @JsonProperty("images")
     private String[] images;
 }
