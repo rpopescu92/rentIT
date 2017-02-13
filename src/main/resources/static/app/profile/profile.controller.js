@@ -75,7 +75,7 @@
                                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                             }).success(function (data, status, headers, config) {
                                 console.log("success");
-                                $scope.photo.content = file.content + "?cb=" + new Date();
+                                $scope.photo.content = file.content;
                                 $scope.photo.name = file.name;
                             });
         };

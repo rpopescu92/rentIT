@@ -44,9 +44,9 @@
             .controller('ViewProperty', ViewProperty)
             ;
 
-    ViewProperty.$inject = ['$scope', '$state', 'ViewPropertyService', '$rootScope', 'Account'];
+    ViewProperty.$inject = ['$scope', '$state', 'ViewPropertyService', '$rootScope', 'Account', 'ProfileService'];
 
-    function ViewProperty($scope, $state, ViewPropertyService, $rootScope, Account) {
+    function ViewProperty($scope, $state, ViewPropertyService, $rootScope, Account, ProfileService) {
 
         $scope.property = {};
         $scope.images = [];
@@ -63,6 +63,8 @@
         $scope.isOwner = false;
         $scope.owner= {};
         $scope.myInterval = 3000;
+        $scope.photo = {};
+        $scope.defaultPhoto = "/icons/default_photo.png";
 
         $scope.slides = [
                             {
@@ -122,7 +124,15 @@
                                     .then(function(data) {
                                         $scope.owner.emailAddress = data.emailAddress;
                                         $scope.owner.phoneNumber = data.phoneNumber;
-                                    });
+                                        ProfileService.getProfileDetails($scope.property.owner.username)
+                                               .then(function(data) {
+                                                   if(data.photo != null) {
+                                                      $scope.photo.content = data.photo.content;
+                                                      $scope.photo.name = data.photo.name;
+                                                   } else {
+                                                      $scope.photo.content = $scope.defaultPhoto;
+                                    }});
+                               });
             }
          }
          function addComment(comment) {
