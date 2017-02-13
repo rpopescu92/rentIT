@@ -19,7 +19,7 @@
               left: false,
               right: true
             };
-        $scope.file = {};
+        $scope.photo = {};
 
         $scope.$watch('file', function (file) {
               $scope.upload($scope.file);
@@ -46,15 +46,15 @@
                                                         $scope.streetNumber = data.address.streetNumber;
                                                         $scope.apartmentNumber = data.address.apartmentNumber;
                                                         $scope.floorNumber = data.address.floorNumber;
-                                                        if(data.address.city!=null){
+                                                        if(data.address.city != null){
                                                             $scope.city = data.address.city.cityName;
                                                         }
 
                                                         $scope.otherInfo = data.otherInfo;
                                                         $scope.userId = data.user.id;
-                                                        if(data.photo!=null) {
-                                                            $scope.file.content = data.photo.content;
-                                                            $scope.file.name = data.photo.name;
+                                                        if(data.photo != null) {
+                                                            $scope.photo.content = data.photo.content;
+                                                            $scope.photo.name = data.photo.name;
                                                         }
 
                                                      },
@@ -74,6 +74,9 @@
                             }).progress(function (evt) {
                                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                             }).success(function (data, status, headers, config) {
+                                console.log("success");
+                                $scope.photo.content = file.content + "?cb=" + new Date();
+                                $scope.photo.name = file.name;
                             });
         };
         function updateProfile() {

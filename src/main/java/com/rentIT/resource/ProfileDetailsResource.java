@@ -54,8 +54,9 @@ public class ProfileDetailsResource {
                                                     @RequestParam("username") String username ) throws IOException{
 
         if (!file.isEmpty()) {
+
             Photo photo = Photo.builder().content(file.getBytes())
-                                .name(file.getName()).build();
+                                .name(file.getOriginalFilename()).build();
             profileDetailsService.uploadPhoto(username,photo);
             logger.debug("file upload has bytes");
             return new ResponseEntity<>(HttpStatus.OK);

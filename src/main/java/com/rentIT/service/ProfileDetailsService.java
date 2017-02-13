@@ -83,8 +83,15 @@ public class ProfileDetailsService {
         }
 
         ProfileDetails profileDetails = profileDetailsRepository.findByUser(user.get());
-        photo = photoRepository.save(photo);
-        profileDetails.setPhoto(photo);
-        profileDetailsRepository.save(profileDetails);
+        if(photoRepository.findOne(profileDetails.getPhoto().getId()) != null) {
+            Photo savedPhoto = photoRepository.findOne(profileDetails.getPhoto().getId());
+            savedPhoto.setContent(photo.getContent());
+            savedPhoto.setName(photo.getName());
+            photoRepository.save(savedPhoto);
+        } else {
+            photo = photoRepository.save(photo);
+            profileDetails.setPhoto(photo);
+            profileDetailsRepository.save(profileDetails);
+        }
     }
 }
