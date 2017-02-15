@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rentIT.domain.model.Address;
 import com.rentIT.domain.model.City;
 import com.rentIT.domain.model.Currency;
+import com.rentIT.domain.model.Photo;
 import lombok.*;
 
 import java.io.Serializable;
@@ -30,5 +31,5 @@ public class PropertyDto implements Serializable{
     private float floorArea;
     private String otherInfo;
     @JsonProperty("images")
-    private String[] images;
+    private Photo[] images;
 }

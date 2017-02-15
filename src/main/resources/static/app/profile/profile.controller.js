@@ -23,10 +23,10 @@
         $scope.cities = [];
 
         $scope.$watch('file', function (file) {
-              $scope.upload($scope.file);
+             $scope.upload($scope.file);
          });
 
-         $scope.upload = upload;
+        $scope.upload = upload;
 
         init();
 
@@ -35,8 +35,8 @@
                             .then(function(data){
                                 $scope.username = data.username;
 
-                                 ProfileService.getProfileDetails($scope.username)
-                                                .then(function(data) {
+                                ProfileService.getProfileDetails($scope.username)
+                                               .then(function(data) {
                                                         $scope.id = data.id;
                                                         $scope.firstName = data.firstName;
                                                         $scope.lastName = data.lastName;
@@ -69,17 +69,17 @@
         }
 
         function upload (file) {
-                        Upload.upload({
-                                url: '/api/upload',
-                                fields: {'username': $scope.username}, // additional data to send
-                                file: file
-                            }).progress(function (evt) {
-                                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                            }).success(function (data, status, headers, config) {
-                                console.log("success");
-                                $scope.photo.content = file.content;
-                                $scope.photo.name = file.name;
-                            });
+               Upload.upload({
+                     url: '/api/upload',
+                     fields: {'username': $scope.username}, // additional data to send
+                     file: file
+               }).progress(function (evt) {
+                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                }).success(function (data, status, headers, config) {
+                     console.log("success");
+                     $scope.photo.content = file.content;
+                     $scope.photo.name = file.name;
+              });
         };
         function updateProfile() {
             var profileDetails = {
@@ -95,9 +95,8 @@
                     apartmentNumber: $scope.apartmentNumber,
                     floorNumber: $scope.floorNumber,
                     city: {
-                        cityName: $scope.cityName
-                    },
-                    otherDirections: $scope.otherDirections
+                        cityName: $scope.city.cityName
+                    }
                 },
                 user: {
                     id: $scope.userId,

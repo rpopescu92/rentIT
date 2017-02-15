@@ -59,15 +59,11 @@
                 <div class="row" style="padding:10px;">
                     <md-input-container style="width:30%">
                         <label>City</label>
-                        <md-select ng-model="property.address.city.cityName">
+                        <md-select ng-model="city">
                             <md-option ng-value="city" ng-repeat="city in cities">
                                 {{city.cityName}}
                             </md-option>
                         </md-select>
-                    </md-input-container>
-                    <md-input-container style="width:40%">
-                        <label>Other directions</label>
-                        <input ng-model="otherDirections" type="text">
                     </md-input-container>
                 </div>
             </md-card-content>

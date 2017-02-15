@@ -41,8 +41,8 @@ public class Property implements Serializable{
     private Date dateAdded;
     private float floorArea;
     private String otherInfo;
-    @ElementCollection(targetClass=String.class)
-    private List<String> images;
+    @ElementCollection(targetClass=Photo.class)
+    private List<Photo> images;
     @OneToOne
     private Facilities facilities;
 

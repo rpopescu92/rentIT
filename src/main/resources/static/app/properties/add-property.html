@@ -84,6 +84,19 @@
             </md-input-container>
         </div>
         <div class="row">
+            <md-card>
+                <md-card-content>
+                    <div class="row" style="padding:4px;">
+                        <label>Upload photos</label>
+                        <input ngf-select ng-model="file" name="file" ngf-accept="'image/*'" required="" type="file">
+                        <div class="thumbnail" ng-repeat="file in files" style="padding-top:5px;">
+                            <img ng-src="data:image/png;base64, file" class="img-responsive">
+                        </div>
+                    </div>
+                </md-card-content>
+            </md-card>
+        </div>
+        <div class="row">
             <md-button class="md-primary md-raised" style="background-color:#FBA100; color: white"
                        ng-click="addProperty()">
                 Add

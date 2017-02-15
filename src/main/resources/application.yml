@@ -9,7 +9,7 @@ spring:
         databasePlatform: org.hibernate.dialect.PostgreSQLDialect
         hibernate:
             show_sql: true
-            ddl-auto: update
+            ddl-auto: none
 
     jwt:
         secret: AmUnSecretMareDeTotPeCareNuIlSpunNimanuiDelocNiciodataGhicesteSiNuVeiAfla239090932091
