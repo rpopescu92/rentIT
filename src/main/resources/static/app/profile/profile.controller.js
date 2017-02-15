@@ -6,10 +6,10 @@
 
     ProfileController.$inject = ['$scope', '$rootScope', '$state',
                                 'ProfileService', 'PrincipalService', '$mdToast',
-                                'Upload', 'Account'];
+                                'Upload', 'Account', 'CitiesService'];
 
     function ProfileController($scope, $rootScope, $state, ProfileService,
-                PrincipalService, $mdToast, Upload, Account) {
+                PrincipalService, $mdToast, Upload, Account, CitiesService) {
 
         $scope.username;
         $scope.updateProfile = updateProfile;
@@ -20,6 +20,7 @@
               right: true
             };
         $scope.photo = {};
+        $scope.cities = [];
 
         $scope.$watch('file', function (file) {
               $scope.upload($scope.file);
@@ -60,6 +61,7 @@
                                                      },
                                                  function(error) {
                                          });
+                                 getCities();
                             },
                             function(error){
                                 console.log("user not authenticated");
@@ -118,5 +120,12 @@
                                          .hideDelay(3000));
                    });
         }
+
+         function getCities() {
+                    CitiesService.getAllCities()
+                                .then(function(data) {
+                                    $scope.cities = data.data;
+                                });
+                }
     }
 })();
