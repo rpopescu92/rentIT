@@ -21,6 +21,7 @@
             };
         $scope.photo = {};
         $scope.cities = [];
+        $scope.city = {};
 
         $scope.$watch('file', function (file) {
              $scope.upload($scope.file);
@@ -47,8 +48,8 @@
                                                         $scope.streetNumber = data.address.streetNumber;
                                                         $scope.apartmentNumber = data.address.apartmentNumber;
                                                         $scope.floorNumber = data.address.floorNumber;
-                                                        if(data.address.city != null){
-                                                            $scope.city = data.address.city.cityName;
+                                                        if(data.address.city != null) {
+                                                            $scope.city = data.address.city;
                                                         }
 
                                                         $scope.otherInfo = data.otherInfo;
