@@ -116,7 +116,6 @@ public class PropertyServiceTest {
     }
 
     @Test
-    @Ignore
     public void testGetAllProperties() {
         Property property = Property.builder().price(233).title("property1").longDescription("property1 description").address(new Address("street1","nr2")).build();
         List<Property> properties = new ArrayList<>();

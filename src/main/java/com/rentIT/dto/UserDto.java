@@ -16,6 +16,8 @@ public class UserDto implements Serializable{
     private String lastName;
     private String username;
     private String password;
+    private boolean isOwner;
+    private boolean isTenant;
     private UserRole role;
 
 }

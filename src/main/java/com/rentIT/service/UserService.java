@@ -47,6 +47,8 @@ public class UserService {
                         .username(userDto.getUsername())
                         .password(userDto.getPassword())
                         .createDate(new Date())
+                        .isOwner(userDto.isOwner())
+                        .isTenant(userDto.isTenant())
                         .role(UserRole.USER)
                         .build();
 

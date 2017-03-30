@@ -28,6 +28,18 @@
                         <label>Password</label>
                         <input ng-model="password" type="password">
                     </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <md-checkbox ng-model="isOwner" aria-label="I'm owner"
+                                     style="margin-left:5px; margin-bottom:3px;">
+                            I'm owner
+                        </md-checkbox>
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <md-checkbox ng-model="isTenant" aria-label="I'm tenant"
+                                     style="margin-left:5px; margin-bottom:3px;">
+                            I'm tenant
+                        </md-checkbox>
+                    </md-input-container>
                 </md-content>
         </div>
     </md-dialog-content>

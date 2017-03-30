@@ -88,9 +88,9 @@
                 <md-card-content>
                     <div class="row" style="padding:4px;">
                         <label>Upload photos</label>
-                        <input ngf-select ng-model="file" name="file" ngf-accept="'image/*'" required="" type="file">
+                        <div class="button" ngf-select ng-model="files" ngf-multiple="true">Select</div>
                         <div class="thumbnail" ng-repeat="file in files" style="padding-top:5px;">
-                            <img ng-src="data:image/png;base64, file" class="img-responsive">
+                            <img ng-src="data:image/png;base64, {{file}}" class="img-responsive">
                         </div>
                     </div>
                 </md-card-content>

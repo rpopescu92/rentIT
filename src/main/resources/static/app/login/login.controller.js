@@ -12,6 +12,7 @@
         $scope.currentUser;
         $scope.login = login;
         $scope.authenticationError = false;
+        $scope.isOwner = false;
 
         function registerDialog() {
             $scope.username = "";
@@ -32,18 +33,38 @@
                 password: $scope.password
             }
             AuthorizationService.login(data)
-                        .then(function(data){
-                            $state.go('home');
+                        .then(function(data, status){
                             PrincipalService.theUsername($scope.username);
                             $scope.$emit("authenticationSuccess");
                             if(AuthorizationService.getPreviousState()) {
                                 var previousState = AuthorizationService.getPreviousState();
                                 AuthorizationService.resetPreviousState();
+                                console.log("bla");
                                 $state.go(previousState.name, previousState.params);
+                                getAccount();
                             }
-                         }).catch(function(){
+                            if(status === 401) {
+                                $scope.authenticationError = true;
+                            }
+                         },
+                        function (response) {
                             $scope.authenticationError = true;
-                  });
+                            console.log("login error");
+                        });
+        }
+
+        function getAccount() {
+            Account.getAccount()
+                .then(function(data){
+                    $scope.username = data.username;
+                    $scope.isOwner = data.isOwner;
+                    if($scope.isOwner) {
+                        console.log("is owner");
+                        $state.go('my-properties');
+                    } else {
+                        $state.go('home');
+                    }
+                });
         }
     }
 })();
