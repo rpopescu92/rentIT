@@ -56,7 +56,7 @@ public class ProfileDetailsService {
     public ProfileDetails getProfileDetails(String username){
         Optional<User> optional = userRepository.findByUsername(username);
         if(!optional.isPresent()) {
-            return null;
+            throw new UserNotAuthenticatedException();
         }
         return profileDetailsRepository.findByUser(optional.get());
     }

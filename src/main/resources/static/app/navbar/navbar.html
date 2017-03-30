@@ -1,17 +1,12 @@
-<!--<div style="position: fixed; width: 100%">
-
-</div>-->
 <md-toolbar  md-scroll-shrink layout="row" layout-align="start end" class="blueNavbar">
     <div class="md-toolbar-tools" ng-class="{active: isActive('/home')}">
-        <md-button ng-click="goHome()">
-            <md-icon md-svg-src="/icons/ic_home_black_24px.svg" style="fill:#FBA100"></md-icon>
-            Home</md-button>
-        <md-button ng-click="myProperties()">My Properties</md-button>
-        <md-button ng-click="goToProperties()">Properties</md-button>
+        <md-button ui-sref="home" ui-sref-active="rent-active-menu">Home</md-button>
+        <md-button ui-sref="my-properties" ui-sref-active="rent-active-menu">My Properties</md-button>
+        <md-button ui-sref="properties" ui-sref-active="rent-active-menu">Properties</md-button>
         <md-button>Market Analysis</md-button>
         <md-button>Messages</md-button>
         <span flex></span>
-        <md-button style="background-color:#FBA100;" ng-click="addProperty()">
+        <md-button style="background-color:#FBA100;" ui-sref="add-property">
             <md-icon md-svg-src="icons/plus.svg" style="fill:white;"></md-icon>
             Add property
         </md-button>

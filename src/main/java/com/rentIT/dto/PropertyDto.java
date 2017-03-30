@@ -30,6 +30,7 @@ public class PropertyDto implements Serializable{
     private boolean isFurnished;
     private float floorArea;
     private String otherInfo;
+
     @JsonProperty("images")
-    private Photo[] images;
+    private List<Photo> images;
 }

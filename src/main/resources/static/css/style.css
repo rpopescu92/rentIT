@@ -82,3 +82,20 @@ md-checkbox.md-checked .md-icon {
   top:20px;
  margin-left:-200px;
 }
+
+.rent-empty-data {
+    border: 1px solid #8BC34A;
+    border-radius: 7px;
+    font-family: Helvetica;
+    font-size: 21px;
+    width: 45%;
+    height: 45px;
+    line-height: 30px;
+    text-align: center;
+    padding: 5px;
+    border-left-width: 7px;
+}
+
+.rent-active-menu {
+    background-color: #FBA100;
+}

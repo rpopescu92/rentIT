@@ -19,14 +19,17 @@ public class City implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long Id;
+
     private String region;
+
     @Column(name = "city_name")
     @JsonProperty("cityName")
     private String cityName;
+
     @JsonIgnore
     private String country;
 
-    public City(String cityName) {
-        this.cityName = cityName;
-    }
+//    public City(String cityName) {
+//        this.cityName = cityName;
+//    }
 }

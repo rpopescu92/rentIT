@@ -50,7 +50,7 @@ public class PropertyServiceTest {
 
         PropertyDto propertyDto = PropertyDto.builder()
                 .username("ana")
-                .address(new Address("Brancoveanu","20","3", 3, new City("Bucharest")))
+                .address(new Address("Brancoveanu","20","3", 3, new City()))
                 .averageRating(0)
                 .constructionYear(1992)
                 .title("short")
@@ -70,7 +70,7 @@ public class PropertyServiceTest {
 
         PropertyDto propertyDto = PropertyDto.builder()
                 .username("ana")
-                .address(new Address("Brancoveanu","20","3", 3,  new City("Bucharest")))
+                .address(new Address("Brancoveanu","20","3", 3,  new City()))
                 .averageRating(0)
                 .constructionYear(1992)
                 .isFurnished(true)
@@ -85,7 +85,7 @@ public class PropertyServiceTest {
         Mockito.when(userRepository.findByUsername("ana")).thenReturn(Optional.empty());
         PropertyDto propertyDto = PropertyDto.builder()
                 .username("ana")
-                .address(new Address("Brancoveanu","20","3", 3,  new City("Bucharest")))
+                .address(new Address("Brancoveanu","20","3", 3,  new City()))
                 .build();
         propertyService.saveProperty(propertyDto);
     }

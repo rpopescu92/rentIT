@@ -32,7 +32,7 @@ public class PropertyResourceTest {
     public void testAddProperty() {
         PropertyDto propertyDto = PropertyDto.builder()
                 .username("ana")
-                .address(new Address("Brancoveanu","20","3", 3, new City("Bucharest")))
+                .address(new Address("Brancoveanu","20","3", 3, new City()))
                 .averageRating(0)
                 .constructionYear(1992)
                 .isFurnished(true)

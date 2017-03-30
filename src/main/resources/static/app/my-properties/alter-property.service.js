@@ -10,7 +10,7 @@
     function AlterPropertyService($http) {
         return {
             rentProperty: rentProperty
-        }
+        };
 
         function rentProperty(id, isRented) {
             $http({

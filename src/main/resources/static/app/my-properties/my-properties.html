@@ -3,7 +3,7 @@
         <h2 style="padding:5px;">My Properties</h2>
     </div>
 </div>
-<div layout-align="center center">
+<div layout-align="center center" ng-show="properties.length > 0">
     <div class="col-md-12">
         <div class="col-md-3" ng-repeat="property in properties">
             <md-card>
@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
-<div class="row">
+<div class="row" ng-show="properties.length > 0">
     <div class="col-md-12 col-md-offset-1">
         <div class="col-md-3" style="padding-top: 48px;">
             View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
@@ -49,6 +49,14 @@
                 <ul uib-pagination total-items="totalItems" items-per-page="query.limit" ng-model="query.page"
                     ng-change="pageChanged()"></ul>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="properties.length == 0" style="padding-top: 70px;">
+    <div class="col-md-12 col-md-offset-1">
+        <div class="rent-empty-data">
+            <p>You don't have any registered properties</p>
         </div>
     </div>
 </div>

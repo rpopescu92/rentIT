@@ -55,10 +55,9 @@
             if ($scope.files.length > 0) {
                 for (var i = 0; i < $scope.files.length; i++) {
                     var file = $scope.files[i];
-                    fileReader.readAsArrayBuffer(file);
+                    fileReader.readAsBinaryString(file);
                     fileReader.onload = function (e) {
-                        var arrayBuffer = e.target.result;
-                        var bytes = new Uint8Array(arrayBuffer);
+                        var bytes = btoa(e.target.result.toString());
                         //var byteArray = new Uint8Array(fileReader.result);
                         console.log(bytes);
                         images.push({

@@ -19,5 +19,7 @@ public class Photo {
 
     private String type;
     private String name;
+
+    @Lob
     private byte[] content;
 }

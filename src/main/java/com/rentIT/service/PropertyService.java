@@ -65,7 +65,7 @@ public class PropertyService {
                 .address(savedAddress)
                 .averageRating(0)
                 .constructionYear(propertyDto.getConstructionYear())
-                .images(Arrays.asList(propertyDto.getImages()))
+                .images(propertyDto.getImages())
                 .isFurnished(propertyDto.isFurnished())
                 .longDescription(propertyDto.getLongDescription())
                 .title(propertyDto.getTitle())
