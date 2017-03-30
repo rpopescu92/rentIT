@@ -78,13 +78,21 @@ public class ProfileDetailsService {
 
     public void uploadPhoto(String username, Photo photo) {
         Optional<User> user = userRepository.findByUsername(username);
-        if(user.isPresent()) {
-            ProfileDetails profileDetails = profileDetailsRepository.findByUser(user.get());
+        if(!user.isPresent()) {
+            throw new UserNotAuthenticatedException();
+        }
 
+        ProfileDetails profileDetails = profileDetailsRepository.findByUser(user.get());
+        if(profileDetails.getPhoto() != null) {
+            Photo savedPhoto = photoRepository.findOne(profileDetails.getPhoto().getId());
+            savedPhoto.setContent(photo.getContent());
+            savedPhoto.setName(photo.getName());
+            photoRepository.save(savedPhoto);
+            profileDetails.setPhoto(savedPhoto);
+        } else {
             photo = photoRepository.save(photo);
             profileDetails.setPhoto(photo);
-            profileDetailsRepository.save(profileDetails);
         }
-        throw new UserNotAuthenticatedException();
+        profileDetailsRepository.save(profileDetails);
     }
 }

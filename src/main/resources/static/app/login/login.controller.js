@@ -11,6 +11,7 @@
         $scope.registerDialog = registerDialog;
         $scope.currentUser;
         $scope.login = login;
+        $scope.authenticationError = false;
 
         function registerDialog() {
             $scope.username = "";
@@ -40,11 +41,9 @@
                                 AuthorizationService.resetPreviousState();
                                 $state.go(previousState.name, previousState.params);
                             }
-                        },
-                           function(error){
-                               console.log("error login");
-                           }
-                        )
+                         }).catch(function(){
+                            $scope.authenticationError = true;
+                  });
         }
     }
 })();

@@ -4,9 +4,9 @@
     angular.module('rentITApp')
             .controller('AddPropertyController', AddPropertyController);
 
-    AddPropertyController.$inject = ['$state', '$scope', 'AddPropertyService', 'Account', 'CitiesService'];
+    AddPropertyController.$inject = ['$state', '$scope', 'AddPropertyService', 'Account', 'CitiesService', 'Upload'];
 
-    function AddPropertyController($state, $scope, AddPropertyService, Account, CitiesService) {
+    function AddPropertyController($state, $scope, AddPropertyService, Account, CitiesService, Upload) {
 
         $scope.addProperty = addProperty;
         $scope.property = {};
@@ -17,6 +17,14 @@
         $scope.regions = [];
         $scope.resultCities = [];
         $scope.changedValue = changedValue;
+        $scope.files = [];
+        $scope.photo = {};
+
+        $scope.$watch('file', function (file) {
+             $scope.upload($scope.file);
+        });
+        $scope.upload = upload;
+
         init();
 
         function init() {
@@ -29,9 +37,16 @@
 
              getRegions();
              getAllCities();
-
-
         }
+
+        function upload (file) {
+           console.log("upload");
+           if(file != null) {
+               $scope.photo.content = file.content;
+               $scope.photo.name = file.name;
+               $scope.files.push(file);
+           }
+        };
 
         function addProperty() {
             AddPropertyService.addProperty($scope.property)

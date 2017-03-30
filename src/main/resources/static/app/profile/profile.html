@@ -5,7 +5,9 @@
                <div class="row" style="padding:4px;">
                    <label>Upload profile photo</label>
                    <input ngf-select ng-model="file" name="file" ngf-accept="'image/*'" required="" type="file">
-                   <img ngf-src="file" class="img-responsive" style="width:80%" >
+                   <div class="thumbnail" style="padding-top:5px;">
+                        <img ng-src="data:image/png;base64,{{photo.content}}" class="img-responsive profilePhoto">
+                   </div>
                </div>
            </md-card-content>
        </md-card>
@@ -57,11 +59,11 @@
                 <div class="row" style="padding:10px;">
                     <md-input-container style="width:30%">
                         <label>City</label>
-                        <input ng-model="city" type="text">
-                    </md-input-container>
-                    <md-input-container style="width:40%">
-                        <label>Other directions</label>
-                        <input ng-model="otherDirections" type="text">
+                        <md-select ng-model="city">
+                            <md-option ng-value="city" ng-repeat="city in cities">
+                                {{city.cityName}}
+                            </md-option>
+                        </md-select>
                     </md-input-container>
                 </div>
             </md-card-content>

@@ -6,10 +6,10 @@
 
     ProfileController.$inject = ['$scope', '$rootScope', '$state',
                                 'ProfileService', 'PrincipalService', '$mdToast',
-                                'Upload', 'Account'];
+                                'Upload', 'Account', 'CitiesService'];
 
     function ProfileController($scope, $rootScope, $state, ProfileService,
-                PrincipalService, $mdToast, Upload, Account) {
+                PrincipalService, $mdToast, Upload, Account, CitiesService) {
 
         $scope.username;
         $scope.updateProfile = updateProfile;
@@ -19,13 +19,15 @@
               left: false,
               right: true
             };
-
+        $scope.photo = {};
+        $scope.cities = [];
+        $scope.city = {};
 
         $scope.$watch('file', function (file) {
-              $scope.upload($scope.file);
+             $scope.upload($scope.file);
          });
 
-         $scope.upload = upload;
+        $scope.upload = upload;
 
         init();
 
@@ -34,8 +36,8 @@
                             .then(function(data){
                                 $scope.username = data.username;
 
-                                 ProfileService.getProfileDetails($scope.username)
-                                                .then(function(data) {
+                                ProfileService.getProfileDetails($scope.username)
+                                               .then(function(data) {
                                                         $scope.id = data.id;
                                                         $scope.firstName = data.firstName;
                                                         $scope.lastName = data.lastName;
@@ -46,12 +48,21 @@
                                                         $scope.streetNumber = data.address.streetNumber;
                                                         $scope.apartmentNumber = data.address.apartmentNumber;
                                                         $scope.floorNumber = data.address.floorNumber;
-                                                        $scope.city = data.address.city.cityName;
-                                                        $scope.otherDirections = data.address.otherDirections;
+                                                        if(data.address.city != null) {
+                                                            $scope.city = data.address.city;
+                                                        }
+
+                                                        $scope.otherInfo = data.otherInfo;
                                                         $scope.userId = data.user.id;
+                                                        if(data.photo != null) {
+                                                            $scope.photo.content = data.photo.content;
+                                                            $scope.photo.name = data.photo.name;
+                                                        }
+
                                                      },
                                                  function(error) {
                                          });
+                                 getCities();
                             },
                             function(error){
                                 console.log("user not authenticated");
@@ -59,16 +70,17 @@
         }
 
         function upload (file) {
-                        Upload.upload({
-                                url: '/upload',
-                                fields: {'username': $scope.username}, // additional data to send
-                                file: file
-                            }).progress(function (evt) {
-                                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                                console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
-                            }).success(function (data, status, headers, config) {
-                                console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
-                            });
+               Upload.upload({
+                     url: '/api/upload',
+                     fields: {'username': $scope.username}, // additional data to send
+                     file: file
+               }).progress(function (evt) {
+                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                }).success(function (data, status, headers, config) {
+                     console.log("success");
+                     $scope.photo.content = file.content;
+                     $scope.photo.name = file.name;
+              });
         };
         function updateProfile() {
             var profileDetails = {
@@ -84,9 +96,8 @@
                     apartmentNumber: $scope.apartmentNumber,
                     floorNumber: $scope.floorNumber,
                     city: {
-                        cityName: $scope.cityName
-                    },
-                    otherDirections: $scope.otherDirections
+                        cityName: $scope.city.cityName
+                    }
                 },
                 user: {
                     id: $scope.userId,
@@ -109,5 +120,12 @@
                                          .hideDelay(3000));
                    });
         }
+
+         function getCities() {
+                    CitiesService.getAllCities()
+                                .then(function(data) {
+                                    $scope.cities = data.data;
+                                });
+                }
     }
 })();

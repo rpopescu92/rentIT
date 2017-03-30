@@ -76,6 +76,8 @@ public class PropertyService {
                 .otherInfo(propertyDto.getOtherInfo())
                 .dateAdded(new Date())
                 .build();
+        owner.get().setOwner(true);
+        userRepository.save(owner.get());
 
         propertyRepository.save(property);
     }
