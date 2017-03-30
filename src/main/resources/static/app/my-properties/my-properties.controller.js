@@ -10,12 +10,15 @@
             }
         });
 
-    MyPropertiesController.$inject = ['$state', '$scope', '$rootScope', 'MyPropertiesService', 'Account', 'ViewPropertyService'];
+    MyPropertiesController.$inject = ['$state', '$scope', '$rootScope', 'MyPropertiesService',
+        'Account', 'ViewPropertyService', 'AlterPropertyService'];
 
-    function MyPropertiesController($state, $scope, $rootScope, MyPropertiesService, Account, ViewPropertyService) {
+    function MyPropertiesController($state, $scope, $rootScope, MyPropertiesService,
+                                    Account, ViewPropertyService, AlterPropertyService) {
 
         $scope.viewProperty = viewProperty;
         $scope.getUserProperties = getUserProperties;
+        $scope.rented = rented;
         $scope.property = {};
         $scope.properties = [];
         $scope.query = {
@@ -62,6 +65,10 @@
             ViewPropertyService.setProperty(property);
             $scope.$broadcast('view-property', property);
             $state.go('view-property');
+        }
+
+        function rented(id) {
+            AlterPropertyService.rentProperty(id, true);
         }
 
         $scope.setPage = function (pageNo) {

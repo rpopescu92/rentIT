@@ -1,8 +1,8 @@
-(function() {
+(function () {
     'use strict';
 
     angular.module('rentITApp')
-            .controller('AddPropertyController', AddPropertyController);
+        .controller('AddPropertyController', AddPropertyController);
 
     AddPropertyController.$inject = ['$state', '$scope', 'AddPropertyService', 'Account', 'CitiesService', 'Upload'];
 
@@ -20,67 +20,89 @@
         $scope.files = [];
         $scope.photo = {};
 
-        $scope.$watch('file', function (file) {
-             $scope.upload($scope.file);
-        });
-        $scope.upload = upload;
+        // $scope.$watch('file', function (file) {
+        //      $scope.upload($scope.file);
+        // });
+        // $scope.upload = upload;
 
         init();
 
         function init() {
             Account.getAccount()
-                   .then(function(data) {
-                      $scope.username = data.username;
-                  }, function(error) {
+                .then(function (data) {
+                    $scope.username = data.username;
+                }, function (error) {
 
-                  });
+                });
 
-             getRegions();
-             getAllCities();
+            getRegions();
+            getAllCities();
         }
 
-        function upload (file) {
-           console.log("upload");
-           if(file != null) {
-               $scope.photo.content = file.content;
-               $scope.photo.name = file.name;
-               $scope.files.push(file);
-           }
-        };
+        // function upload (file) {
+        //    console.log("upload");
+        //    if(file != null) {
+        //        $scope.photo.content = file.content;
+        //        $scope.photo.name = file.name;
+        //        $scope.files.push(file);
+        //    }
+        // };
 
         function addProperty() {
-            AddPropertyService.addProperty($scope.property)
-                        .then(function(data){
-                            console.log('go to my properties');
-                            $state.go('my-properties');
-                        },
-                        function(error){
-
+            var fileReader = new FileReader();
+            var images = [];
+            console.log($scope.files);
+            if ($scope.files.length > 0) {
+                for (var i = 0; i < $scope.files.length; i++) {
+                    var file = $scope.files[i];
+                    fileReader.readAsArrayBuffer(file);
+                    fileReader.onload = function (e) {
+                        var arrayBuffer = e.target.result;
+                        var bytes = new Uint8Array(arrayBuffer);
+                        //var byteArray = new Uint8Array(fileReader.result);
+                        console.log(bytes);
+                        images.push({
+                            content: bytes,
+                            name: file.name,
+                            type: 'jpg'
                         });
+                        $scope.property.images = images;
+                        console.log($scope.property.images);
+                        AddPropertyService.addProperty($scope.property)
+                            .then(function (data) {
+                                    console.log('go to my properties');
+                                    $state.go('my-properties');
+                                },
+                                function (error) {
+
+                                });
+                    };
+                }
+            }
         }
 
         function getRegions() {
             CitiesService.getRegions()
-                        .then(function(data) {
-                            $scope.resultCities = [];
-                            $scope.regions = data.data;
-                        });
+                .then(function (data) {
+                    $scope.resultCities = [];
+                    $scope.regions = data.data;
+                });
         }
 
         function getAllCities() {
             CitiesService.getAllCities()
-                        .then(function(data) {
-                            $scope.cities = data.data;
-                        });
+                .then(function (data) {
+                    $scope.cities = data.data;
+                });
         }
 
         function changedValue(region) {
-           $scope.resultCities = [];
-           for(var j=0; j< $scope.cities.length; j++) {
-                if($scope.cities[j].region === region) {
+            $scope.resultCities = [];
+            for (var j = 0; j < $scope.cities.length; j++) {
+                if ($scope.cities[j].region === region) {
                     $scope.resultCities.push($scope.cities[j].cityName);
                 }
-           }
+            }
         }
     }
 })();

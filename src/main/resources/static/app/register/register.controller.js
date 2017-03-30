@@ -22,7 +22,9 @@
                 firstName: $scope.firstName,
                 lastName: $scope.lastName,
                 username: $scope.username,
-                password: $scope.password
+                password: $scope.password,
+                  isOwner: $scope.isOwner,
+                  isTenant: $scope.isTenant
               }
               RegisterService.register(data)
                         .then(function(data) {

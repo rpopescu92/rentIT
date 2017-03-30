@@ -131,6 +131,10 @@ public class PropertyService {
         return updatedProperty;
     }
 
+    public void deleteProperty(long id) {
+        propertyRepository.delete(id);
+    }
+
     private void updateAddress(Property property) {
         City city = cityRepository.findByCityNameAndRegion(property.getAddress().getCity().getCityName()
                 , property.getAddress().getCity().getRegion());
@@ -138,5 +142,9 @@ public class PropertyService {
         Address address = property.getAddress();
 
         addressRepository.save(address);
+    }
+
+    public void rentProperty(long id, Boolean isRented) {
+        propertyRepository.isRented(id, isRented);
     }
 }

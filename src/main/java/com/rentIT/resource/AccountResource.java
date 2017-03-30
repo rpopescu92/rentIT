@@ -3,6 +3,8 @@ package com.rentIT.resource;
 import com.rentIT.service.UserService;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,6 +21,8 @@ public class AccountResource {
 
     @Autowired
     private UserService userService;
+
+    private Logger log = LoggerFactory.getLogger(ProfileDetailsResource.class);
 
     @RequestMapping(value = "/account", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAccount() {

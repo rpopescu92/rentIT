@@ -5,6 +5,8 @@ import com.rentIT.dto.UserDto;
 import com.rentIT.exception.UserExistsException;
 import com.rentIT.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ public class RegisterResource {
 
     @Inject
     private UserService userService;
+    private Logger log = LoggerFactory.getLogger(ProfileDetailsResource.class);
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity register(@RequestBody UserDto userDto) {

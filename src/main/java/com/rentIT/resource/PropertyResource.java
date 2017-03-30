@@ -62,4 +62,18 @@ public class PropertyResource {
 
         return new ResponseEntity<>(updatedProperty, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/properties/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteProperty(@PathVariable("id") long id) {
+        propertyService.deleteProperty(id);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/properties/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity rentProperty(@PathVariable("id") long id, @RequestBody Boolean isRented) {
+        propertyService.rentProperty(id, isRented);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }

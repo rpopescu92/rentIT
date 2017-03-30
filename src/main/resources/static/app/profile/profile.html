@@ -7,6 +7,7 @@
                    <input ngf-select ng-model="file" name="file" ngf-accept="'image/*'" required="" type="file">
                    <div class="thumbnail" style="padding-top:5px;">
                         <img ng-src="data:image/png;base64,{{photo.content}}" class="img-responsive profilePhoto">
+                        <img class="img-responsive profilePhoto" type="file" name="file" ng-show="file!=null">
                    </div>
                </div>
            </md-card-content>
