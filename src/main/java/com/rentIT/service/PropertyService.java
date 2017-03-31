@@ -1,13 +1,7 @@
 package com.rentIT.service;
 
-import com.rentIT.domain.model.Address;
-import com.rentIT.domain.model.City;
-import com.rentIT.domain.model.Property;
-import com.rentIT.domain.model.User;
-import com.rentIT.domain.repository.AddressRepository;
-import com.rentIT.domain.repository.CityRepository;
-import com.rentIT.domain.repository.PropertyRepository;
-import com.rentIT.domain.repository.UserRepository;
+import com.rentIT.domain.model.*;
+import com.rentIT.domain.repository.*;
 import com.rentIT.dto.PropertyDto;
 import com.rentIT.exception.InvalidPropertyException;
 import com.rentIT.exception.UserNotAuthenticatedException;
@@ -23,6 +17,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -37,6 +32,8 @@ public class PropertyService {
     private AddressRepository addressRepository;
     @Autowired
     private CityRepository cityRepository;
+    @Autowired
+    private PhotoRepository photoRepository;
 
     private Logger logger = LoggerFactory.getLogger(PropertyService.class);
 
@@ -60,12 +57,14 @@ public class PropertyService {
                 .city(city).build();
         Address savedAddress = addressRepository.save(address);
 
+        List<Photo> photos = photoRepository.save(propertyDto.getImages());
+
         Property property = Property.builder()
                 .owner(owner.get())
                 .address(savedAddress)
                 .averageRating(0)
                 .constructionYear(propertyDto.getConstructionYear())
-                .images(propertyDto.getImages())
+                .images(photos)
                 .isFurnished(propertyDto.isFurnished())
                 .longDescription(propertyDto.getLongDescription())
                 .title(propertyDto.getTitle())
