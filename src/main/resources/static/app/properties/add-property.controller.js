@@ -58,7 +58,6 @@
                     fileReader.readAsBinaryString(file);
                     fileReader.onload = function (e) {
                         var bytes = btoa(e.target.result.toString());
-                        //var byteArray = new Uint8Array(fileReader.result);
                         console.log(bytes);
                         images.push({
                             content: bytes,

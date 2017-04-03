@@ -25,7 +25,10 @@
                     <md-button ng-click="rented(property.id)">
                         <md-icon md-svg-icon="/icons/ic_vpn_key_black_18px.svg" ng-style="{color: {true:'#E57373'}[property.isRented]}"></md-icon>
                         Rented</md-button>
-                    <md-button ng-click="viewProperty(property)">View</md-button>
+                    <md-button ng-click="viewProperty(property)">
+                        Details
+                    </md-button>
+                    <md-button ng-click="edit(property)">Edit</md-button>
                 </md-card-actions>
             </md-card>
         </div>

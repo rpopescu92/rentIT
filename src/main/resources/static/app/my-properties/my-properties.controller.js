@@ -18,6 +18,7 @@
 
         $scope.viewProperty = viewProperty;
         $scope.getUserProperties = getUserProperties;
+        $scope.edit = edit;
         $scope.rented = rented;
         $scope.property = {};
         $scope.properties = [];
@@ -69,6 +70,10 @@
 
         function rented(id) {
             AlterPropertyService.rentProperty(id, true);
+        }
+
+        function edit(property) {
+
         }
 
         $scope.setPage = function (pageNo) {

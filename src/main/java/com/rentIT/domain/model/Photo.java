@@ -1,6 +1,7 @@
 package com.rentIT.domain.model;
 
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -21,5 +22,6 @@ public class Photo {
     private String name;
 
     @Lob
+    @Type(type="org.hibernate.type.BinaryType")
     private byte[] content;
 }
