@@ -7,7 +7,8 @@
                     'ngLocale',
                     'angularFileUpload',
                     'ngFileUpload',
-                    'ngAnimate'])
+                    'ngAnimate',
+                    'flow'])
                     .run(stateInitializer);
     stateInitializer.$inject = ['stateHandler', '$rootScope'];
 

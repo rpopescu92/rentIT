@@ -19,11 +19,7 @@
         $scope.changedValue = changedValue;
         $scope.files = [];
         $scope.photo = {};
-
-        // $scope.$watch('file', function (file) {
-        //      $scope.upload($scope.file);
-        // });
-        // $scope.upload = upload;
+        $scope.processFiles = processFiles;
 
         init();
 
@@ -39,14 +35,10 @@
             getAllCities();
         }
 
-        // function upload (file) {
-        //    console.log("upload");
-        //    if(file != null) {
-        //        $scope.photo.content = file.content;
-        //        $scope.photo.name = file.name;
-        //        $scope.files.push(file);
-        //    }
-        // };
+        function processFiles(files) {
+            $scope.files.push(files[0].file);
+            console.log($scope.files);
+        }
 
         function addProperty() {
             var fileReader = new FileReader();
