@@ -23,3 +23,8 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     void isRented(long id, boolean isRented);
 
 }
+/***
+ * select * from property p
+ inner join property_images pi on p.id=pi.property_id
+ inner join photo po on pi.images_id=po.id;
+ */

@@ -1,3 +1,8 @@
 .profilePhoto {
     border-radius:10%;
 }
+
+.uploadImage{
+    width:300px;
+    height:200px;
+}

@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class City implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
 
     private String region;
