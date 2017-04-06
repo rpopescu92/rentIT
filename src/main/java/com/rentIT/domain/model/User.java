@@ -16,7 +16,6 @@ import java.util.Date;
 public class User {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="test_seq")
     @SequenceGenerator(name="test_seq", sequenceName="test_seq", allocationSize=1)
     private long id;

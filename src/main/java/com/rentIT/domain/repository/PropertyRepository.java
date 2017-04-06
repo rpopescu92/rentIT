@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     @Query("select p from Property p where p.owner=?1")
@@ -21,6 +23,9 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     @Transactional
     @Query("update Property p set p.isRented=?2 where p.id=?1")
     void isRented(long id, boolean isRented);
+
+    @Query("select p from Property p where p.owner.username=?1")
+    List<Property> getProperty(String username);
 
 }
 /***
