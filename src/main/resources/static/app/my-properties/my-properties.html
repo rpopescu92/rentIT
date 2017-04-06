@@ -8,7 +8,7 @@
         <div class="col-md-3" ng-repeat="property in properties">
             <md-card>
                 <md-card-title ng-click="viewProperty()">
-                    <img class="img-responsive" ng-src="/icons/house.jpg" alt="Washed Out" style="width:70%;">
+                    <img class="img-responsive" ng-src="data:image/jpeg;base64, {{property.images[0].content}}" alt="Washed Out" style="width:70%;">
                     <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
                     <span>
                     <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
