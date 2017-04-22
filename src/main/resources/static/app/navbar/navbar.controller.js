@@ -23,7 +23,6 @@
         });
 
         function init() {
-            console.log("login: "+ $scope.isAuthenticated);
             $scope.isAuthenticated = PrincipalService.isAuthenticated();
 
             getAuthenticatedUser();

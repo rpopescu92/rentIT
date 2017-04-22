@@ -14,16 +14,20 @@ import javax.persistence.*;
 public class ProfileDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
+
     private String firstName;
     private String lastName;
-    @OneToOne
-    private Address address;
     private String phoneNumber;
     private String emailAddress;
+
+    @OneToOne
+    private Address address;
+
     @OneToOne
     private Photo photo;
+
     @OneToOne
     private User user;
 }

@@ -13,10 +13,10 @@ import javax.persistence.*;
 @Getter
 public class Facilities {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
+
     private Compartment compartment;
 
 }

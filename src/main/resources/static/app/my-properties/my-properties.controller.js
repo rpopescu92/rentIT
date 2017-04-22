@@ -48,14 +48,12 @@
 
         function getUserProperties(page) {
             $scope.query.page = page;
-            console.log($scope.query);
             MyPropertiesService.getUserProperties($scope.username, $scope.query)
                 .then(function (response) {
                     if (response.status == 200) {
                         $scope.properties = response.data.content;
                         $scope.totalItems = response.data.totalElements;
                         $scope.pages = response.data.totalPages;
-                        console.log(response);
                     }
                 }, function (error) {
                     console.log("error get properties");
@@ -63,9 +61,8 @@
         }
 
         function viewProperty(property) {
-            ViewPropertyService.setProperty(property);
             $scope.$broadcast('view-property', property);
-            $state.go('view-property');
+            $state.go('view-property', {propertyId: property.id});
         }
 
         function rented(id) {
@@ -81,7 +78,6 @@
         };
 
         $scope.pageChanged = function () {
-            console.log('page changed ' + $scope.query.page);
             getUserProperties($scope.query.page);
         };
 

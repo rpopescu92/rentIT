@@ -18,20 +18,23 @@ import java.util.List;
 public class Property implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
-    private String title;
+
     @Type(type="text")
     private String longDescription;
 
     @OneToOne
     private User owner;
+
     @OneToOne
     private User tenant;
+
     @OneToOne
     private Address address;
 
     private float averageRating;
+    private String title;
     private float price;
     private Currency currency;
     private int constructionYear;
@@ -41,8 +44,10 @@ public class Property implements Serializable{
     private Date dateAdded;
     private float floorArea;
     private String otherInfo;
+
     @ElementCollection(targetClass=Photo.class,fetch = FetchType.EAGER)
     private List<Photo> images;
+
     @OneToOne
     private Facilities facilities;
 

@@ -20,6 +20,7 @@
         $scope.files = [];
         $scope.photo = {};
         $scope.processFiles = processFiles;
+        $scope.images = [];
 
         init();
 
@@ -36,37 +37,33 @@
         }
 
         function processFiles(files) {
+            var fileReader = new FileReader();
             $scope.files.push(files[0].file);
             console.log($scope.files);
+            fileReader.readAsBinaryString(files[0].file);
+            fileReader.onload = function (e) {
+                var bytes = btoa(e.target.result.toString());
+                $scope.images.push({
+                    content: bytes,
+                    name: files[0].file.name,
+                    type: 'jpg'
+                });
+            };
         }
 
         function addProperty() {
-            var fileReader = new FileReader();
-            var images = [];
-            console.log($scope.files);
             if ($scope.files.length > 0) {
                 for (var i = 0; i < $scope.files.length; i++) {
-                    var file = $scope.files[i];
-                    fileReader.readAsBinaryString(file);
-                    fileReader.onload = function (e) {
-                        var bytes = btoa(e.target.result.toString());
-                        console.log(bytes);
-                        images.push({
-                            content: bytes,
-                            name: file.name,
-                            type: 'jpg'
-                        });
-                        $scope.property.images = images;
-                        console.log($scope.property.images);
-                        AddPropertyService.addProperty($scope.property)
-                            .then(function (data) {
-                                    console.log('go to my properties');
-                                    $state.go('my-properties');
-                                },
-                                function (error) {
+                    $scope.property.images = $scope.images;
+                    console.log($scope.property.images);
+                    AddPropertyService.addProperty($scope.property)
+                        .then(function (data) {
+                                console.log('go to my properties');
+                                $state.go('my-properties');
+                            },
+                            function (error) {
 
-                                });
-                    };
+                            });
                 }
             }
         }

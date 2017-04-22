@@ -1,6 +1,7 @@
 package com.rentIT.domain.model;
 
 import lombok.*;
+import org.hibernate.id.enhanced.SequenceStyleGenerator;
 
 import javax.persistence.*;
 
@@ -14,12 +15,14 @@ import javax.persistence.*;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long Id;
+
     private String streetName;
     private String streetNumber;
     private String apartmentNumber;
     private int floorNumber;
+
     @OneToOne
     private City city;
 

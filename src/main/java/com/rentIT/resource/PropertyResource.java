@@ -76,4 +76,10 @@ public class PropertyResource {
 
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @RequestMapping(value="/properties/{id}/value", method = RequestMethod.GET)
+    public ResponseEntity<Property> getProperty(@PathVariable("id") long id) {
+        return new ResponseEntity<>(propertyService.getPropertyById(id), HttpStatus.OK);
+    }
+
 }

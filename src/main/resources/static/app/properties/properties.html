@@ -1,34 +1,35 @@
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <div class="row">
-                <div class="form-group searchBar col-xs-6">
-                    <div class="input-group">
-                        <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </div>
-                        <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
-                    </div>
-                </div>
-                <div class="form-group searchCity col-xs-6">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Location" ng-model="property.city">
-                    </div>
-                </div>
+    <div class="col-md-6 col-md-offset-3" style="margin-top:30px;">
+        <div class="form-group searchBar col-md-4 col-xs-6">
+            <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchString">
+            </div>
+        </div>
+        <div class="form-group searchCity col-md-2 col-xs-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Location" ng-model="property.city">
+            </div>
+        </div>
+        <div class="form-group searchCity col-md-2 col-xs-6" style="margin-top:-8px;">
+            <div class="input-group">
+                <md-button class="md-raised" style="color: black; border-color:#FBA100">Search</md-button>
+            </div>
         </div>
         <div class="row">
             <div ng-dropdown-multiselect=""
                  options="roomsData" selected-model="roomsModel" checkboxes="true" extra-settings="roomsSettings">
             </div>
         </div>
-        <div class="row">
-        <md-button class="md-raised" style="color: black; border-color:#FBA100">Search</md-button>
-    </div>
     </div>
 </div>
-<div class="row" ng-class="{active: isActive('/home')}" ng-repeat="property in properties | searchFor:searchString | searchFor: property.city | filter:roomFilter">
+<div class="row" ng-class="{active: isActive('/home')}"
+     ng-repeat="property in properties | searchFor:searchString | searchFor: property.city | filter:roomFilter">
     <div class="col-md-6 col-md-offset-3">
-        <md-card style="width:100%" >
+        <md-card style="width:100%">
             <md-card-title>
                 <md-card-title-text>
-                    <span class="md-headline">{{property.title}}
+                    <span class="md-headline rent-text">{{property.title}}
                          <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
                         {{property.averageRating}}
                         <span style="float:right;">{{property.price}} {{property.currency}}</span>
@@ -37,13 +38,16 @@
                 </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                <div class="col-md-5">
-                    <div class="md-media-lg card-media">
-                        <img src="/icons/house.jpg" class="md-card-image" alt="user avatar">
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="md-media-lg card-media">
+                            <img ng-src="data:image/jpg;base64,{{property.images[0].content}}"
+                                 style="width:220px;height:220px;margin:auto;">
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-7">
-                    <p>{{property.longDescription}}</p>
+                    <div class="col-md-12" style="margin-top:15px;">
+                        <span class="rent-description">{{property.longDescription}}</span>
+                    </div>
                 </div>
             </md-card-content>
             <md-card-footer>
@@ -54,17 +58,17 @@
                 <md-button class="md-icon-button" aria-label="Favorite" ng-click="favorite(property)">
                     <md-icon md-svg-icon="/icons/ic_favorite_black_18px.svg" style="fill:#E57373;"></md-icon>
                 </md-button>
-                <md-button ng-click="viewProperty(property)">View</md-button>
+                <div class="rent-btn rent-button rent-btn-cons" ng-click="viewProperty(property)">View</div>
             </md-card-actions>
         </md-card>
     </div>
 </div>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-            <div class="pagination">
-                <ul uib-pagination total-items="totalItems" items-per-page="query.limit" ng-model="query.page"
-                    ng-change="pageChanged()"></ul>
-            </div>
+        <div class="pagination">
+            <ul uib-pagination total-items="totalItems" items-per-page="query.limit" ng-model="query.page"
+                ng-change="pageChanged()"></ul>
+        </div>
     </div>
 </div>
 

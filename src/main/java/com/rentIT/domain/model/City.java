@@ -17,7 +17,7 @@ import java.io.Serializable;
 public class City implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long Id;
 
     private String region;
@@ -29,7 +29,4 @@ public class City implements Serializable{
     @JsonIgnore
     private String country;
 
-//    public City(String cityName) {
-//        this.cityName = cityName;
-//    }
 }

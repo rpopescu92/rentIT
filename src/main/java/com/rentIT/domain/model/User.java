@@ -16,11 +16,12 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="test_seq")
-    @SequenceGenerator(name="test_seq", sequenceName="test_seq", allocationSize=1)
+    @GeneratedValue
     private long id;
+
     @Column(unique = true)
     private String username;
+
     private String password;
     private UserRole role;
     private boolean isOwner;

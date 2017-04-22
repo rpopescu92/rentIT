@@ -15,8 +15,9 @@ import java.util.Date;
 public class HistoryRating {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
+
     private int rating;
     private String comment;
     private Date createdDate;

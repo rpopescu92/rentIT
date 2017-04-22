@@ -10,7 +10,7 @@
         $urlRouterProvider.otherwise('/home');
 
         $stateProvider.state('view-property', {
-            url: '/view-property',
+            url: '/view-property/:propertyId',
             parent: 'app',
             views: {
                 'content@': {

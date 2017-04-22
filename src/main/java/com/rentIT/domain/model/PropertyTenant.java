@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class PropertyTenant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
 
     @OneToOne

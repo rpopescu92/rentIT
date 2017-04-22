@@ -19,7 +19,7 @@
             $rootScope.title = current.$$route.title
           });
 
-    };
+    }
 
     /*myApp.run(['$rootScope', function($rootScope) {
         $rootScope.$on('$routeChangeSuccess', function (event, current, previous) {

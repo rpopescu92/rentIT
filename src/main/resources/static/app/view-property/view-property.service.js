@@ -8,7 +8,7 @@
 
     function ViewPropertyService($http) {
 
-        var viewProperty;
+        var self = this;
 
         return {
             getProperty: getProperty,
@@ -16,14 +16,17 @@
             addHistoryRating: addHistoryRating,
             getHistoryRatings: getHistoryRatings,
             getOwnerDetails: getOwnerDetails
-        }
+        };
 
-        function getProperty() {
-            return viewProperty;
+        function getProperty(id) {
+            return $http({
+                url: '/api/properties/'+id+'/value',
+                method: 'GET'
+            });
         }
 
         function setProperty(property) {
-            viewProperty = property;
+            self.viewProperty = property;
         }
 
         function addHistoryRating(historyRating) {

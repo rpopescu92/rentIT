@@ -146,4 +146,8 @@ public class PropertyService {
     public void rentProperty(long id, Boolean isRented) {
         propertyRepository.isRented(id, isRented);
     }
+
+    public Property getPropertyById(long id) {
+        return propertyRepository.findOne(id);
+    }
 }

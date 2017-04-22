@@ -1,60 +1,70 @@
 <md-button onclick="history.back()">Back</md-button>
-<md-content class="md-padding" layout-xs="column" layout="row">
-    <!--<div flex-xs flex-gt-xs="60" layout="column" layout-align="center center">-->
-    <!--<img ng-repeat="image in images"
-         ng-hide="!isCurrentSlideIndex($index)" ng-src={{image}} >
-    <a class="arrow prev" ng-click="nextSlide()"></a>
-    <a class="arrow next" ng-click="prevSlide()"></a>
-    <a ng-class="{'active':isCurrentSlideIndex($index)}"
-       ng-click="setCurrentSlideIndex($index);"></a>
-       -->
-    <div layout="row" layout-align="center center">
-        <md-card  style="padding:5px; width:80%;">
-            <md-card-title>
-                <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
-                <span>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2" style="height: 250px;">
+        <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+            <div uib-slide ng-repeat="image in slides track by image.id" index="image.id">
+                <img ng-src="data:image/jpg;base64,{{image.content}}" style="width:220px;height:220px;margin:auto;">
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top: 10px;">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <md-card>
+                    <md-card-title>
+                        <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
+                        <span>
                     <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
                         {{property.averageRating}}
                 </span>
 
-            </md-card-title>
-        <md-card-content>
-            <span class="md-headline" style="padding:5px;">{{property.title}}</span>
-            <p style="padding:5px;">{{property.longDescription}}</p>
-            <div class="row">
-                <p style="padding:5px;">
-                    Address: {{property.address.streetName}}, {{property.address.streetNumber}}
-                </p>
+                    </md-card-title>
+                    <md-card-content>
+                        <span class="md-headline" style="padding:5px;">{{property.title}}</span>
+                        <p style="padding:5px;">{{property.longDescription}}</p>
+                        <div class="row">
+                            <p style="padding:5px;">
+                                Address: {{property.address.streetName}}, {{property.address.streetNumber}}
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p style="padding:5px;">Construction Year: {{property.constructionYear}}</p>
+                        </div>
+                        <div class="row">
+                            <p style="padding:5px;">{{property.roomsNumber}} Rooms, {{property.floorArea}} square meter</p>
+                        </div>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                    </md-card-actions>
+                </md-card>
             </div>
-            <div class="row">
-                <p style="padding:5px;">Construction Year: {{property.constructionYear}}</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <md-card ng-show="!isOwner" style="width:30%;">
+                    <md-card-title>
+                        <div class="thumbnail" style="padding-top:5px; width:60%">
+                            <img class="img-responsive" ng-src="data:image/png;base64,{{photo.content}}">
+                        </div>
+                        <span style="padding:3px">Username: {{property.owner.username}}</span>
+                    </md-card-title>
+                    <md-card-content>
+                        <div class="row" ng-show="owner.phoneNumber != null" style="padding-left:5px">
+                            <span>Tel. {{owner.phoneNumber}}</span>
+                        </div>
+                        <div class="row" ng-show="owner.emailAddress != null" style="padding-left:5px">
+                            <span>Email: {{owner.emailAddress}}</span>
+                        </div>
+                    </md-card-content>
+                </md-card>
             </div>
-            <div class="row">
-                <p style="padding:5px;">{{property.roomsNumber}} Rooms, {{property.floorArea}} square meter</p>
-            </div>
-        </md-card-content>
-        <md-card-actions layout="row" layout-align="end center">
-        </md-card-actions>
-    </md-card>
-    <md-card ng-show="!isOwner" style="width:30%;">
-        <md-card-title>
-            <div class="thumbnail" style="padding-top:5px; width:60%">
-                <img class="img-responsive" ng-src="data:image/png;base64,{{photo.content}}">
-            </div>
-            <span style="padding:3px">Username: {{property.owner.username}}</span>
-        </md-card-title>
-        <md-card-content>
-            <div class="row" ng-show="owner.phoneNumber != null" style="padding-left:5px">
-                <span>Tel. {{owner.phoneNumber}}</span>
-            </div>
-            <div class="row" ng-show="owner.emailAddress != null" style="padding-left:5px">
-                <span>Email: {{owner.emailAddress}}</span>
-            </div>
-        </md-card-content>
-     </md-card>
+        </div>
+    </div>
 </div>
-</md-content>
-
 <div class="row" ng-show="!isOwner">
     <div class="col-md-6 col-md-offset-1" style="padding: 5px;">
         <div class="row">
