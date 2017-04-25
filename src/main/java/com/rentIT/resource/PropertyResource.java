@@ -44,7 +44,7 @@ public class PropertyResource {
 
     }
 
-    @RequestMapping(value = "/properties", method = RequestMethod.POST)
+    @RequestMapping(value = "/properties/advanced", method = RequestMethod.POST)
     public ResponseEntity<Page<Property>> getAllProperties(@RequestParam("page") Integer page,
                                                            @RequestParam("limit") Integer limit,
                                                            @RequestParam("order") String order,

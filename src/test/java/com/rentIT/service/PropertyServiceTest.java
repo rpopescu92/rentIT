@@ -115,16 +115,16 @@ public class PropertyServiceTest {
         Page<Property> page = propertyService.getPropertiesByOwner(String.valueOf(1), String.valueOf(5), "+","doesNotExists");
     }
 
-    @Test
-    public void testGetAllProperties() {
-        Property property = Property.builder().price(233).title("property1").longDescription("property1 description").address(new Address("street1","nr2")).build();
-        List<Property> properties = new ArrayList<>();
-        properties.add(property);
-        Page<Property> page = new PageImpl<Property>(properties,new PageRequest(1, 5, Sort.Direction.ASC, "+"), 1 );
-        Mockito.when(propertyRepository.findAllProperties(new PageRequest(1, 5, Sort.Direction.ASC, "+"))).thenReturn(page);
-
-        Page<Property> propertiesResponse = propertyService.getAllProperties(1, 5, "+");
-        Assert.assertNotNull(propertiesResponse);
-        Assert.assertEquals(propertiesResponse.getTotalElements(), 1);
-    }
+//    @Test
+//    public void testGetAllProperties() {
+//        Property property = Property.builder().price(233).title("property1").longDescription("property1 description").address(new Address("street1","nr2")).build();
+//        List<Property> properties = new ArrayList<>();
+//        properties.add(property);
+//        Page<Property> page = new PageImpl<Property>(properties,new PageRequest(1, 5, Sort.Direction.ASC, "+"), 1 );
+//        Mockito.when(propertyRepository.findAllProperties(new PageRequest(1, 5, Sort.Direction.ASC, "+"))).thenReturn(page);
+//
+//        Page<Property> propertiesResponse = propertyService.getAllProperties(1, 5, "+");
+//        Assert.assertNotNull(propertiesResponse);
+//        Assert.assertEquals(propertiesResponse.getTotalElements(), 1);
+//    }
 }
