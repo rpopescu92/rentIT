@@ -3,8 +3,6 @@ package com.rentIT.resource;
 import com.rentIT.domain.model.Photo;
 import com.rentIT.service.ProfileDetailsService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,17 +22,15 @@ public class UploadResource {
     @Autowired
     private ProfileDetailsService profileDetailsService;
 
-    private Logger logger = LoggerFactory.getLogger(ProfileDetailsResource.class);
-
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Photo> uploadProfilePhoto(@RequestParam("file") MultipartFile file,
-                                                    @RequestParam("username") String username ) throws IOException {
+                                                    @RequestParam("username") String username) throws IOException {
         byte[] bytes;
-        logger.debug("file upload");
+        log.debug("file upload");
         if (!file.isEmpty()) {
             bytes = file.getBytes();
             //store file in storage
-            logger.debug("file upload has bytes");
+            log.debug("file upload has bytes");
             return new ResponseEntity<Photo>(HttpStatus.OK);
         }
         return new ResponseEntity<Photo>(HttpStatus.INTERNAL_SERVER_ERROR);

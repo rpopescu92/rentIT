@@ -1,6 +1,5 @@
 package com.rentIT.security;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
@@ -13,7 +12,7 @@ import java.io.IOException;
 
 @Component
 @Slf4j
-public class Http401UnauthorizedEntryPoint implements AuthenticationEntryPoint{
+public class Http401UnauthorizedEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {

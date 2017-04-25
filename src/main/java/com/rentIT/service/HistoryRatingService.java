@@ -27,8 +27,6 @@ public class HistoryRatingService {
     @Autowired
     private UserRepository userRepository;
 
-    private Logger logger = LoggerFactory.getLogger(HistoryRatingService.class);
-
     public HistoryRating addNewRating(HistoryRating historyRating) {
         if(historyRating.getProperty()!= null) {
             Property property = propertyRepository.findOne(historyRating.getProperty().getId());

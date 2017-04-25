@@ -1,6 +1,5 @@
 package com.rentIT.domain.repository;
 
-
 import com.rentIT.domain.model.HistoryRating;
 import com.rentIT.domain.model.Property;
 import com.rentIT.domain.model.User;

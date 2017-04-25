@@ -22,8 +22,6 @@ public class AccountResource {
     @Autowired
     private UserService userService;
 
-    private Logger log = LoggerFactory.getLogger(ProfileDetailsResource.class);
-
     @RequestMapping(value = "/account", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity getAccount() {
         log.debug("Get Account");

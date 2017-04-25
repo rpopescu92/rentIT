@@ -1,7 +1,5 @@
 package com.rentIT.security;
 
-import com.rentIT.security.AuthorizationConfigurer;
-import com.rentIT.security.TokenProvider;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

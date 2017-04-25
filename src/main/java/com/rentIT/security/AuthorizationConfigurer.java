@@ -11,7 +11,6 @@ public class AuthorizationConfigurer extends SecurityConfigurerAdapter<DefaultSe
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String AUTHORIZATION_TOKEN = "access_token";
 
-
     private TokenProvider tokenProvider;
 
     public AuthorizationConfigurer(TokenProvider tokenProvider) {

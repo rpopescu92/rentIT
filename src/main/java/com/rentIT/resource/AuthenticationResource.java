@@ -42,8 +42,6 @@ public class AuthenticationResource {
     @Inject
     private AuthenticationManager authenticationManager;
 
-    private Logger log = LoggerFactory.getLogger(ProfileDetailsResource.class);
-
     @RequestMapping(value = "/authenticate",method = RequestMethod.POST)
     public ResponseEntity authorize(@Valid @RequestBody AuthenticationDto authDto, HttpServletResponse httpServletResponse) {
         log.debug("Authenticating user with username ", authDto.getUsername());

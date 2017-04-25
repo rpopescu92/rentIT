@@ -27,6 +27,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Inject
     private TokenProvider tokenProvider;
+
     @Inject
     private Http401UnauthorizedEntryPoint authenticationEntryPoint;
 
