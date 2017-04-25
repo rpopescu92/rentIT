@@ -4,6 +4,7 @@ import com.rentIT.dto.UserDto;
 import com.rentIT.exception.UserExistsException;
 import com.rentIT.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,15 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-
 @RestController
 @RequestMapping("/register")
 @Slf4j
 public class RegisterResource {
 
-    @Inject
-    private UserService userService;
+    private final UserService userService;
+
+    @Autowired
+    public RegisterResource(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity register(@RequestBody UserDto userDto) {
@@ -35,7 +38,7 @@ public class RegisterResource {
             userService.registerUser(userDto);
             return new ResponseEntity(HttpStatus.OK);
         } catch (UserExistsException ex) {
-            return new ResponseEntity(ex.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 }

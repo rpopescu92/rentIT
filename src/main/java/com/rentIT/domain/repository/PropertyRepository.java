@@ -26,10 +26,4 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     @Query("select p from Property p where p.owner.username=?1")
     List<Property> getProperty(String username);
-
 }
-/***
- * select * from property p
- inner join property_images pi on p.id=pi.property_id
- inner join photo po on pi.images_id=po.id;
- */

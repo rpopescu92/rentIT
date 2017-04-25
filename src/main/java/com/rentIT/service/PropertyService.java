@@ -3,20 +3,19 @@ package com.rentIT.service;
 import com.rentIT.domain.model.*;
 import com.rentIT.domain.repository.*;
 import com.rentIT.dto.PropertyDto;
-import com.rentIT.exception.InvalidPropertyException;
 import com.rentIT.exception.UserNotAuthenticatedException;
+import com.rentIT.factory.AddressFactory;
+import com.rentIT.factory.PropertyFactory;
+import com.rentIT.resource.model.SearchOptions;
+import com.rentIT.validation.PropertyValidator;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,49 +33,29 @@ public class PropertyService {
     private CityRepository cityRepository;
     @Autowired
     private PhotoRepository photoRepository;
-
-    private Logger logger = LoggerFactory.getLogger(PropertyService.class);
+    @Autowired
+    private PropertyValidator propertyValidator;
+    @Autowired
+    private PropertyAdvancedSearchRepository propertyAdvancedSearchRepository;
 
     public void saveProperty(PropertyDto propertyDto) {
-        logger.debug("Save new property for user {}", propertyDto.getUsername());
+        log.debug("Save new property for user {}", propertyDto.getUsername());
         Optional<User> owner = userRepository.findByUsername(propertyDto.getUsername());
         if (!owner.isPresent()) {
             throw new UserNotAuthenticatedException();
         }
-        if (StringUtils.isEmpty(propertyDto.getAddress().getStreetName()) || StringUtils.isEmpty(propertyDto.getAddress().getStreetNumber())
-                || StringUtils.isEmpty(propertyDto.getTitle())
-                || StringUtils.isEmpty(propertyDto.getConstructionYear())) {
-            throw new InvalidPropertyException("Invalid fields. Address cannot be empty");
-        }
+        User ownerUser = owner.get();
+        propertyValidator.isValid(propertyDto);
 
         City city = cityRepository.findByCityNameAndRegion(propertyDto.getAddress().getCity().getCityName(), propertyDto.getAddress().getCity().getRegion());
-        Address address = Address.builder().streetName(propertyDto.getAddress().getStreetName())
-                .streetNumber(propertyDto.getAddress().getStreetNumber())
-                .apartmentNumber(propertyDto.getAddress().getApartmentNumber())
-                .floorNumber(propertyDto.getAddress().getFloorNumber())
-                .city(city).build();
+        Address address = AddressFactory.createAddress(propertyDto, city);
         Address savedAddress = addressRepository.save(address);
 
         List<Photo> photos = photoRepository.save(propertyDto.getImages());
 
-        Property property = Property.builder()
-                .owner(owner.get())
-                .address(savedAddress)
-                .averageRating(0)
-                .constructionYear(propertyDto.getConstructionYear())
-                .images(photos)
-                .isFurnished(propertyDto.isFurnished())
-                .longDescription(propertyDto.getLongDescription())
-                .title(propertyDto.getTitle())
-                .price(propertyDto.getPrice())
-                .currency(propertyDto.getCurrency())
-                .roomsNumber(propertyDto.getRoomsNumber())
-                .floorArea(propertyDto.getFloorArea())
-                .otherInfo(propertyDto.getOtherInfo())
-                .dateAdded(new Date())
-                .build();
+        Property property = PropertyFactory.createProperty(ownerUser, propertyDto, savedAddress, photos);
         owner.get().setOwner(true);
-        userRepository.save(owner.get());
+        userRepository.save(ownerUser);
 
         propertyRepository.save(property);
     }
@@ -95,14 +74,18 @@ public class PropertyService {
         return propertyRepository.findPropertyByUserOwner(owner.get(), new PageRequest(Integer.parseInt(page) - 1, Integer.parseInt(limit), direction, option));
     }
 
-    public Page<Property> getAllProperties(Integer page, Integer limit, String option) {
-        Sort.Direction direction = option.startsWith("-") ? Sort.Direction.DESC : Sort.Direction.ASC;
-        if (option.startsWith("+")) {
-            option = option.substring(option.indexOf('+') + 1);
+    public Page<Property> getAllProperties(Integer page, Integer limit, String option, SearchOptions searchOptions) {
+        if(searchOptions == null) {
+            Sort.Direction direction = option.startsWith("-") ? Sort.Direction.DESC : Sort.Direction.ASC;
+            if (option.startsWith("+")) {
+                option = option.substring(option.indexOf('+') + 1);
+            } else {
+                option = option.substring(option.indexOf('-') + 1);
+            }
+            return propertyRepository.findAllProperties(new PageRequest(page - 1, limit, direction, option));
         } else {
-            option = option.substring(option.indexOf('-') + 1);
+            return new PageImpl<>(propertyAdvancedSearchRepository.getAllPropertiesBySearchOptions(page, limit, option, searchOptions),new PageRequest(page - 1, limit),0);
         }
-        return propertyRepository.findAllProperties(new PageRequest(page - 1, limit, direction, option));
     }
 
     public Property updateProperty(Property property) {

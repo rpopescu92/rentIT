@@ -26,7 +26,7 @@ public class AccountResource {
     public ResponseEntity getAccount() {
         log.debug("Get Account");
         return userService.getAuthenticatedUser()
-                .map(user -> new ResponseEntity(user, HttpStatus.OK))
-                .orElse(new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR));
+                .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 }

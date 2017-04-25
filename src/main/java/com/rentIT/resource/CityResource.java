@@ -20,15 +20,11 @@ public class CityResource {
 
     @RequestMapping(value = "/cities", method = RequestMethod.GET)
     public ResponseEntity<List<City>> getCities() {
-        List<City> cities = citiesService.getAllCities();
-
-        return new ResponseEntity(cities, HttpStatus.OK);
+        return new ResponseEntity<>(citiesService.getAllCities(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/cities/regions", method = RequestMethod.GET)
     public ResponseEntity<List<String>> getRegions() {
-        List<String> uniqueRegion = citiesService.getRegions();
-
-        return new ResponseEntity(uniqueRegion, HttpStatus.OK);
+        return new ResponseEntity<>(citiesService.getRegions(), HttpStatus.OK);
     }
 }
