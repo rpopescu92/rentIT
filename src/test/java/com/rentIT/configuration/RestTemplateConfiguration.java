@@ -14,7 +14,6 @@ public class RestTemplateConfiguration {
     RestTemplate restTemplate() {
         HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory();
         RestTemplate template = new RestTemplate(requestFactory);
-        // Rest template should not throw exceptions on server errors, but return the entity to us
         template.setErrorHandler(new DefaultResponseErrorHandler() {
             @Override
             protected boolean hasError(HttpStatus statusCode) {

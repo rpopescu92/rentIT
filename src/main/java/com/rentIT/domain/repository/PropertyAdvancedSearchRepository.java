@@ -19,17 +19,21 @@ public class PropertyAdvancedSearchRepository {
     private EntityManager entityManager;
 
     public List<Property> getAllPropertiesBySearchOptions(int first, int maxResults, String order, SearchOptions searchOptions) {
-        String queryString = "select p from Property";
+        String queryString = "select p from Property p";
 
             queryString += " where ";
             List<String> queryOptions = createQueryOptions(searchOptions);
             queryString += queryOptions.get(0);
+            String subQuery = "";
             for (int i = 1; i<queryOptions.size(); i++) {
-                queryString += " and " + queryOptions.get(i);
+                subQuery += " and " + queryOptions.get(i);
             }
 
+            queryString += subQuery;
             queryString += order.startsWith("+") ? " order by p.id ASC" : " order by p.id DESC";
 
+            queryString = queryString.replace('[', '(');
+            queryString = queryString.replace(']', ')');
             int page = first <= 0 ? 0 : first - 1;
             int perPage = maxResults * page;
 
@@ -43,7 +47,7 @@ public class PropertyAdvancedSearchRepository {
     private List<String> createQueryOptions(SearchOptions searchOptions) {
         List<String> queryOptions = new ArrayList<>();
         if(!StringUtils.isEmpty(searchOptions.getName())) {
-            queryOptions.add("p.title="+searchOptions.getName());
+            queryOptions.add("p.title='"+searchOptions.getName() + "'");
         }
 
         if(!CollectionUtils.isEmpty(searchOptions.getCityId())) {

@@ -25,5 +25,5 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     void isRented(long id, boolean isRented);
 
     @Query("select p from Property p where p.owner.username=?1")
-    List<Property> getProperty(String username);
+    List<Property> findByOwner(String username);
 }
