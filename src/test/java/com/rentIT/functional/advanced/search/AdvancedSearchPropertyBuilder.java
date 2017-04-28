@@ -1,6 +1,7 @@
 package com.rentIT.functional.advanced.search;
 
 import com.rentIT.domain.model.Address;
+import com.rentIT.domain.model.City;
 import com.rentIT.domain.model.Currency;
 import com.rentIT.dto.PropertyDto;
 
@@ -14,8 +15,12 @@ public final class AdvancedSearchPropertyBuilder {
     }
 
     public static PropertyDto createProperty(String title) {
+        Address address = new Address();
+        address.setStreetName("test");
+        address.setStreetNumber("412");
+        address.setCity(City.builder().cityName("Bucharest").build());
         return PropertyDto.builder()
-                .address(new Address())
+                .address(address)
                 .title(title == null || title.isEmpty() ? "simple-property" : title)
                 .averageRating(1)
                 .constructionYear(1990)

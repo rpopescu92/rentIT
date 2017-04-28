@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rentIT.functional.SpringIntegrationTest;
 import com.rentIT.functional.authenticate.AuthenticateService;
 import com.rentIT.functional.cleanup.CleanupService;
+import com.rentIT.functional.model.PageImplBean;
 import com.rentIT.functional.register.RegisterUserService;
 import com.rentIT.util.JwtToken;
 import cucumber.api.java.en.And;
@@ -24,7 +25,7 @@ public class AdvancedSearchTest extends SpringIntegrationTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private ResponseEntity response;
+    private ResponseEntity<String> response;
     private JwtToken jwtToken;
 
     @Autowired
@@ -51,22 +52,26 @@ public class AdvancedSearchTest extends SpringIntegrationTest {
         this.jwtToken = jwtToken;
     }
 
-    @When("^The user creates some properties$")
+    @When("^The user creates only one properties$")
     public void user_creates_some_properties() {
-        managePropertyService.addProperty(this.jwtToken.getIdToken(), AdvancedSearchPropertyBuilder.createProperty("simple-title"));
+        ResponseEntity<String> response = managePropertyService.addProperty(this.jwtToken.getIdToken(), AdvancedSearchPropertyBuilder.createProperty("simple-title"));
+        Assert.isTrue(response.getStatusCodeValue() == 200);
     }
 
-    @And("^The user searches for a property by title$")
+    @And("^The user searches for that property by title$")
     public void user_searches_for_a_property_by_title() {
-        ResponseEntity response = managePropertyService.searchPropertyByTitle(this.jwtToken.getIdToken(), "simple-title", 1,3, "+");
+        ResponseEntity<String> response = managePropertyService.searchPropertyByTitle(this.jwtToken.getIdToken(), "simple-title", 1, 3, "+");
         Assert.isTrue(response.getStatusCodeValue() == 200);
         this.response = response;
         cleanupService.cleanupProperty("turnball");
     }
 
-    @Then("^The user should receive the expected result$")
-    public void test() {
-        System.out.println(this.response);
+    @Then("^The user should get only one property$")
+    public void user_should_get_one_property() throws IOException {
+        Assert.isTrue(this.response.getStatusCodeValue() == 200);
+        PageImplBean properties = objectMapper.readValue(this.response.getBody(), PageImplBean.class);
+        Assert.isTrue(properties != null);
+        Assert.isTrue(!properties.getContent().isEmpty() && properties.getContent().size() == 1);
     }
 
 }

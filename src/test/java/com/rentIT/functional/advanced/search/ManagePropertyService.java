@@ -28,7 +28,7 @@ public class ManagePropertyService {
         return restTemplate.exchange(propertyReader.getDevUrl() + "/api/properties", HttpMethod.POST, entity, String.class);
     }
 
-    public ResponseEntity searchPropertyByTitle(String jwtToken, String title, int page, int perPage, String order) {
+    public ResponseEntity<String> searchPropertyByTitle(String jwtToken, String title, int page, int perPage, String order) {
         SearchOptions searchOptions = new SearchOptions();
         searchOptions.setName(title);
         HttpEntity<SearchOptions> entity = new HttpEntity<>(searchOptions, HttpHeaderFactory.createAuthenticationHeader(jwtToken));
