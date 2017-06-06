@@ -58,7 +58,6 @@
                     console.log($scope.property.images);
                     AddPropertyService.addProperty($scope.property)
                         .then(function (data) {
-                                console.log('go to my properties');
                                 $state.go('my-properties');
                             },
                             function (error) {

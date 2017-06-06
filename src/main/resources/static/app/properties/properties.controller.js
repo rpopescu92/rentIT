@@ -28,6 +28,7 @@
         $scope.selectedNrStars = [];
         $scope.minPrice = '';
         $scope.maxPrice = '';
+        $scope.allowsPets = false;
         $scope.search = search;
 
         init();
@@ -56,8 +57,10 @@
                 numberOfRooms: $scope.selectedNrRooms,
                 numberOfStars: $scope.selectedNrStars,
                 minPrice: $scope.minPrice,
-                maxPrice: $scope.maxPrice
+                maxPrice: $scope.maxPrice,
+                allowsPets: $scope.allowsPets
             };
+            console.log(searchOptions);
             var search = _isValidSearch() ? searchOptions : null;
             PropertiesService.getProperties($scope.query, search)
                 .then(function (response) {

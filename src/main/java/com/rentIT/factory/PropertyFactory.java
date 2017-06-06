@@ -29,6 +29,7 @@ public final class PropertyFactory {
                 .currency(propertyDto.getCurrency())
                 .roomsNumber(propertyDto.getRoomsNumber())
                 .floorArea(propertyDto.getFloorArea())
+                .allowsPets(propertyDto.getAllowsPets())
                 .otherInfo(propertyDto.getOtherInfo())
                 .dateAdded(new Date())
                 .build();

@@ -2,7 +2,6 @@ package com.rentIT.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.rentIT.domain.model.Address;
-import com.rentIT.domain.model.City;
 import com.rentIT.domain.model.Currency;
 import com.rentIT.domain.model.Photo;
 import lombok.*;
@@ -15,7 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PropertyDto implements Serializable{
+public class PropertyDto implements Serializable {
 
     private String username;
     private String title;
@@ -30,6 +29,7 @@ public class PropertyDto implements Serializable{
     private boolean isFurnished;
     private float floorArea;
     private String otherInfo;
+    private Boolean allowsPets;
 
     @JsonProperty("images")
     private List<Photo> images;

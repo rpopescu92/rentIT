@@ -40,6 +40,7 @@ public class Property implements Serializable{
     private int constructionYear;
     private int roomsNumber;
     private boolean isFurnished;
+    private Boolean allowsPets;
     private boolean isRented;
     private Date dateAdded;
     private float floorArea;

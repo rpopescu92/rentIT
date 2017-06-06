@@ -29,4 +29,7 @@ public class SearchOptions {
 
     @JsonProperty(value = "numberOfRooms")
     private List<Integer> numberOfRooms;
+
+    @JsonProperty(value = "allowsPets")
+    private Boolean allowsPets;
 }
