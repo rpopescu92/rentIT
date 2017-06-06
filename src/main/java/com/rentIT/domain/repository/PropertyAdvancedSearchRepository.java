@@ -55,7 +55,7 @@ public class PropertyAdvancedSearchRepository {
         }
 
         if(searchOptions.getMaxPrice() != null && searchOptions.getMinPrice() != null) {
-            queryOptions.add("p.price between (" + searchOptions.getMinPrice() + "," + searchOptions.getMaxPrice());
+            queryOptions.add("p.price between " + searchOptions.getMinPrice() + " AND " + searchOptions.getMaxPrice());
         }
 
         if (!CollectionUtils.isEmpty(searchOptions.getNumberOfRooms())){

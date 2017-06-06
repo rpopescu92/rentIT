@@ -13,10 +13,10 @@ import java.util.List;
 
 public interface PropertyRepository extends JpaRepository<Property, Long> {
 
-    @Query("select p from Property p where p.owner=?1")
+    @Query("select p from Property p where p.owner=?1 order by p.dateAdded DESC")
     Page<Property> findPropertyByUserOwner(User owner, Pageable pageable);
 
-    @Query("select p from Property p where p.isRented=false")
+    @Query("select p from Property p where p.isRented=false order by p.dateAdded DESC")
     Page<Property> findAllProperties(Pageable pageable);
 
     @Modifying

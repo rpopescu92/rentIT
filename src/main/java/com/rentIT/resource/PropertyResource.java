@@ -48,7 +48,7 @@ public class PropertyResource {
     public ResponseEntity<Page<Property>> getAllProperties(@RequestParam("page") Integer page,
                                                            @RequestParam("limit") Integer limit,
                                                            @RequestParam("order") String order,
-                                                           @RequestBody SearchOptions searchOptions) {
+                                                           @RequestBody(required = false) SearchOptions searchOptions) {
         return new ResponseEntity<>(propertyService.getAllProperties(page, limit, order, searchOptions), HttpStatus.OK);
     }
 
