@@ -28,14 +28,19 @@
                         <p style="padding:5px;">{{property.longDescription}}</p>
                         <div class="row">
                             <p style="padding:5px;">
-                                Address: {{property.address.streetName}}, {{property.address.streetNumber}}
+                                <b>Address</b>: {{property.address.streetName}}, {{property.address.streetNumber}}
                             </p>
                         </div>
                         <div class="row">
-                            <p style="padding:5px;">Construction Year: {{property.constructionYear}}</p>
+                            <p style="padding:5px;">
+                                <b>City</b>: {{property.address.city.country}}, {{property.address.city.region}}, {{property.address.city.cityName}}
+                            </p>
                         </div>
                         <div class="row">
-                            <p style="padding:5px;">{{property.roomsNumber}} Rooms, {{property.floorArea}} square meter</p>
+                            <p style="padding:5px;"><b>Construction Year</b>: {{property.constructionYear}}</p>
+                        </div>
+                        <div class="row">
+                            <p style="padding:5px;"><b>Property details</b>: {{property.roomsNumber}} Rooms, {{property.floorArea}} square meter</p>
                         </div>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">

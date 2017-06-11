@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Setter
 @Getter
 @Builder
-public class City implements Serializable{
+public class City implements Serializable {
 
     @Id
     @GeneratedValue
@@ -28,5 +28,7 @@ public class City implements Serializable{
 
     @JsonIgnore
     private String country;
+
+    private String sector;
 
 }

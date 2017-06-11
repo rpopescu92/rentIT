@@ -80,6 +80,7 @@
             ViewPropertyService.getProperty(vm.propertyId)
                 .then(function (data) {
                     $scope.property = data.data;
+                    console.log($scope.property);
                     $scope.slides = $scope.property.images;
                     for(var i=0;i<$scope.slides.length;i++) {
                         slides.push({

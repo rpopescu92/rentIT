@@ -1,5 +1,6 @@
 package com.rentIT.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
@@ -25,6 +26,7 @@ public class Property implements Serializable{
     private String longDescription;
 
     @OneToOne
+    @JsonIgnore
     private User owner;
 
     @OneToOne
