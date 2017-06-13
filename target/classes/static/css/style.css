@@ -1,0 +1,157 @@
+
+.dialog{
+    width: 50%;
+    height: 60%;
+}
+
+.md-toolbar-tools, .blueNavbar{
+    background-color: #6D5CAE !important;
+    color: white;
+    padding: 2px;
+}
+
+.customButton{
+    color: #8BC34A !important;
+}
+
+svg {
+    fill: inherit;
+}
+
+md-dialog{
+    overflow-x:hidden;
+     width:100%;
+}
+.dialogContent {
+   overflow-x: hidden;
+   width:100%;
+}
+
+.sub-menu {
+  position: absolute;
+  display: none;
+  background-color: lightgreen;
+  padding: 5px;
+}
+
+.sub-menu > li {
+  display: block;
+  cursor: pointer;
+}
+
+li:hover .sub-menu {
+  display: block;
+}
+
+.loginContainer {
+    padding: 10px;
+    margin-top:5%;
+
+}
+
+.loginForm{
+    width: 100%;
+    color: black !important ;
+}
+.homebrand{
+    color: black !important;
+}
+
+md-input-container:not(.md-input-invalid).md-input-focused .md-input {
+    color: black !important;
+    border-color: black;
+}
+
+.raisedButton{
+    background-color: #8BC34A !important;
+
+}
+
+md-checkbox.md-checked .md-icon {
+         background-color: #8BC34A !important;
+}
+
+#slides_control > div{
+  height: 200px;
+}
+
+#slides_control {
+  position:absolute;
+  width: 400px;
+  left:50%;
+  top:20px;
+ margin-left:-200px;
+}
+
+.rent-empty-data {
+    border: 1px solid #8BC34A;
+    border-radius: 7px;
+    font-family: Helvetica;
+    font-size: 21px;
+    width: 45%;
+    height: 45%;
+    line-height: 30px;
+    text-align: center;
+    padding: 5px;
+    border-left-width: 7px;
+}
+
+.rent-active-menu {
+    background-color: #FBA100;
+}
+
+body{
+    background-color: transparent
+}
+
+.rent-text {
+    font-family: Monospaced Monaco;
+    color: #626262;
+    font-size: 22px;
+    font-weight:700;
+    text-transform: uppercase;
+}
+
+.rent-description {
+    font-family: Monospaced Monaco;
+    color: #626262;
+    font-size: 20px;
+}
+
+.rent-btn {
+    font-family: Arial,sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0.01em;
+    -webkit-font-smoothing: antialiased;
+    border: 1px solid #f0f0f0;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    display: inline-block;
+    padding: 6px 12px;
+    text-shadow: none;
+    box-shadow: none;
+    line-height: 21px;
+    padding-left: 17px;
+    padding-right: 17px;
+    position: relative;
+    transition: color 0.1s linear 0s,background-color 0.1s linear 0s,opacity 0.2s linear 0s!important;
+}
+.rent-button {
+    color: #ffffff;
+    background-color: #6d5cae;
+    border-color: #6d5cae;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.rent-btn {
+    margin-right: 5px;
+    min-width: 100px;
+}
+
+.rent-button:hover {
+    background-color: #8a7dbe;
+}

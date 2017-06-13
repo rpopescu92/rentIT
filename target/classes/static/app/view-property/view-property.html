@@ -1,0 +1,106 @@
+<md-button onclick="history.back()">Back</md-button>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2" style="height: 250px;">
+        <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+            <div uib-slide ng-repeat="image in slides track by image.id" index="image.id">
+                <img ng-src="data:image/jpg;base64,{{image.content}}" style="width:220px;height:220px;margin:auto;">
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-top: 10px;">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <md-card>
+                    <md-card-title>
+                        <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
+                        <span>
+                    <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
+                        {{property.averageRating}}
+                </span>
+
+                    </md-card-title>
+                    <md-card-content>
+                        <span class="md-headline" style="padding:5px;">{{property.title}}</span>
+                        <p style="padding:5px;">{{property.longDescription}}</p>
+                        <div class="row">
+                            <p style="padding:5px;">
+                                <b>Address</b>: {{property.address.streetName}}, {{property.address.streetNumber}}
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p style="padding:5px;">
+                                <b>City</b>: {{property.address.city.country}}, {{property.address.city.region}}, {{property.address.city.cityName}}
+                            </p>
+                        </div>
+                        <div class="row">
+                            <p style="padding:5px;"><b>Construction Year</b>: {{property.constructionYear}}</p>
+                        </div>
+                        <div class="row">
+                            <p style="padding:5px;"><b>Property details</b>: {{property.roomsNumber}} Rooms, {{property.floorArea}} square meter</p>
+                        </div>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-if="!isOwner">Interested</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-md-offset-2">
+                <md-card ng-show="!isOwner" style="width:65%;">
+                    <md-card-title>
+                        <div class="thumbnail" style="padding-top:5px; width:60%">
+                            <img class="img-responsive" ng-src="data:image/png;base64,{{photo.content}}">
+                        </div>
+                        <span style="padding:3px">Username: {{property.owner.username}}</span>
+                    </md-card-title>
+                    <md-card-content>
+                        <div class="row" ng-show="owner.phoneNumber != null" style="padding-left:5px">
+                            <span>Tel. {{owner.phoneNumber}}</span>
+                        </div>
+                        <div class="row" ng-show="owner.emailAddress != null" style="padding-left:5px">
+                            <span>Email: {{owner.emailAddress}}</span>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" ng-show="!isOwner">
+    <div class="col-md-6 col-md-offset-2" style="padding: 32px;">
+        <div class="row">
+            <div ng-init="rating = star.rating + 1"></div>
+            <div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="getSelectedRating(rating)"></div>
+        </div>
+        <form class="commentBox">
+            <md-input-container style="width:90%"><!-- doar daca userul e diferit de owner-->
+                <label>Your review</label>
+                <textarea ng-model="myComment" type="text" md-maxlength="400" rows="3" style='border-radius:4px;'></textarea>
+            </md-input-container>
+            <div class="row">
+                <md-button class="customButton" ng-click="addComment(myComment)" style='margin-top:10px;'>Submit</md-button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-2" style="padding: 24px;">
+        <h4>Comments</h4>
+        <md-content>
+            <md-list flex>
+                <md-list-item class="md-3-line md-long-text" ng-repeat="historyRating in historyRatings">
+                    <img ng-src="" class="md-avatar" />
+                    <div class="md-list-item-text" layout="column">
+                        <h3><!--stars rating--></h3>
+                        <p>{{ historyRating.comment }} ({{historyRating.author.username}} on {{historyRating.createdDate}} - {{historyRating.rating}} stars)</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
+</div>

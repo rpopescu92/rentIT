@@ -1,0 +1,8 @@
+.searchBar, .searchCity{
+    border-radius: 2px;
+    padding: 4px !important;
+}
+
+.commentBox{
+    border-color: #8BC34A;
+}

@@ -1,0 +1,79 @@
+<div class="row" style="padding:4px;">
+    <div class="col-md-3">
+       <md-card>
+           <md-card-content>
+               <div class="row" style="padding:4px;">
+                   <label>Upload profile photo</label>
+                   <input ngf-select ng-model="file" name="file" ngf-accept="'image/*'" required="" type="file">
+                   <div class="thumbnail" style="padding-top:5px;">
+                        <img ng-src="data:image/png;base64,{{photo.content}}" class="img-responsive profilePhoto">
+                        <img class="img-responsive profilePhoto" type="file" name="file" ng-show="file!=null">
+                   </div>
+               </div>
+           </md-card-content>
+       </md-card>
+    </div>
+    <div class="col-md-9">
+        <md-card>
+            <md-card-title>
+                <h2>{{$scope.username}}</h2>
+            </md-card-title>
+            <md-card-content>
+                    <div class="row" style="padding:10px;">
+                        <md-input-container style="width:40%">
+                            <label>First Name</label>
+                            <input ng-model="firstName" type="text">
+                        </md-input-container>
+                        <md-input-container style="width:40%">
+                            <label>Last Name</label>
+                            <input ng-model="lastName" type="text">
+                        </md-input-container>
+                    </div>
+                <div class="row" style="padding:10px;">
+                    <md-input-container style="width:40%">
+                        <label>Email</label>
+                        <input ng-model="email" type="email">
+                    </md-input-container>
+                    <md-input-container style="width:40%">
+                        <label>Phone number</label>
+                        <input ng-model="phoneNumber" type="text">
+                    </md-input-container>
+                </div>
+                <div class="row" style="padding:10px;">
+                    <md-input-container style="width:30%">
+                        <label>Street name</label>
+                        <input ng-model="streetName" type="text">
+                    </md-input-container>
+                    <md-input-container style="width:20%">
+                        <label>Street no.</label>
+                        <input ng-model="streetNumber" type="text">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Apartment no.</label>
+                        <input ng-model="apartmentNumber" type="text">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Floor no.</label>
+                        <input ng-model="floorNumber" type="number">
+                    </md-input-container>
+                </div>
+                <div class="row" style="padding:10px;">
+                    <md-input-container style="width:30%">
+                        <label>City</label>
+                        <md-select ng-model="city">
+                            <md-option ng-value="city" ng-repeat="city in cities">
+                                {{city.cityName}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="left">
+                <md-button class="md-raised md-primary raisedButton" ng-click="updateProfile()">
+                   Update
+                </md-button>
+            </md-card-actions>
+        </md-card>
+    </div>
+
+</div>

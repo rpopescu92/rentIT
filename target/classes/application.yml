@@ -1,0 +1,15 @@
+server:
+  port: 8089
+spring:
+    datasource:
+        url: jdbc:postgresql://localhost:5432/rentIT
+        username: chu23
+        password: Stickerdunk1..
+    jpa:
+        databasePlatform: org.hibernate.dialect.PostgreSQLDialect
+        hibernate:
+            show_sql: true
+            ddl-auto: update
+    jwt:
+        secret: AmUnSecretMareDeTotPeCareNuIlSpunNimanuiDelocNiciodataGhicesteSiNuVeiAfla239090932091
+        tokenValidityInSeconds: 3600

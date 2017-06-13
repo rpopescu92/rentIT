@@ -1,0 +1,135 @@
+<div class="row">
+    <div class="col-md-6 col-md-offset-3" style="margin-top:30px;">
+        <div class="form-group searchBar col-md-4 col-xs-6">
+            <div class="input-group">
+                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+                <input type="text" class="form-control" placeholder="Search" ng-model="searchName">
+            </div>
+        </div>
+        <div class="form-group searchCity col-md-2 col-xs-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Location" ng-model="searchLocation">
+            </div>
+        </div>
+        <div class="form-group searchCity col-md-2 col-xs-6" style="margin-top:-8px;">
+            <div class="input-group">
+                <md-button class="md-raised" style="color: black; border-color:#FBA100" ng-click="search()">Search
+                </md-button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-6 col-xs-6 col-md-offset-3">
+        <md-autocomplete
+                ng-disabled="false"
+                md-no-cache="true"
+                md-selected-item="selectedItem"
+                md-search-text-change="searchTextChange(searchText)"
+                md-search-text="searchText"
+                md-selected-item-change="selectedItemChange(item)"
+                md-items="item in querySearch(searchText)"
+                md-item-text="item.cityName"
+                md-min-length="0"
+                placeholder="Choose a city/sector">
+            <md-item-template>
+                <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.region}}, {{item.cityName}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-6 col-xs-6 col-md-offset-3">
+        <md-chips ng-model="selectedCities" name="selectedCities" readonly="true"
+                  md-removable="true" md-max-chips="5" placeholder="Enter a fruit...">
+            <md-chip-template>
+                <strong>{{$chip.region}}-{{$chip.cityName}}</strong>
+            </md-chip-template>
+        </md-chips>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4 col-xs-6 col-md-offset-3">
+        Number of rooms: <span ng-repeat="nr in nrRooms">
+            {{ nr }}
+            <md-checkbox ng-checked="exists(nr, selectedNrRooms)" ng-click="toggle(nr, selectedNrRooms)"></md-checkbox>
+            </span>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4 col-xs-6 col-md-offset-3">
+        Number of stars: <span ng-repeat="nr in nrRooms">
+            {{ nr }}
+            <md-checkbox ng-checked="exists(nr, selectedNrStars)" ng-click="toggle(nr, selectedNrStars)"></md-checkbox>
+            </span>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4 col-xs-6 col-md-offset-3">
+        <span>Min price:</span>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Minimum price" ng-model="minPrice">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4 col-xs-6 col-md-offset-3">
+        <span>Max price:</span>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Maximum price" ng-model="maxPrice">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-4 col-xs-6 col-md-offset-3">
+        <span>Allows pets: </span> <md-checkbox ng-model="allowsPets"></md-checkbox>
+    </div>
+</div>
+<div class="row" ng-class="{active: isActive('/home')}" ng-repeat="property in properties">
+    <div class="col-md-6 col-md-offset-3">
+        <md-card style="width:100%">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline rent-text">{{property.title}}
+                         <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
+                        {{property.averageRating}}
+                        <span style="float:right;">{{property.price}} {{property.currency}}</span>
+                    </span>
+
+                </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <div class="col-md-12">
+                    <div class="col-md-5">
+                        <div class="md-media-lg card-media">
+                            <img ng-src="data:image/jpg;base64,{{property.images[0].content}}"
+                                 style="width:220px;height:220px;margin:auto;">
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top:15px;">
+                        <span class="rent-description">{{property.longDescription}}</span>
+                    </div>
+                </div>
+            </md-card-content>
+            <md-card-footer>
+                <md-icon md-svg-src="/icons/ic_room_black_18px.svg"></md-icon>
+                <span>{{property.address.city.cityName}}</span>
+            </md-card-footer>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-icon-button" aria-label="Favorite" ng-click="favorite(property)">
+                    <md-icon md-svg-icon="/icons/ic_favorite_black_18px.svg" style="fill:#E57373;"></md-icon>
+                </md-button>
+                <div class="rent-btn rent-button rent-btn-cons" ng-click="viewProperty(property)">View</div>
+            </md-card-actions>
+        </md-card>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="pagination">
+            <ul uib-pagination total-items="totalItems" items-per-page="query.limit" ng-model="query.page"
+                ng-change="pageChanged()"></ul>
+        </div>
+    </div>
+</div>
+
