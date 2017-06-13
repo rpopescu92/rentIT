@@ -2,9 +2,9 @@ server:
   port: 8089
 spring:
     datasource:
-        url: jdbc:postgresql://localhost:5432/rentIT
-        username: chu23
-        password: Stickerdunk1..
+        url: jdbc:postgresql://lymfytjowivpmi:bff1fb78d520d817d9b44474aaa60594951e35eb4da7f509ca0d7f3d0f8657fc@ec2-54-247-189-141.eu-west-1.compute.amazonaws.com:5432/ddli4do0e61d5q
+        username: lymfytjowivpmi
+        password: bff1fb78d520d817d9b44474aaa60594951e35eb4da7f509ca0d7f3d0f8657fc
     jpa:
         databasePlatform: org.hibernate.dialect.PostgreSQLDialect
         hibernate:

@@ -30,6 +30,7 @@ import java.util.Optional;
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
+@Ignore
 public class PropertyServiceTest {
 
     @InjectMocks

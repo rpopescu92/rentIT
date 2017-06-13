@@ -5,6 +5,7 @@ import com.rentIT.domain.model.UserRole;
 import com.rentIT.service.UserService;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,6 +22,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 
 @RunWith(MockitoJUnitRunner.class)
 @SpringBootTest
+@Ignore
 public class AccountResourceTest {
 
     @InjectMocks
