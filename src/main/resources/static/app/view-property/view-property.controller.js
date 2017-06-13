@@ -80,7 +80,6 @@
             ViewPropertyService.getProperty(vm.propertyId)
                 .then(function (data) {
                     $scope.property = data.data;
-                    console.log($scope.property);
                     $scope.slides = $scope.property.images;
                     for(var i=0;i<$scope.slides.length;i++) {
                         slides.push({
@@ -102,6 +101,7 @@
                     .then(function (data) {
                         $scope.owner.emailAddress = data.emailAddress;
                         $scope.owner.phoneNumber = data.phoneNumber;
+                        console.log(data);
                         ProfileService.getProfileDetails($scope.property.owner.username)
                             .then(function (data) {
                                 if (data.photo != null) {
@@ -129,6 +129,10 @@
             ViewPropertyService.getHistoryRatings(propertyId)
                 .then(function (data) {
                     $scope.historyRatings = data;
+                    console.log(data);
+                    $scope.historyRatings.forEach(function (item) {
+                        item.createdDate = new Date(item.createdDate).toLocaleString();
+                    });
                 });
         }
 

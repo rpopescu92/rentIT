@@ -14,7 +14,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
@@ -31,7 +30,7 @@ public class UserService {
 
     public Optional<User> getAuthenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication == null) {
+        if (authentication == null) {
             return null;
         }
 
@@ -40,23 +39,25 @@ public class UserService {
 
     public void registerUser(UserDto userDto) {
         Optional<User> optional = userRepository.findByUsername(userDto.getUsername());
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             throw new UserExistsException("Username already exists.");
         }
         User user = User.builder()
-                        .username(userDto.getUsername())
-                        .password(userDto.getPassword())
-                        .createDate(new Date())
-                        .isOwner(userDto.isOwner())
-                        .isTenant(userDto.isTenant())
-                        .role(UserRole.USER)
-                        .build();
+                .username(userDto.getUsername())
+                .password(userDto.getPassword())
+                .createDate(new Date())
+                .isOwner(userDto.isOwner())
+                .isTenant(userDto.isTenant())
+                .role(UserRole.USER)
+                .build();
 
         Address address = new Address();
         address = addressRepository.save(address);
         ProfileDetails profileDetails = ProfileDetails.builder()
                 .firstName(userDto.getFirstName())
                 .lastName(userDto.getLastName())
+                .emailAddress(userDto.getEmailAddress())
+                .phoneNumber(userDto.getNumber())
                 .address(address)
                 .build();
         user = userRepository.save(user);

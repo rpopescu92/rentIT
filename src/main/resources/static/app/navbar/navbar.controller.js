@@ -24,7 +24,6 @@
 
         function init() {
             $scope.isAuthenticated = PrincipalService.isAuthenticated();
-
             getAuthenticatedUser();
         }
 

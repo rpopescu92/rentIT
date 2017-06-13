@@ -20,6 +20,7 @@
         $scope.getUserProperties = getUserProperties;
         $scope.edit = edit;
         $scope.rented = rented;
+        $scope.unrent = unrent;
         $scope.property = {};
         $scope.properties = [];
         $scope.query = {
@@ -66,7 +67,13 @@
         }
 
         function rented(id) {
-            AlterPropertyService.rentProperty(id, "rented");
+            AlterPropertyService.rentProperty(id, "RENTED");
+            init();
+        }
+
+        function unrent(id) {
+            AlterPropertyService.rentProperty(id, "NOT_RENTED");
+            init();
         }
 
         function edit(property) {

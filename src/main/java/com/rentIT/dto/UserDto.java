@@ -10,12 +10,14 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto implements Serializable{
+public class UserDto implements Serializable {
 
     private String firstName;
     private String lastName;
     private String username;
     private String password;
+    private String emailAddress;
+    private String number;
     private boolean isOwner;
     private boolean isTenant;
     private UserRole role;

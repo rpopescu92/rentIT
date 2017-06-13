@@ -1,9 +1,9 @@
-<md-toolbar  md-scroll-shrink layout="row" layout-align="start end" class="blueNavbar">
+<md-toolbar  md-scroll-shrink layout="row" layout-align="start end" class="blueNavbar" ng-if="isAuthenticated">
     <div class="md-toolbar-tools" ng-class="{active: isActive('/home')}">
         <md-button ui-sref="home" ui-sref-active="rent-active-menu">Home</md-button>
         <md-button ui-sref="my-properties" ui-sref-active="rent-active-menu">My Properties</md-button>
         <md-button ui-sref="properties" ui-sref-active="rent-active-menu">Properties</md-button>
-        <md-button>Market Analysis</md-button>
+        <md-button ui-sref="market-analysis">Market Analysis</md-button>
         <md-button>Messages</md-button>
         <span flex></span>
         <md-button style="background-color:#FBA100;" ui-sref="add-property">

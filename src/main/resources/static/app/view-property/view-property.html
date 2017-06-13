@@ -44,13 +44,14 @@
                         </div>
                     </md-card-content>
                     <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-if="!isOwner">Interested</md-button>
                     </md-card-actions>
                 </md-card>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
-                <md-card ng-show="!isOwner" style="width:30%;">
+            <div class="col-md-12 col-md-offset-2">
+                <md-card ng-show="!isOwner" style="width:65%;">
                     <md-card-title>
                         <div class="thumbnail" style="padding-top:5px; width:60%">
                             <img class="img-responsive" ng-src="data:image/png;base64,{{photo.content}}">
@@ -71,7 +72,7 @@
     </div>
 </div>
 <div class="row" ng-show="!isOwner">
-    <div class="col-md-6 col-md-offset-1" style="padding: 5px;">
+    <div class="col-md-6 col-md-offset-2" style="padding: 32px;">
         <div class="row">
             <div ng-init="rating = star.rating + 1"></div>
             <div class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="getSelectedRating(rating)"></div>
@@ -88,7 +89,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6 col-md-offset-1" style="padding: 5px;">
+    <div class="col-md-6 col-md-offset-2" style="padding: 24px;">
         <h4>Comments</h4>
         <md-content>
             <md-list flex>
@@ -96,7 +97,7 @@
                     <img ng-src="" class="md-avatar" />
                     <div class="md-list-item-text" layout="column">
                         <h3><!--stars rating--></h3>
-                        <p>{{ historyRating.comment }}</p>
+                        <p>{{ historyRating.comment }} ({{historyRating.author.username}} on {{historyRating.createdDate}} - {{historyRating.rating}} stars)</p>
                     </div>
                 </md-list-item>
             </md-list>

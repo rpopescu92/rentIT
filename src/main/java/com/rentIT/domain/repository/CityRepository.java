@@ -16,6 +16,9 @@ public interface CityRepository extends JpaRepository<City, Long> {
 
     City findByCityNameAndRegion(String cityName, String region);
 
+    @Query("select c.cityName from City c")
+    List<String> findByCityName();
+
     @Query("select distinct region from City")
     List<String> findDistinctRegions();
 

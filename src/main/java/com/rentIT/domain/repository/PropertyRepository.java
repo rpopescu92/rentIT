@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface PropertyRepository extends JpaRepository<Property, Long> {
@@ -22,9 +23,15 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     @Modifying
     @Transactional
-    @Query("update Property p set p.status=?2 where p.id=?1")
-    void isRented(long id, Status status);
+    @Query("update Property p set p.status=?2, p.dateRented=?3 where p.id=?1")
+    void isRented(long id, Status status, ZonedDateTime dateRented);
 
     @Query("select p from Property p where p.owner.username=?1")
     List<Property> findByOwner(String username);
+
+    @Query("select p from Property p where p.address.city.sector in ?1 and p.status='RENTED' ")
+    List<Property> findPropertiesForBucharest(List<String> sectors);
+
+    @Query("select p from Property p where p.status = 'RENTED' ")
+    List<Property> findPropertiesForEachCity();
 }

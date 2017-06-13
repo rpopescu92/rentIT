@@ -53,17 +53,16 @@
 
         function addProperty() {
             if ($scope.files.length > 0) {
-                for (var i = 0; i < $scope.files.length; i++) {
-                    $scope.property.images = $scope.images;
-                    console.log($scope.property.images);
-                    AddPropertyService.addProperty($scope.property)
-                        .then(function (data) {
-                                $state.go('my-properties');
-                            },
-                            function (error) {
+                // for (var i = 0; i < $scope.files.length; i++) {
+                $scope.property.images = $scope.images;
+                AddPropertyService.addProperty($scope.property)
+                    .then(function (data) {
+                            $state.go('my-properties');
+                        },
+                        function (error) {
 
-                            });
-                }
+                        });
+                // }
             }
         }
 

@@ -22,7 +22,7 @@ public class RegisterUserService {
     private CleanupService cleanupService;
 
     public <T> ResponseEntity<T> registerUser(String userName, String password, Class<T> clazz) {
-        UserDto newUser = new UserDto("test", "test", userName, password, false, false, UserRole.USER);
+        UserDto newUser = new UserDto("test", "test", userName, password, "email@gmail.com", "213211", false, false, UserRole.USER);
         String registerUrl = propertyReader.getDevUrl() + "/register";
         return restTemplate.postForEntity(registerUrl, newUser, clazz);
     }

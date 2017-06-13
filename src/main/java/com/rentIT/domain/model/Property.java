@@ -6,6 +6,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class Property implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status = Status.NOT_RENTED;
     private Date dateAdded;
+    private ZonedDateTime dateRented;
     private float floorArea;
     private String otherInfo;
 

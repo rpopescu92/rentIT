@@ -10,41 +10,48 @@
     </md-toolbar>
     <md-dialog-content class="dialogContent">
         <div class="md-dialog-content">
-                <md-content>
-                    <md-input-container class="md-icon-float md-block">
-                        <label>First Name</label>
-                        <input ng-model="firstName" type="text">
-                    </md-input-container>
-                    <md-input-container class="md-icon-float md-block">
-                        <label>Last Name</label>
-                        <input ng-model="lastName" type="text">
-                    </md-input-container>
-                    <md-input-container class="md-icon-float md-block">
-                        <label>Username</label>
-                        <md-icon md-svg-src="/icons/account_circle_black24px.svg" style="fill:#8BC34A"></md-icon>
-                        <input ng-model="username" type="text">
-                    </md-input-container>
-                    <md-input-container class="md-icon-float md-block">
-                        <label>Password</label>
-                        <input ng-model="password" type="password">
-                    </md-input-container>
-                    <md-input-container class="md-icon-float md-block">
-                        <md-checkbox ng-model="isOwner" aria-label="I'm owner"
-                                     style="margin-left:5px; margin-bottom:3px;">
-                            I'm owner
-                        </md-checkbox>
-                    </md-input-container>
-                    <md-input-container class="md-icon-float md-block">
-                        <md-checkbox ng-model="isTenant" aria-label="I'm tenant"
-                                     style="margin-left:5px; margin-bottom:3px;">
-                            I'm tenant
-                        </md-checkbox>
-                    </md-input-container>
-                </md-content>
+            <md-content>
+                <md-input-container class="md-icon-float md-block">
+                    <label>First Name</label>
+                    <input ng-model="firstName" type="text">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Last Name</label>
+                    <input ng-model="lastName" type="text">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Username</label>
+                    <input ng-model="username" type="text">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Password</label>
+                    <input ng-model="password" type="password">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Email address</label>
+                    <input ng-model="emailAddress" type="text">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <label>Phone</label>
+                    <input ng-model="number" type="text">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <md-checkbox ng-model="isOwner" aria-label="I'm owner"
+                                 style="margin-left:5px; margin-bottom:3px;">
+                        I'm owner
+                    </md-checkbox>
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <md-checkbox ng-model="isTenant" aria-label="I'm tenant"
+                                 style="margin-left:5px; margin-bottom:3px;">
+                        I'm tenant
+                    </md-checkbox>
+                </md-input-container>
+            </md-content>
         </div>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="center center">
-           <md-button ng-click="cancel()">Cancel</md-button>
-           <md-button md-no-ink class="md-primary customButton" ng-click="register()">Register</md-button>
+        <md-button ng-click="cancel()">Cancel</md-button>
+        <md-button md-no-ink class="md-primary customButton" ng-click="register()">Register</md-button>
     </md-dialog-actions>
 </md-dialog>

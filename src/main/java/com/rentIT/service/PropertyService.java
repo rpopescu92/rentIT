@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -126,8 +127,8 @@ public class PropertyService {
         addressRepository.save(address);
     }
 
-    public void rentProperty(long id, Status isRented) {
-        propertyRepository.isRented(id, isRented);
+    public void rentProperty(long id, Rent status) {
+        propertyRepository.isRented(id, status.getStatus(), ZonedDateTime.now());
     }
 
     public Property getPropertyById(long id) {

@@ -12,11 +12,13 @@
             rentProperty: rentProperty
         };
 
-        function rentProperty(id, isRented) {
+        function rentProperty(id, status) {
             $http({
                 url: '/api/properties/' + id,
                 method: 'PATCH',
-                data: isRented
+                data: {
+                    status: status
+                }
             });
         }
     }
