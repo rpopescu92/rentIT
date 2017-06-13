@@ -66,7 +66,7 @@
         }
 
         function rented(id) {
-            AlterPropertyService.rentProperty(id, true);
+            AlterPropertyService.rentProperty(id, "rented");
         }
 
         function edit(property) {

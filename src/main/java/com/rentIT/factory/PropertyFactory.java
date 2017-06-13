@@ -1,9 +1,6 @@
 package com.rentIT.factory;
 
-import com.rentIT.domain.model.Address;
-import com.rentIT.domain.model.Photo;
-import com.rentIT.domain.model.Property;
-import com.rentIT.domain.model.User;
+import com.rentIT.domain.model.*;
 import com.rentIT.dto.PropertyDto;
 
 import java.util.Date;
@@ -27,6 +24,7 @@ public final class PropertyFactory {
                 .title(propertyDto.getTitle())
                 .price(propertyDto.getPrice())
                 .currency(propertyDto.getCurrency())
+                .status(Status.NOT_RENTED)
                 .roomsNumber(propertyDto.getRoomsNumber())
                 .floorArea(propertyDto.getFloorArea())
                 .allowsPets(propertyDto.getAllowsPets() == null ? Boolean.FALSE : propertyDto.getAllowsPets())

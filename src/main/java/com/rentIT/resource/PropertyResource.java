@@ -1,6 +1,7 @@
 package com.rentIT.resource;
 
 import com.rentIT.domain.model.Property;
+import com.rentIT.domain.model.Status;
 import com.rentIT.dto.PropertyDto;
 import com.rentIT.exception.InvalidPropertyException;
 import com.rentIT.exception.UserNotAuthenticatedException;
@@ -73,8 +74,8 @@ public class PropertyResource {
     }
 
     @RequestMapping(value = "/properties/{id}", method = RequestMethod.PATCH)
-    public ResponseEntity rentProperty(@PathVariable("id") long id, @RequestBody Boolean isRented) {
-        propertyService.rentProperty(id, isRented);
+    public ResponseEntity rentProperty(@PathVariable("id") long id, @RequestBody Status status) {
+        propertyService.rentProperty(id, status);
         return new ResponseEntity(HttpStatus.OK);
     }
 

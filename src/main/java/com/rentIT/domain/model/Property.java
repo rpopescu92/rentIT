@@ -16,13 +16,13 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Property implements Serializable{
+public class Property implements Serializable {
 
     @Id
     @GeneratedValue
     private long id;
 
-    @Type(type="text")
+    @Type(type = "text")
     private String longDescription;
 
     @OneToOne
@@ -43,12 +43,15 @@ public class Property implements Serializable{
     private int roomsNumber;
     private boolean isFurnished;
     private Boolean allowsPets = Boolean.FALSE;
-    private boolean isRented;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.NOT_RENTED;
     private Date dateAdded;
     private float floorArea;
     private String otherInfo;
 
-    @ElementCollection(targetClass=Photo.class,fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = Photo.class, fetch = FetchType.EAGER)
     private List<Photo> images;
 
     @OneToOne

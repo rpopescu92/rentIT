@@ -104,7 +104,7 @@ public class PropertyService {
         updatedProperty.setLongDescription(property.getLongDescription());
         updatedProperty.setTitle(property.getTitle());
         updatedProperty.setPrice(property.getPrice());
-        updatedProperty.setRented(property.isRented());
+        updatedProperty.setStatus(property.getStatus());
         updatedProperty.setRoomsNumber(property.getRoomsNumber());
         updatedProperty.setTenant(property.getTenant());
 
@@ -126,7 +126,7 @@ public class PropertyService {
         addressRepository.save(address);
     }
 
-    public void rentProperty(long id, Boolean isRented) {
+    public void rentProperty(long id, Status isRented) {
         propertyRepository.isRented(id, isRented);
     }
 
