@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-10 col-md-offset-3" style="margin-top:30px;">
+    <div class="col-md-6 col-md-offset-3" style="margin-top:30px;">
         <div class="form-group searchBar col-md-4 col-xs-6">
             <div class="input-group">
                 <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
@@ -17,6 +17,35 @@
                 </md-button>
             </div>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-6 col-xs-6 col-md-offset-3">
+        <md-autocomplete
+                ng-disabled="false"
+                md-no-cache="true"
+                md-selected-item="selectedItem"
+                md-search-text-change="searchTextChange(searchText)"
+                md-search-text="searchText"
+                md-selected-item-change="selectedItemChange(item)"
+                md-items="item in querySearch(searchText)"
+                md-item-text="item.cityName"
+                md-min-length="0"
+                placeholder="Choose a city/sector">
+            <md-item-template>
+                <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.region}}, {{item.cityName}}</span>
+            </md-item-template>
+        </md-autocomplete>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-md-6 col-xs-6 col-md-offset-3">
+        <md-chips ng-model="selectedCities" name="selectedCities" readonly="true"
+                  md-removable="true" md-max-chips="5" placeholder="Enter a fruit...">
+            <md-chip-template>
+                <strong>{{$chip.region}}-{{$chip.cityName}}</strong>
+            </md-chip-template>
+        </md-chips>
     </div>
 </div>
 <div class="row">

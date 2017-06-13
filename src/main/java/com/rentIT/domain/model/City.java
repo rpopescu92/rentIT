@@ -18,7 +18,7 @@ public class City implements Serializable {
 
     @Id
     @GeneratedValue
-    private long Id;
+    private long id;
 
     private String region;
 

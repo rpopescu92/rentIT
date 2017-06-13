@@ -23,4 +23,7 @@ public class CitiesService {
         return cityRepository.findDistinctRegions();
     }
 
+    public List<City> getCity(String cityNameOrSector) {
+        return cityRepository.findByCityNameContainsOrSectorContainsAllIgnoreCase(cityNameOrSector);
+    }
 }

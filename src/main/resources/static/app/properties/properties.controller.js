@@ -4,9 +4,9 @@
     angular.module('rentITApp')
         .controller('PropertiesController', PropertiesController);
 
-    PropertiesController.$inject = ['$scope', '$rootScope', 'PropertiesService', '$state'];
+    PropertiesController.$inject = ['$scope', '$rootScope', 'PropertiesService', 'CitiesService', '$state'];
 
-    function PropertiesController($scope, $rootScope, PropertiesService, $state) {
+    function PropertiesController($scope, $rootScope, PropertiesService, CitiesService, $state) {
         $scope.getProperties = getProperties;
         $scope.query = {
             order: 'price',
@@ -20,6 +20,9 @@
         $scope.currentPage = 1;
         $scope.itemsPerPage = $scope.query.limit;
         $scope.pages = [];
+        $scope.cities = [];
+        $scope.selectedCityIds = [];
+        $scope.selectedCities = [];
         $scope.totalItems = [];
         $scope.searchName = '';
         $scope.searchLocation = '';
@@ -29,12 +32,19 @@
         $scope.minPrice = '';
         $scope.maxPrice = '';
         $scope.allowsPets = false;
+        $scope.searchTextChange = searchTextChange;
+        $scope.querySearch = querySearch;
+        $scope.selectedItemChange = selectedItemChange;
         $scope.search = search;
 
         init();
 
         function init() {
             getProperties($scope.query.page);
+            CitiesService.getAllCities()
+                .then(function (data) {
+                    $scope.cities = data.data;
+                });
         }
 
         $scope.toggle = function (item, list) {
@@ -51,16 +61,47 @@
             return list.indexOf(item) > -1;
         };
 
+        function searchTextChange(searchText) {
+            return CitiesService.getCity(searchText)
+                .then(function (data) {
+                    return data.data;
+                });
+        }
+
+        function querySearch(searchText) {
+            if (searchText === '') {
+                return CitiesService.getAllCities()
+                    .then(function (data) {
+                        return data.data;
+                    });
+            } else {
+                return CitiesService.getCity(searchText)
+                    .then(function (data) {
+                        console.log(searchText);
+                        return data.data;
+                    });
+            }
+        }
+
+        function selectedItemChange(item) {
+            if (item !== '' && item !== undefined) {
+                $scope.selectedCities.push(item);
+            }
+        }
+
         function search() {
+            $scope.selectedCities.forEach(function (item) {
+                $scope.selectedCityIds.push(item.id);
+            });
             var searchOptions = {
                 name: $scope.searchName,
                 numberOfRooms: $scope.selectedNrRooms,
                 numberOfStars: $scope.selectedNrStars,
                 minPrice: $scope.minPrice,
                 maxPrice: $scope.maxPrice,
-                allowsPets: $scope.allowsPets
+                allowsPets: $scope.allowsPets,
+                cityId: $scope.selectedCityIds
             };
-            console.log(searchOptions);
             var search = _isValidSearch() ? searchOptions : null;
             PropertiesService.getProperties($scope.query, search)
                 .then(function (response) {
@@ -68,7 +109,6 @@
                             $scope.properties = response.data.content;
                             $scope.totalItems = response.data.totalElements;
                             $scope.pages = response.data.totalPages;
-
                         }
                     },
                     function (error) {
@@ -101,7 +141,8 @@
 
         function _isValidSearch() {
             if ($scope.searchName !== '' || $scope.selectedNrRooms.length > 0 ||
-                $scope.selectedNrStars.length > 0 || $scope.minPrice !== '' || $scope.maxPrice !== '') {
+                $scope.selectedNrStars.length > 0 || $scope.minPrice !== '' || $scope.maxPrice !== '' ||
+                $scope.selectedCityIds.length > 0) {
                 return true;
             }
             return false;

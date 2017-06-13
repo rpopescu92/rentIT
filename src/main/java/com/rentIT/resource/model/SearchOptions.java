@@ -32,4 +32,7 @@ public class SearchOptions {
 
     @JsonProperty(value = "allowsPets")
     private Boolean allowsPets;
+
+    @JsonProperty("searchLocation")
+    private String searchLocation;
 }

@@ -55,7 +55,7 @@ public class PropertyAdvancedSearchRepository {
         }
 
         if (!CollectionUtils.isEmpty(searchOptions.getCityId())) {
-            queryOptions.add("p.city.id in " + searchOptions.getCityId());
+            queryOptions.add("p.address.city.id in " + searchOptions.getCityId());
         }
 
         if (searchOptions.getMaxPrice() != null && searchOptions.getMinPrice() != null) {
