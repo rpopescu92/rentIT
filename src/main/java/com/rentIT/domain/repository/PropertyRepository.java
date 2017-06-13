@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 
 public interface PropertyRepository extends JpaRepository<Property, Long> {
@@ -34,4 +33,8 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
 
     @Query("select p from Property p where p.status = 'RENTED' ")
     List<Property> findPropertiesForEachCity();
+
+    @Query("select p from Property p where p.address.city.sector in ?1 and p.status='RENTED' " +
+            "and p.dateRented <= ?2 and p.dateRented >= ?3")
+    List<Property> findPropertiesBetweenRentedDates(List<String> sectors, String begin, String last);
 }

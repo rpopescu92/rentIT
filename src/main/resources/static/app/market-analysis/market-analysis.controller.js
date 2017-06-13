@@ -26,10 +26,16 @@
 
             MarketAnalysisService.getForCities()
                 .then(function (data) {
-                   console.log(data.data);
                     $scope.cityLabels = data.data.labels;
                     $scope.cityData = data.data.data;
                 });
+
+            MarketAnalysisService.getLast3Months()
+                .then(function (data) {
+                   $scope.cityLabels1 = data.data.labels;
+                   $scope.cityData1 = data.data.complexData;
+                   $scope.citySeries1 = data.data.series;
+                })
         }
     }
 

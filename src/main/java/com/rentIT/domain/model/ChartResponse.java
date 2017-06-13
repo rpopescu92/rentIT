@@ -12,4 +12,6 @@ import java.util.List;
 public class ChartResponse {
     private List<String> labels;
     private List<Integer> data;
+    private List<List<Integer>> complexData;
+    private List<String> series;
 }

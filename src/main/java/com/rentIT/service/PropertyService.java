@@ -38,6 +38,8 @@ public class PropertyService {
     private PropertyValidator propertyValidator;
     @Autowired
     private PropertyAdvancedSearchRepository propertyAdvancedSearchRepository;
+    @Autowired
+    private HistoryRentingRepository historyRentingRepository;
 
     public void saveProperty(PropertyDto propertyDto) {
         log.debug("Save new property for user {}", propertyDto.getUsername());
@@ -131,7 +133,20 @@ public class PropertyService {
         if (status.getStatus() == Status.NOT_RENTED) {
             propertyRepository.rent(id, status.getStatus(), "");
         } else {
+            saveHistoryRent(id);
             propertyRepository.rent(id, status.getStatus(), DateTimeFactory.createNowDate());
+        }
+    }
+
+    private void saveHistoryRent(Long propertyId) {
+        Property property = propertyRepository.findOne(propertyId);
+        if (property != null) {
+            HistoryRenting historyRenting = new HistoryRenting();
+            historyRenting.setProperty(property);
+            historyRenting.setStatus(Status.RENTED);
+            historyRenting.setDateRented(DateTimeFactory.createNowDate());
+
+            historyRentingRepository.save(historyRenting);
         }
     }
 

@@ -22,13 +22,17 @@ public class MarketAnalysisResource {
 
     @RequestMapping(path = "/bucharest", method = RequestMethod.GET)
     public ResponseEntity getMarketAnalysisForBucharest() {
-        return new ResponseEntity<>(
-                marketAnalysisService.getAnalysisForBucharest(), HttpStatus.OK);
+        return new ResponseEntity<>(marketAnalysisService.getAnalysisForBucharest(), HttpStatus.OK);
     }
 
     @RequestMapping(path = "/cities", method = RequestMethod.GET)
     public ResponseEntity<ChartResponse> getMarketAnalysisForEachCity() {
         return new ResponseEntity<>(marketAnalysisService.getAnalysisForEachCity(), HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/bucharest/last-months", method = RequestMethod.GET)
+    public ResponseEntity getMarketAnalysisForBucharestForTheLast3Months() {
+        return new ResponseEntity<>(marketAnalysisService.getAnalysisForBucharestForTheLastMonths(), HttpStatus.OK);
     }
 
 }
