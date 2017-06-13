@@ -90,6 +90,7 @@
         }
 
         function search() {
+            $scope.selectedCityIds = [];
             $scope.selectedCities.forEach(function (item) {
                 $scope.selectedCityIds.push(item.id);
             });

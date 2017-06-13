@@ -49,7 +49,7 @@ public class Property implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status = Status.NOT_RENTED;
     private Date dateAdded;
-    private ZonedDateTime dateRented;
+    private String dateRented;
     private float floorArea;
     private String otherInfo;
 

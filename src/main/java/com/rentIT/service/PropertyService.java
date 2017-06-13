@@ -7,6 +7,7 @@ import com.rentIT.exception.UserNotAuthenticatedException;
 import com.rentIT.factory.AddressFactory;
 import com.rentIT.factory.PropertyFactory;
 import com.rentIT.resource.model.SearchOptions;
+import com.rentIT.util.DateTimeFactory;
 import com.rentIT.validation.PropertyValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,7 +76,7 @@ public class PropertyService {
     }
 
     public Page<Property> getAllProperties(Integer page, Integer limit, String option, SearchOptions searchOptions) {
-        if(searchOptions == null) {
+        if (searchOptions == null) {
             Sort.Direction direction = option.startsWith("-") ? Sort.Direction.DESC : Sort.Direction.ASC;
             if (option.startsWith("+")) {
                 option = option.substring(option.indexOf('+') + 1);
@@ -85,7 +85,7 @@ public class PropertyService {
             }
             return propertyRepository.findAllProperties(new PageRequest(page - 1, limit, direction, option));
         } else {
-            return new PageImpl<>(propertyAdvancedSearchRepository.getAllPropertiesBySearchOptions(page, limit, option, searchOptions),new PageRequest(page - 1, limit),0);
+            return new PageImpl<>(propertyAdvancedSearchRepository.getAllPropertiesBySearchOptions(page, limit, option, searchOptions), new PageRequest(page - 1, limit), 0);
         }
     }
 
@@ -128,7 +128,11 @@ public class PropertyService {
     }
 
     public void rentProperty(long id, Rent status) {
-        propertyRepository.isRented(id, status.getStatus(), ZonedDateTime.now());
+        if (status.getStatus() == Status.NOT_RENTED) {
+            propertyRepository.rent(id, status.getStatus(), "");
+        } else {
+            propertyRepository.rent(id, status.getStatus(), DateTimeFactory.createNowDate());
+        }
     }
 
     public Property getPropertyById(long id) {

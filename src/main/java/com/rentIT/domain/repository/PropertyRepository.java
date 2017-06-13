@@ -24,7 +24,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     @Modifying
     @Transactional
     @Query("update Property p set p.status=?2, p.dateRented=?3 where p.id=?1")
-    void isRented(long id, Status status, ZonedDateTime dateRented);
+    void rent(long id, Status status, String dateRented);
 
     @Query("select p from Property p where p.owner.username=?1")
     List<Property> findByOwner(String username);
