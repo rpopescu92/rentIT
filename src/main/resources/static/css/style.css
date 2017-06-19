@@ -1,16 +1,16 @@
 
-.dialog{
+.dialog {
     width: 50%;
     height: 60%;
 }
 
-.md-toolbar-tools, .blueNavbar{
+.md-toolbar-tools, .blueNavbar {
     background-color: #6D5CAE !important;
     color: white;
     padding: 2px;
 }
 
-.customButton{
+.customButton {
     color: #8BC34A !important;
 }
 
@@ -18,42 +18,44 @@ svg {
     fill: inherit;
 }
 
-md-dialog{
-    overflow-x:hidden;
-     width:100%;
+md-dialog {
+    overflow-x: hidden;
+    width: 100%;
 }
+
 .dialogContent {
-   overflow-x: hidden;
-   width:100%;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .sub-menu {
-  position: absolute;
-  display: none;
-  background-color: lightgreen;
-  padding: 5px;
+    position: absolute;
+    display: none;
+    background-color: lightgreen;
+    padding: 5px;
 }
 
 .sub-menu > li {
-  display: block;
-  cursor: pointer;
+    display: block;
+    cursor: pointer;
 }
 
 li:hover .sub-menu {
-  display: block;
+    display: block;
 }
 
 .loginContainer {
     padding: 10px;
-    margin-top:5%;
+    margin-top: 5%;
 
 }
 
-.loginForm{
+.loginForm {
     width: 100%;
-    color: black !important ;
+    color: black !important;
 }
-.homebrand{
+
+.homebrand {
     color: black !important;
 }
 
@@ -62,25 +64,25 @@ md-input-container:not(.md-input-invalid).md-input-focused .md-input {
     border-color: black;
 }
 
-.raisedButton{
+.raisedButton {
     background-color: #8BC34A !important;
 
 }
 
 md-checkbox.md-checked .md-icon {
-         background-color: #8BC34A !important;
+    background-color: #8BC34A !important;
 }
 
-#slides_control > div{
-  height: 200px;
+#slides_control > div {
+    height: 200px;
 }
 
 #slides_control {
-  position:absolute;
-  width: 400px;
-  left:50%;
-  top:20px;
- margin-left:-200px;
+    position: absolute;
+    width: 400px;
+    left: 50%;
+    top: 20px;
+    margin-left: -200px;
 }
 
 .rent-empty-data {
@@ -96,11 +98,39 @@ md-checkbox.md-checked .md-icon {
     border-left-width: 7px;
 }
 
+.rent-data-options {
+    border: 1px solid #3B4752;
+    border-radius: 7px;
+    font-family: Helvetica;
+    font-size: 21px;
+    color:#757575;
+    width: 100%;
+    height: 45%;
+    line-height: 30px;
+    text-align: center;
+    padding: 5px;
+    border-left-width: 7px;
+}
+
+.rent-data {
+    border: 1px solid #10CFBD;
+    border-radius: 7px;
+    font-family: Helvetica;
+    font-size: 21px;
+    color:#757575;
+    width: 100%;
+    height: 45%;
+    line-height: 30px;
+    text-align: center;
+    padding: 5px;
+    border-left-width: 7px;
+}
+
 .rent-active-menu {
     background-color: #FBA100;
 }
 
-body{
+body {
     background-color: transparent
 }
 
@@ -108,7 +138,7 @@ body{
     font-family: Monospaced Monaco;
     color: #626262;
     font-size: 22px;
-    font-weight:700;
+    font-weight: 700;
     text-transform: uppercase;
 }
 
@@ -119,7 +149,7 @@ body{
 }
 
 .rent-btn {
-    font-family: Arial,sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 14px;
     font-weight: normal;
     letter-spacing: 0.01em;
@@ -136,8 +166,9 @@ body{
     padding-left: 17px;
     padding-right: 17px;
     position: relative;
-    transition: color 0.1s linear 0s,background-color 0.1s linear 0s,opacity 0.2s linear 0s!important;
+    transition: color 0.1s linear 0s, background-color 0.1s linear 0s, opacity 0.2s linear 0s !important;
 }
+
 .rent-button {
     color: #ffffff;
     background-color: #6d5cae;
@@ -154,4 +185,20 @@ body{
 
 .rent-button:hover {
     background-color: #8a7dbe;
+}
+
+a {
+    border-radius: 16px;
+}
+
+.pagination > li:first-child > a, .pagination > li:first-child > span {
+    border-radius: 16px;
+    margin-right: 10px;
+    content: '>'
+}
+
+.pagination > li:last-child > a, .pagination > li:last-child > span {
+    border-radius: 16px;
+    margin-left: 10px;
+    content: '<';
 }

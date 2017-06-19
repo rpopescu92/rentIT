@@ -9,7 +9,7 @@ import java.util.List;
 public interface HistoryRentingRepository extends JpaRepository<HistoryRenting, Long> {
 
     @Query("select h from HistoryRenting h where h.property.address.city.sector in ?1 and h.status='RENTED' " +
-            "and h.dateRented <= ?2 and h.dateRented >= ?3")
+            "and date(h.dateRented) <= date(?2) and date(h.dateRented) >= date(?3)")
     List<HistoryRenting> findPropertiesBetweenRentedDates(List<String> sectors, String begin, String last);
 
 }

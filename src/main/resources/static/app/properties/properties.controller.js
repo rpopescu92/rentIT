@@ -27,6 +27,8 @@
         $scope.searchName = '';
         $scope.searchLocation = '';
         $scope.nrRooms = [1, 2, 3, 4, 5];
+        $scope.displayOptions = displayOptions;
+        $scope.displaySearchOptions = false;
         $scope.selectedNrRooms = [];
         $scope.selectedNrStars = [];
         $scope.minPrice = '';
@@ -45,6 +47,10 @@
                 .then(function (data) {
                     $scope.cities = data.data;
                 });
+        }
+
+        function displayOptions() {
+            $scope.displaySearchOptions = !$scope.displaySearchOptions;
         }
 
         $scope.toggle = function (item, list) {

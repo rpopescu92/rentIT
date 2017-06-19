@@ -1,30 +1,68 @@
-<md-toolbar  md-scroll-shrink layout="row" layout-align="start end" class="blueNavbar" ng-if="isAuthenticated">
-    <div class="md-toolbar-tools" ng-class="{active: isActive('/home')}">
-        <md-button ui-sref="home" ui-sref-active="rent-active-menu">Home</md-button>
-        <md-button ui-sref="my-properties" ui-sref-active="rent-active-menu">My Properties</md-button>
-        <md-button ui-sref="properties" ui-sref-active="rent-active-menu">Properties</md-button>
-        <md-button ui-sref="market-analysis">Market Analysis</md-button>
-        <md-button>Messages</md-button>
-        <span flex></span>
-        <md-button style="background-color:#FBA100;" ui-sref="add-property">
-            <md-icon md-svg-src="icons/plus.svg" style="fill:white;"></md-icon>
-            Add property
-        </md-button>
-        <div class="collapse navbar-collapse">
-            <div class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                    <md-button>
-                        <md-icon md-svg-src="icons/account_circle_black24px.svg" class="accountIcon" style="fill:white" ></md-icon>
-                        {{username}}
-                    </md-button>
-                </a>
-                <ul class="dropdown-menu">
-                    <li ng-click="goEditProfile()"><a>Edit Profile</a></li>
-                    <li><md-divider></md-divider></li>
-                    <li><a ng-click="logout()">Logout</a></li>
-                </ul>
-            </div>
-        </div>
+<div class="row">
+    <!--<md-toolbar  md-scroll-shrink layout="row" layout-align="start end" class="blueNavbar" ng-if="isAuthenticated">-->
+    <!--<div class="md-toolbar-tools" ng-class="{active: isActive('/home')}">-->
+    <!--<md-button ui-sref="home" ui-sref-active="rent-active-menu">Home</md-button>-->
+    <!--<md-button ui-sref="my-properties" ui-sref-active="rent-active-menu">My Properties</md-button>-->
+    <!--<md-button ui-sref="properties" ui-sref-active="rent-active-menu">Properties</md-button>-->
+    <!--<md-button ui-sref="market-analysis">Market Analysis</md-button>-->
+    <!--<md-button>Messages</md-button>-->
+    <!--<span flex></span>-->
+    <!--<md-button style="background-color:#FBA100;" ui-sref="add-property">-->
+    <!--<md-icon md-svg-src="icons/plus.svg" style="fill:white;"></md-icon>-->
+    <!--Add property-->
+    <!--</md-button>-->
+    <!--<div class="collapse navbar-collapse">-->
+    <!--<div class="dropdown">-->
+    <!--<a class="dropdown-toggle" data-toggle="dropdown">-->
+    <!--<md-button>-->
+    <!--<md-icon md-svg-src="icons/account_circle_black24px.svg" class="accountIcon" style="fill:white" ></md-icon>-->
+    <!--{{username}}-->
+    <!--</md-button>-->
+    <!--</a>-->
+    <!--<ul class="dropdown-menu">-->
+    <!--<li ng-click="goEditProfile()"><a>Edit Profile</a></li>-->
+    <!--<li><md-divider></md-divider></li>-->
+    <!--<li><a ng-click="logout()">Logout</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</div>-->
 
-    </div>
-</md-toolbar>
+    <!--</div>-->
+    <!--</md-toolbar>-->
+
+    <md-nav-bar
+            md-selected-nav-item="currentNavItem"
+            nav-bar-aria-label="navigation links"
+            ng-show="isAuthenticated">
+        <md-nav-item md-nav-click="goto('home')" name="page1">
+            Home
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('my-properties')" name="page2">
+            My Properties
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('properties')" name="page3">
+            Properties
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('market-analysis')" name="page5">
+            Market Analysis
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('add-property')" name="page6">
+            Add property
+        </md-nav-item>
+        <md-nav-item md-nav-click="goEditProfile()" name="page7">
+            Edit profile
+        </md-nav-item>
+        <md-nav-item md-nav-click="logout()" name="page8">
+            Logout
+        </md-nav-item>
+        <!-- these require actual routing with ui-router or ng-route, so they
+        won't work in the demo
+        <md-nav-item md-nav-href="#page4" name="page5">Page Four</md-nav-item>
+        <md-nav-item md-nav-sref="app.page5" name="page4">Page Five</md-nav-item>
+        You can also add options for the <code>ui-sref-opts</code> attribute.
+        <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
+          Page Six
+        </md-nav-item>
+        -->
+    </md-nav-bar>
+</div>

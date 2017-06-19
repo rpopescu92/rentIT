@@ -1,16 +1,18 @@
-<div class="row">
-    <div class="col-md-12 col-md-offset-1">
-        <h2 style="padding:5px;">My Properties</h2>
+<div class="row" style="margin-top: 70px;" ng-show="properties.length > 0">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="rent-data-options">
+            <span>My registered properties</span>
+        </div>
     </div>
 </div>
 <div layout-align="center center" ng-show="properties.length > 0">
-    <div class="col-md-12">
-        <div class="col-md-3" ng-repeat="property in properties">
+    <div class="col-md-12 col-md-offset-1" style="margin-top:40px;">
+        <div class="col-md-3" style="margin-left: 35px;" ng-repeat="property in properties">
             <md-card>
                 <md-card-title ng-click="viewProperty(property)">
                     <img class="img-responsive" ng-src="data:image/jpeg;base64, {{property.images[0].content}}"
                          alt="Washed Out" style="width:120px; height:120px;">
-                    <span class="md-headline" style="font-weight:bold">{{property.price}} euro</span>
+                    <span class="md-headline" style="font-weight:bold;padding:5px;">{{property.price}} euro</span>
                     <span>
                     <md-icon md-svg-src="/icons/ic_grade_black_18px.svg" style="fill:#FBA100"></md-icon>
                     {{property.averageRating}}
@@ -18,14 +20,17 @@
 
                 </md-card-title>
                 <md-card-content>
-                    <span class="md-headline" style="padding:5px;">{{property.title}}</span>
-                    <p style="padding:5px;">{{property.longDescription | limitTo: 100 }}{{property.longDescription.length > 100 ? '...' : ''}}</p>
-                    <p style="padding:5px;">Construction year: {{property.constructionYear}}</p>
+                    <span class="md-headline" style="padding:5px;font-family: Monospaced Monaco;color: #626262;">{{property.title}}</span>
+                    <p sstyle="padding:5px;font-family: Monospaced Monaco;color: #626262;font-size: 20px;">{{property.longDescription | limitTo: 100
+                        }}{{property.longDescription.length > 100 ? '...' : ''}}</p>
+                    <p style="padding:5px;font-family: Monospaced Monaco;color: #626262;font-size: 20px;">Construction year: {{property.constructionYear}}</p>
                 </md-card-content>
                 <md-card-actions layout="row" layout-align="end center">
                     <md-button ng-click="rented(property.id)" ng-show="property.status !== 'RENTED'">
-                        <md-icon md-svg-icon="/icons/ic_vpn_key_black_18px.svg" ng-style="{color: {true:'#E57373'}[property.isRented]}"></md-icon>
-                        Rented</md-button>
+                        <md-icon md-svg-icon="/icons/ic_vpn_key_black_18px.svg"
+                                 ng-style="{color: {true:'#E57373'}[property.isRented]}"></md-icon>
+                        Rented
+                    </md-button>
                     <md-button ng-click="unrent(property.id)" ng-show="property.status === 'RENTED'">Unrent</md-button>
                     <md-button ng-click="viewProperty(property)">
                         Details
@@ -37,17 +42,27 @@
     </div>
 </div>
 <div class="row" ng-show="properties.length > 0">
-    <div class="col-md-12 col-md-offset-1">
-        <div class="col-md-3" style="padding-top: 48px;">
-            View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">
-            <option>3</option>
-            <option>5</option>
-            <option>10</option>
-            <option>20</option>
-            <option>30</option>
-            <option>40</option>
-            <option>50</option>
-        </select> records at a time.
+    <div class="col-md-12 col-md-offset-1" style="margin-top: 100px;">
+        <div class="col-md-3" style="padding-top: 48px;top: -16px;margin-left: 0;padding-left: 67px;">
+            <!--View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)">-->
+            <!--<option>3</option>-->
+            <!--<option>5</option>-->
+            <!--<option>10</option>-->
+            <!--<option>20</option>-->
+            <!--<option>30</option>-->
+            <!--<option>40</option>-->
+            <!--<option>50</option>-->
+            <!--</select> records at a time.-->
+            <md-input-container>
+                <label>Per page</label>
+                <md-select ng-model="query.limit" class="md-no-underline" ng-change="getUserProperties(1);">
+                    <md-option value="3"><em>3</em></md-option>
+                    <md-option value="5"><em>5</em></md-option>
+                    <md-option value="10"><em>10</em></md-option>
+                    <md-option value="20"><em>20</em></md-option>
+                    <md-option value="30"><em>30</em></md-option>
+                </md-select>
+            </md-input-container>
         </div>
         <div class="col-md-6">
             <div class="pagination">
@@ -58,7 +73,7 @@
     </div>
 </div>
 
-<div class="row" ng-show="properties.length == 0" style="padding-top: 70px;">
+<div class="row" ng-show="properties.length == 0" style="padding-top: 100px;">
     <div class="col-md-12 col-md-offset-1">
         <div class="rent-empty-data">
             <p>You don't have any registered properties</p>

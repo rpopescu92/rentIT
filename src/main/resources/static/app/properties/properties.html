@@ -1,92 +1,141 @@
-<div class="row">
-    <div class="col-md-6 col-md-offset-3" style="margin-top:30px;">
-        <div class="form-group searchBar col-md-4 col-xs-6">
-            <div class="input-group">
-                <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-                <input type="text" class="form-control" placeholder="Search" ng-model="searchName">
-            </div>
-        </div>
-        <div class="form-group searchCity col-md-2 col-xs-6">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Location" ng-model="searchLocation">
-            </div>
-        </div>
-        <div class="form-group searchCity col-md-2 col-xs-6" style="margin-top:-8px;">
-            <div class="input-group">
-                <md-button class="md-raised" style="color: black; border-color:#FBA100" ng-click="search()">Search
-                </md-button>
-            </div>
+<div class="row" style="margin-top: 70px;">
+    <div class="col-md-8 col-md-offset-2" style="cursor: pointer;" ng-click="displayOptions()">
+        <div class="rent-data-options">
+            <span>Search options</span>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="form-group col-md-6 col-xs-6 col-md-offset-3">
-        <md-autocomplete
-                ng-disabled="false"
-                md-no-cache="true"
-                md-selected-item="selectedItem"
-                md-search-text-change="searchTextChange(searchText)"
-                md-search-text="searchText"
-                md-selected-item-change="selectedItemChange(item)"
-                md-items="item in querySearch(searchText)"
-                md-item-text="item.cityName"
-                md-min-length="0"
-                placeholder="Choose a city/sector">
-            <md-item-template>
-                <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.region}}, {{item.cityName}}</span>
-            </md-item-template>
-        </md-autocomplete>
+<div class="row" style="margin-top:10px;" ng-show="displaySearchOptions">
+    <div class="col-md-8 col-md-offset-2">
+        <md-card style="width: 100%; background-color:#E0F2F1;">
+            <md-card-content>
+                <div class="row">
+                    <div class="col-md-10" style="margin-top:30px;">
+                        <div class="form-group searchBar col-md-12 col-xs-6">
+                            <!--<div class="input-group">-->
+                            <!--<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>-->
+                            <!--<input type="text" class="form-control" placeholder="Search" ng-model="searchName">-->
+                            <!--</div>-->
+                            <md-input-container class="md-block" flex-gt-xs>
+                                <label>Enter the name of the property</label>
+                                <input ng-model="searchName">
+                            </md-input-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-10 col-xs-6">
+                        <md-autocomplete
+                                ng-disabled="false"
+                                md-no-cache="true"
+                                md-selected-item="selectedItem"
+                                md-search-text-change="searchTextChange(searchText)"
+                                md-search-text="searchText"
+                                md-selected-item-change="selectedItemChange(item)"
+                                md-items="item in querySearch(searchText)"
+                                md-item-text="item.cityName"
+                                md-min-length="0"
+                                placeholder="Choose a city/sector">
+                            <md-item-template>
+                                <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.region}}, {{item.cityName}}</span>
+                            </md-item-template>
+                        </md-autocomplete>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12 col-xs-6">
+                        <md-chips ng-model="selectedCities" name="selectedCities" readonly="true"
+                                  md-removable="true" md-max-chips="5" placeholder="Enter a fruit...">
+                            <md-chip-template>
+                                <strong>{{$chip.region}}-{{$chip.cityName}}</strong>
+                            </md-chip-template>
+                        </md-chips>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12 col-xs-6">
+                        <label>Number of rooms</label>
+                        <div ng-repeat="nr in nrRooms">
+                            {{ nr }}
+                            <md-checkbox ng-checked="exists(nr, selectedNrRooms)"
+                                         ng-click="toggle(nr, selectedNrRooms)"></md-checkbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12 col-xs-6">
+                        <label>Number of stars</label>
+                        <div ng-repeat="nr in nrRooms">
+                            {{ nr }}
+                            <md-checkbox ng-checked="exists(nr, selectedNrStars)"
+                                         ng-click="toggle(nr, selectedNrStars)"></md-checkbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12 col-xs-6">
+                        <label>Min price</label>
+                        <!--<div class="input-group">-->
+                        <!--<input type="text" class="form-control" placeholder="Minimum price" ng-model="minPrice">-->
+                        <!--</div>-->
+                        <md-slider-container>
+                            <md-icon md-svg-icon="device:brightness-low"></md-icon>
+                            <md-slider min="0" max="1200" ng-model="minPrice" aria-label="Min price" flex md-discrete
+                                       ng-readonly="readonly"></md-slider>
+
+                            <md-input-container>
+                                <input flex type="number" ng-model="minPrice" aria-label="green"
+                                       aria-controls="green-slider">
+                            </md-input-container>
+                        </md-slider-container>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12 col-xs-6">
+                        <label>Max price</label>
+                        <!--<div class="input-group">-->
+                        <!--<input type="text" class="form-control" placeholder="Maximum price" ng-model="maxPrice">-->
+                        <!--</div>-->
+                        <md-slider-container>
+                            <md-icon md-svg-icon="device:brightness-low"></md-icon>
+                            <md-slider min="0" max="1200" ng-model="maxPrice" aria-label="Max price" flex md-discrete
+                                       ng-readonly="readonly"></md-slider>
+
+                            <md-input-container>
+                                <input flex type="number" ng-model="maxPrice" aria-label="green"
+                                       aria-controls="green-slider">
+                            </md-input-container>
+                        </md-slider-container>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12 col-xs-6">
+                        <label>Allows pets </label>
+                        <md-checkbox ng-model="allowsPets"></md-checkbox>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group searchCity col-md-2 col-xs-6" style="margin-top:-8px;">
+                        <div class="input-group">
+                            <md-button class="md-raised md-primary raisedButton md-button md-ink-ripple"
+                                       ng-click="search()">Search
+                            </md-button>
+                        </div>
+                    </div>
+                </div>
+            </md-card-content>
+        </md-card>
     </div>
 </div>
-<div class="row">
-    <div class="form-group col-md-6 col-xs-6 col-md-offset-3">
-        <md-chips ng-model="selectedCities" name="selectedCities" readonly="true"
-                  md-removable="true" md-max-chips="5" placeholder="Enter a fruit...">
-            <md-chip-template>
-                <strong>{{$chip.region}}-{{$chip.cityName}}</strong>
-            </md-chip-template>
-        </md-chips>
-    </div>
-</div>
-<div class="row">
-    <div class="form-group col-md-4 col-xs-6 col-md-offset-3">
-        Number of rooms: <span ng-repeat="nr in nrRooms">
-            {{ nr }}
-            <md-checkbox ng-checked="exists(nr, selectedNrRooms)" ng-click="toggle(nr, selectedNrRooms)"></md-checkbox>
-            </span>
-    </div>
-</div>
-<div class="row">
-    <div class="form-group col-md-4 col-xs-6 col-md-offset-3">
-        Number of stars: <span ng-repeat="nr in nrRooms">
-            {{ nr }}
-            <md-checkbox ng-checked="exists(nr, selectedNrStars)" ng-click="toggle(nr, selectedNrStars)"></md-checkbox>
-            </span>
-    </div>
-</div>
-<div class="row">
-    <div class="form-group col-md-4 col-xs-6 col-md-offset-3">
-        <span>Min price:</span>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Minimum price" ng-model="minPrice">
+<div class="row" style="margin-top: 70px;">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="rent-data">
+            <span>Properties to rent</span>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="form-group col-md-4 col-xs-6 col-md-offset-3">
-        <span>Max price:</span>
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="Maximum price" ng-model="maxPrice">
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="form-group col-md-4 col-xs-6 col-md-offset-3">
-        <span>Allows pets: </span> <md-checkbox ng-model="allowsPets"></md-checkbox>
-    </div>
-</div>
-<div class="row" ng-class="{active: isActive('/home')}" ng-repeat="property in properties">
-    <div class="col-md-6 col-md-offset-3">
+<div class="row" style="margin-top: 10px;" ng-class="{active: isActive('/home')}" ng-repeat="property in properties">
+    <div class="col-md-8 col-md-offset-2">
         <md-card style="width:100%">
             <md-card-title>
                 <md-card-title-text>
@@ -125,7 +174,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-2">
         <div class="pagination">
             <ul uib-pagination total-items="totalItems" items-per-page="query.limit" ng-model="query.page"
                 ng-change="pageChanged()"></ul>
